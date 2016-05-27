@@ -1,0 +1,10 @@
+template(name='your_tags')
+    .ui.header Your Tags
+    div
+        each user.tags
+            .ui.basic.compact.button.tag
+                i.remove.icon
+                |#{this}
+        .ui.left.icon.small.input
+            i.add.green.icon
+            input#addtag(type='text' autofocus='' placeholder='Add tag')
