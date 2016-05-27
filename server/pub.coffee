@@ -23,6 +23,6 @@ Meteor.publish 'people_tags', (selectedtags)->
             count: tag.count
             index: i
 
-    console.log tagCloud
+    # console.log tagCloud
 
     self.ready()
