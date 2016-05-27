@@ -1,0 +1,12 @@
+template(name='header')
+    header.main-header
+        .container
+            ul
+                li
+                    a(href='/')
+                        img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
+                        span HubCollider
+                if currentUser
+                    li.u-pull-right.sign-out
+                        button(data-id='sign-out')
+                            i.fa.fa-sign-out.fa-lg
