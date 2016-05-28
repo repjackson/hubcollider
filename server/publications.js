@@ -9,9 +9,6 @@ Meteor.publish('userStatus', function() {
 });
 
 Meteor.publishComposite('posts.all', function(query, filter, limit) {
-  check(query, String);
-  check(filter, String);
-  check(limit, Number);
 
   if (this.userId) {
     let currentUser = Meteor.users.findOne({ _id: this.userId });
@@ -58,8 +55,6 @@ Meteor.publishComposite('posts.all', function(query, filter, limit) {
 });
 
 Meteor.publishComposite('users.profile', function(_id, limit) {
-  check(_id, String);
-  check(limit, Number);
 
   if (this.userId) {
     return {
@@ -81,8 +76,6 @@ Meteor.publishComposite('users.profile', function(_id, limit) {
 });
 
 Meteor.publish('users.all', function(query, limit) {
-  check(query, String);
-  check(limit, Number);
 
   if (this.userId) {
     if (query) {
@@ -154,8 +147,6 @@ Meteor.publish('messages.all', function() {
 });
 
 Meteor.publish('jobs.all', function(query, limit) {
-  check(query, String);
-  check(limit, Number);
 
   if (this.userId) {
     if (query) {

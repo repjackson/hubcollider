@@ -1,5 +1,4 @@
 Meteor.publish 'people_tags', (selectedtags)->
-    check(selectedtags, Array)
 
     self = @
     match = {}

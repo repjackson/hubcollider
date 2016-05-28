@@ -2,9 +2,6 @@ Messages = new Mongo.Collection('messages');
 
 Meteor.methods({
   'messages.insert': (toUserId, toUsername, body) => {
-    check(toUserId, String);
-    check(toUsername, String);
-    check(body, String);
 
     // Verify that user is logged in
     if (!Meteor.user()) {
@@ -47,8 +44,6 @@ Meteor.methods({
     return Messages.insert(message);
   },
   'messages.remove': (messageId, whoDeleted) => {
-    check(messageId, String);
-    check(whoDeleted, String);
 
     // Verify that user is logged in
     if (!Meteor.user()) {
@@ -78,8 +73,6 @@ Meteor.methods({
     Messages.update({_id: messageId}, {$set: {conversation: conversation}});
   },
   'messages.updateRead': (messageId, val) => {
-    check(messageId, String);
-    check(val, Boolean);
 
     // Verify that user is logged in
     if (!Meteor.user()) {
@@ -104,9 +97,6 @@ Meteor.methods({
     Messages.update({_id: messageId}, {$set: {conversation: conversation}});
   },
   'messages.addMessage': (messageId, toUserId, body) => {
-    check(messageId, String);
-    check(toUserId, String);
-    check(body, String);
 
     // Verify that user is logged in
     if (!Meteor.user()) {

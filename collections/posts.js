@@ -2,7 +2,6 @@ Posts = new Mongo.Collection('posts');
 
 Meteor.methods({
   'posts.insert': (body) => {
-    check(body, String);
 
     if (!Meteor.user()) {
       throw new Meteor.Error(401, 'You need to be signed in to continue');
@@ -23,7 +22,6 @@ Meteor.methods({
     return Posts.insert(post);
   },
   'posts.remove': (_id) => {
-    check(_id, String);
 
     if (!Meteor.user()) {
       throw new Meteor.Error(401, 'You need to be signed in to continue');
@@ -38,7 +36,6 @@ Meteor.methods({
     Posts.remove({ _id: _id });
   },
   'posts.like': (_id) => {
-    check(_id, String);
 
     if (!Meteor.user()) {
       throw new Meteor.Error(401, 'You need to be signed in to continue');

@@ -2,12 +2,6 @@ Jobs = new Mongo.Collection('jobs');
 
 Meteor.methods({
   'jobs.post': (title, location, schedule, description, responsibilities, qualifications) => {
-    check(title, String);
-    check(location, String);
-    check(schedule, String);
-    check(description, String);
-    check(responsibilities, String);
-    check(qualifications, String);
 
     // Verify that user is logged in
     if (!Meteor.user()) {
@@ -41,7 +35,6 @@ Meteor.methods({
     return Jobs.insert(job);
   },
   'jobs.remove': (jobId) => {
-    check(jobId, String);
 
     // Verify that user is logged in
     if (!Meteor.user()) {
@@ -57,13 +50,6 @@ Meteor.methods({
     return Jobs.remove({_id: jobId});
   },
   'jobs.update': (jobId, title, location, schedule, description, responsibilities, qualifications) => {
-    check(jobId, String);
-    check(title, String);
-    check(location, String);
-    check(schedule, String);
-    check(description, String);
-    check(responsibilities, String);
-    check(qualifications, String);
 
     // Verify that user is logged in
     if (!Meteor.user()) {
