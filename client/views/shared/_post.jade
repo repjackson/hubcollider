@@ -1,0 +1,23 @@
+template(name='post')
+    .row
+        .twelve.columns
+            with post
+                .post
+                    +markdown
+                        #{body}
+                    hr
+                    .post-line-two
+                        .post-line-two-left
+                            a(href="{{pathFor 'profile' _id=author._id}}")
+                                +avatar(user=author size='extra-small' shape='circle' class='u-pull-left avatar')
+                            a.u-pull-left.author(href="{{pathFor 'profile' _id=author._id}}") @#{author.username}
+                            span.fa(class="{{#if author.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline {{/if}}")
+                            button.no-button(data-id='like-post')
+                                i.fa.fa-thumbs-o-up(class='{{#if isLiked}}liked{{/if}}', aria-hidden='false')
+                                | #{likecount}
+                            .clear
+                        .post-line-two-right
+                            if belongsPostToUser
+                                button.u-pull-right.no-button.remove-post(data-id='remove-post')
+                                    i.fa.fa-trash
+                            p.u-pull-right.formatted-date {{formatDate createdAt}}

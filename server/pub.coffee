@@ -3,7 +3,7 @@ Meteor.publish 'people_tags', (selectedtags)->
     self = @
     match = {}
     if selectedtags?.length > 0 then match.tags = $all: selectedtags
-    # match._id = $ne: @userId
+    match._id = $ne: @userId
 
     tagCloud = Meteor.users.aggregate [
         { $match: match }

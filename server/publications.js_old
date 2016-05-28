@@ -9,7 +9,6 @@ Meteor.publish('userStatus', function() {
 });
 
 Meteor.publishComposite('posts.all', function(query, filter, limit) {
-
   if (this.userId) {
     let currentUser = Meteor.users.findOne({ _id: this.userId });
 
