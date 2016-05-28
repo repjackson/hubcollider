@@ -1,0 +1,11 @@
+template(name='follower')
+    .row
+        .twelve.columns
+            if Template.subscriptionsReady
+                if users.count
+                    each users
+                        +smallProfile user=this
+                else
+                    .alert.info There are no users to display
+            else
+                .text-center Loading users...
