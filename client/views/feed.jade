@@ -1,18 +1,18 @@
 template(name='feed')
-    .row
-        .twelve.columns
-            form.search-posts-form(data-id='search-posts-form')
-                input.u-full-width(type='text', placeholder='Search posts...', data-id='search-query')
-    hr
-    .row
-        .twelve.columns
-            .text-center
-                ul.feed-filter
-                    li
-                        button(type='button', class="{{activeIfFilterIs 'all'}}", data-id='all') All
-                    li
-                        button(type='button', class="{{activeIfFilterIs 'following'}}", data-id='following') Following
-    hr
+    // .row
+    //     .twelve.columns
+            // form.search-posts-form(data-id='search-posts-form')
+            //     input.u-full-width(type='text', placeholder='Search posts...', data-id='search-query')
+    // hr
+    // .row
+    //     .twelve.columns
+    //         .text-center
+    //             ul.feed-filter
+    //                 li
+    //                     button(type='button', class="{{activeIfFilterIs 'all'}}", data-id='all') All
+    //                 li
+    //                     button(type='button', class="{{activeIfFilterIs 'following'}}", data-id='following') Following
+    // hr
     .row
         .twelve.columns
             form(data-id='insert-post-form')
@@ -22,10 +22,3 @@ template(name='feed')
         .twelve.columns
             each posts
                 +post post=this
-            if Template.subscriptionsReady
-                unless instance.postsCount.get
-                    .alert.info There are no matching posts to display
-                if hasMorePosts
-                    button.u-full-width(data-id='load-more') Load more
-            else
-                .text-center Loading posts...
