@@ -6,5 +6,5 @@ Template.following.helpers users: ->
 
 
 Template.following.onCreated ->
-    @autorun ->
+    @autorun =>
         @subscribe 'users.following'

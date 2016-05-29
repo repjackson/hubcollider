@@ -235,5 +235,3 @@ Template.addJob.events
                         Bert.alert 'Job updated', 'success', 'growl-top-right'
                         # Switch the to allJobs view
                         Session.set 'currentView', 'allJobs'
-                    return
-        return
