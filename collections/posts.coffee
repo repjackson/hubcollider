@@ -1,4 +1,4 @@
-Posts = new (Mongo.Collection)('posts')
+@Posts = new (Mongo.Collection)('posts')
 
 Meteor.methods
     'posts.insert': (body) ->

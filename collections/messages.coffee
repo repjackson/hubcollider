@@ -1,4 +1,4 @@
-Messages = new (Mongo.Collection)('messages')
+@Messages = new (Mongo.Collection)('messages')
 
 Meteor.methods
     'messages.insert': (toUserId, toUsername, body) ->
@@ -53,7 +53,7 @@ Meteor.methods
             throw new (Meteor.Error)(211, 'Message could not be deleted')
         Messages.update { _id: messageId }, $set: conversation: conversation
         return
-    
+
     'messages.updateRead': (messageId, val) ->
         # Verify that user is logged in
         if !Meteor.user()

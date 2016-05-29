@@ -8,5 +8,5 @@ template(name='smallProfile')
             +followButton user=this.user
         .tags
             each this.user.tags
-                button #{this}
+                | #{this} &nbsp;
         .clear

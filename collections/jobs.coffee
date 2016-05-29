@@ -1,4 +1,5 @@
-Jobs = new (Mongo.Collection)('jobs')
+@Jobs = new (Mongo.Collection)('jobs')
+
 Meteor.methods
     'jobs.post': (title, location, schedule, description, responsibilities, qualifications) ->
         # Verify that user is logged in
