@@ -13,7 +13,7 @@ template(name='profile')
                     each user.tags
                         |#{this} &nbsp;
                 .text-center
-                    +followButton(user=this)
+                    +messageButton(user=this)
                 hr
                 each posts
                     +post post=this

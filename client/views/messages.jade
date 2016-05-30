@@ -44,7 +44,7 @@ template(name='singleMessage')
                         if fromOtherUser from to
                             var.individualMessage.left
                                 p #{body}
-                                span.individualMessageDate.left #{formatDate sentOn}
+                                span.individualMessageDate.left {{formatDate sentOn}}
                         else
                             var.individualMessage.right
                                 p {{body}}

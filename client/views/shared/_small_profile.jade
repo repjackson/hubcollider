@@ -5,7 +5,7 @@ template(name='smallProfile')
         a.u-pull-left(href="{{pathFor 'profile' _id=this.user._id}}") @{{this.user.username}}
         span.fa(class='{{#if this.user.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline{{/if}}')
         .u-pull-right
-            +followButton user=this.user
+            +messageButton user=this.user
         .tags
             each this.user.tags
                 | #{this} &nbsp;

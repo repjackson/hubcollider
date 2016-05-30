@@ -2,7 +2,9 @@ Meteor.publish null, ->
     if @userId
         return Meteor.users.find({ _id: @userId }, fields:
             biography: 1
-            followingIds: 1)
+            followingIds: 1
+            apps: 1
+            tags: 1)
     return
 
 Meteor.publish 'userStatus', ->
@@ -132,6 +134,7 @@ Meteor.publish 'filtered_people', (selectedUserTags)->
     self = @
     # console.log selectedTags
     match = {}
+    match.apps = $in: 'hub_collider'
     if selectedUserTags and selectedUserTags.length > 0 then match.tags = $all: selectedUserTags
 
     Meteor.users.find match,
@@ -139,3 +142,31 @@ Meteor.publish 'filtered_people', (selectedUserTags)->
             tags: 1
             username: 1
 
+Meteor.publish 'people_tags', (selectedtags)->
+
+    self = @
+    match = {}
+    if selectedtags?.length > 0 then match.tags = $all: selectedtags
+    match.apps = $in: 'hub_collider'
+    match._id = $ne: @userId
+
+    tagCloud = Meteor.users.aggregate [
+        { $match: match }
+        { $project: tags: 1 }
+        { $unwind: "$tags" }
+        { $group: _id: "$tags", count: $sum: 1 }
+        { $match: _id: $nin: selectedtags }
+        { $sort: count: -1, _id: 1 }
+        { $limit: 50 }
+        { $project: _id: 0, name: '$_id', count: 1 }
+        ]
+
+    tagCloud.forEach (tag, i) ->
+        self.added 'people_tags', Random.id(),
+            name: tag.name
+            count: tag.count
+            index: i
+
+    # console.log tagCloud
+
+    self.ready()
