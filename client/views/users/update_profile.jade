@@ -3,7 +3,7 @@ template(name='updateProfile')
         .twelve.columns
             .profile
                 +avatar user=currentUser size='extra-large' shape='circle' class='avatar-center'
-                h1.text-center.username @{{currentUser.username}}
+                h1.text-center.username #{currentUser.username}
                 // #socialMediaAccounts
                 +your_tags
                 // form(data-id='update-profile-form')

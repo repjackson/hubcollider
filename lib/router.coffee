@@ -2,11 +2,11 @@ publicAccessible = FlowRouter.group({})
 
 signInRequired = FlowRouter.group(triggersEnter: [ AccountsTemplates.ensureSignedIn ])
 
-signInRequired.route '/',
-    name: 'feed'
-    action: ->
-        BlazeLayout.render 'layout', main: 'feed'
-        setTitle 'Feed'
+# signInRequired.route '/',
+#     name: 'feed'
+#     action: ->
+#         BlazeLayout.render 'layout', main: 'feed'
+#         setTitle 'Feed'
 
 signInRequired.route '/update-profile',
     name: 'updateProfile'
@@ -20,11 +20,18 @@ signInRequired.route '/users/:_id',
         BlazeLayout.render 'layout', main: 'profile'
         setTitle 'Profile'
 
-signInRequired.route '/browse-users',
+# signInRequired.route '/browse-users',
+#     name: 'browseUsers'
+#     action: ->
+#         BlazeLayout.render 'layout', main: 'browseUsers'
+#         setTitle 'Browse users'
+
+
+signInRequired.route '/',
     name: 'browseUsers'
     action: ->
         BlazeLayout.render 'layout', main: 'browseUsers'
-        setTitle 'Browse users'
+        setTitle 'People'
 
 signInRequired.route '/following',
     name: 'following'

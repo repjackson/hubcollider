@@ -1,5 +1,4 @@
 template(name='your_tags')
-    // .ui.header Your Tags
     div
         each user.tags
             button.tag
@@ -7,3 +6,10 @@ template(name='your_tags')
                 i.fa.fa-times
         .input
             input#addtag(type='text' autofocus='' placeholder='Tag yourself...')
+    strong Top Matched Users
+    div
+        each matchedUsersList
+            .item
+                strong #{this.matchedUser} (#{this.length}):
+                each this.tagIntersection
+                    | #{this} &nbsp;

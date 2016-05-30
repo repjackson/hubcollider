@@ -76,12 +76,13 @@ Template.messages.helpers
 
 ### messages template events ###
 
-Template.messages.events 'click #allMessagesButton, click #composeButton': (event, template) ->
-    #Set template based on button that was clicked
-    $('button').removeClass 'active'
-    $('#' + event.target.id).addClass 'active'
-    Session.set 'currentView', event.target.id.toString().replace('Button', '')
-    return
+Template.messages.events
+    'click #allMessagesButton, click #composeButton': (event, template) ->
+        #Set template based on button that was clicked
+        $('button').removeClass 'active'
+        $('#' + event.target.id).addClass 'active'
+        Session.set 'currentView', event.target.id.toString().replace('Button', '')
+        return
 
 ### allMessages helpers ###
 
@@ -98,6 +99,7 @@ Template.allMessages.helpers
                 'conversation.originatingToDeleted': false
             }
         ] }, sort: 'conversation.sentOn': -1
+
     messagesEmpty: ->
         #Check if current user has any messages
         if Messages.find($or: [
@@ -113,15 +115,18 @@ Template.allMessages.helpers
             true
         else
             false
+
     formatDate: (conversation) ->
         if conversation.length > 0
             date = conversation[conversation.length - 1].sentOn
             return performFormatting(date)
         return
+
     getMostRecentBody: (conversation) ->
         if conversation.length > 0
             return conversation[conversation.length - 1].body
         return
+
     getMostRecentRead: (conversation) ->
         #Determine if message has been read
         if conversation.length > 0
@@ -143,12 +148,12 @@ Template.allMessages.events
                     #Update read field to true
                     Meteor.call 'messages.updateRead', selectedMsg._id, true, (error, result) ->
                         #Do nothing
-                        return
+
         #Set current view to singleMssage template
         $('button').removeClass 'active'
         Session.set 'selectedMsg', event.currentTarget.id
         Session.set 'currentView', 'singleMessage'
-        return
+
     'click .remove-message': (event, template) ->
         event.stopPropagation()
         #Sweet Alert delete confirmation
@@ -180,11 +185,9 @@ Template.allMessages.events
                         Bert.alert 'Message couldn\'t be deleted.', 'danger', 'growl-top-right'
                     else
                         Bert.alert 'Message deleted', 'success', 'growl-top-right'
-                    return
             else
                 Bert.alert 'Message couldn\'t be deleted.', 'danger', 'growl-top-right'
-            return
-        return
+
 
 ### singleMessage template on rendered ###
 
@@ -228,7 +231,7 @@ Template.singleMessage.events
         # When shift and enter are pressed, submit form
         if event.shiftKey and event.keyCode == 13
             $('[data-id=reply-message-form]').submit()
-        return
+
     'submit [data-id=reply-message-form]': (event, template) ->
         event.preventDefault()
         #Only continue if button isn't disabled
@@ -291,12 +294,12 @@ Template.compose.events
             $('[data-id=message-submit]').removeClass 'disabled'
         else
             $('[data-id=message-submit]').addClass 'disabled'
-        return
+
     'keyup [data-id=message-body]': (event, template) ->
         # When shift and enter are pressed, submit form
         if event.shiftKey and event.keyCode == 13
             $('[data-id=send-message-form]').submit()
-        return
+
     'submit [data-id=send-message-form]': (event, template) ->
         event.preventDefault()
         #Only continue if button isn't disabled

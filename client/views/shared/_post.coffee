@@ -11,12 +11,12 @@ Template.post.events
         # Sweet Alert delete confirmation
         swal {
             title: 'Delete post?'
-            text: 'Are you sure that you want to delete this post?'
+            text: 'Confirm delete?'
             type: 'error'
             showCancelButton: true
             closeOnConfirm: true
             cancelButtonText: 'No'
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Delete'
             confirmButtonColor: '#da5347'
         }, ->
             Meteor.call 'posts.remove', self._id, (error, result) ->
@@ -65,6 +65,7 @@ Template.post.helpers
                 moment(date).format 'MMMM DD, YYYY'
             else
                 moment(date).format('MMMM DD') + ' at ' + moment(date).format('h:mm a')
+
     isLiked: ->
         if Posts.find(
                 _id: @_id
