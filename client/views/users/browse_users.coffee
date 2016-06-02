@@ -24,6 +24,7 @@ Template.browseUsers.events
 Template.browseUsers.helpers
     users: ->
         Meteor.users.find { _id: $ne: Meteor.userId() }, sort: createdAt: -1
+        # Meteor.users.find {}, sort: createdAt: -1
     hasMoreUsers: ->
         Template.instance().limit.get() <= Template.instance().usersCount.get()
 

@@ -134,7 +134,7 @@ Meteor.publish 'filtered_people', (selectedUserTags)->
     self = @
     # console.log selectedTags
     match = {}
-    match.apps = $in: 'hub_collider'
+    # match.apps = $in: ['hub_collider']
     if selectedUserTags and selectedUserTags.length > 0 then match.tags = $all: selectedUserTags
 
     Meteor.users.find match,
@@ -143,11 +143,10 @@ Meteor.publish 'filtered_people', (selectedUserTags)->
             username: 1
 
 Meteor.publish 'people_tags', (selectedtags)->
-
     self = @
     match = {}
     if selectedtags?.length > 0 then match.tags = $all: selectedtags
-    match.apps = $in: 'hub_collider'
+    # match.apps = $in: ['hub_collider']
     match._id = $ne: @userId
 
     tagCloud = Meteor.users.aggregate [

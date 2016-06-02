@@ -17,16 +17,16 @@ Template.your_tags.helpers
 
 
 Template.your_tags.events
-    'keydown #addtag': (e,t)->
+    'keydown #add_self_tag': (e,t)->
         e.preventDefault
-        tag = $('#addtag').val().toLowerCase().trim()
+        tag = $('#add_self_tag').val().toLowerCase().trim()
         switch e.which
             when 13
                 if tag.length > 0
-                    Meteor.call 'addtag', tag, ->
-                        $('#addtag').val('')
+                    Meteor.call 'add_self_tag', tag, ->
+                        $('#add_self_tag').val('')
 
-    'click .tag': ->
+    'click .remove_self_tag': ->
         tag = @valueOf()
-        Meteor.call 'removetag', tag, ->
-            $('#addtag').val(tag)
+        Meteor.call 'remove_self_tag', tag, ->
+            $('#add_self_tag').val(tag)

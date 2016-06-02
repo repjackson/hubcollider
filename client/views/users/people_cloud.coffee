@@ -5,27 +5,9 @@ Template.cloud.onCreated ->
 
 Template.cloud.helpers
     globaltags: ->
-        # userCount = Meteor.users.find().count()
-        # if 0 < userCount < 3 then tags.find { count: $lt: userCount } else tags.find()
-        Peopletags.find()
-#
-    # globaltagClass: ->
-    #     buttonClass = switch
-    #         when @index <= 20 then 'big'
-    #         when @index <= 40 then 'large'
-    #         when @index <= 60 then ''
-    #         when @index <= 80 then 'small'
-    #         when @index <= 100 then 'tiny'
-    #     return buttonClass
-
-    globaltagClass: ->
-        buttonClass = switch
-            when @index <= 10 then 'big'
-            when @index <= 20 then 'large'
-            when @index <= 30 then ''
-            when @index <= 40 then 'small'
-            when @index <= 50 then 'tiny'
-        return buttonClass
+        userCount = Meteor.users.find().count()
+        if 0 < userCount < 2 then Peopletags.find { count: $lt: userCount } else Peopletags.find()
+        # Peopletags.find()
 
     selected_tags: -> selected_tags.list()
 
