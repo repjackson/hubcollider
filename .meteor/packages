@@ -15,7 +15,6 @@ tracker                 # Meteor's client-side reactive programming library
 
 accounts-base
 accounts-password
-useraccounts:unstyled
 useraccounts:flow-routing
 kadira:flow-router
 kadira:blaze-layout
@@ -24,7 +23,6 @@ themeteorchef:bert
 reactive-var
 momentjs:moment
 reywood:publish-composite
-fortawesome:fontawesome
 utilities:avatar
 tmeasday:publish-counts
 verron:autosize

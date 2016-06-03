@@ -10,6 +10,13 @@ Template.smallProfile.helpers
     hasTagged: ->
         if @taggers and Meteor.userId() in @taggers then true else false
 
+    doc_tag_class: ->
+        result = ''
+        if @valueOf() in selected_tags.array() then result += ' primary' else result += ' basic'
+        # if Meteor.userId() in Template.parentData(1).up_voters then result += ' green'
+        # else if Meteor.userId() in Template.parentData(1).down_voters then result += ' red'
+        return result
+
 
 Template.smallProfile.events
     'click .userTag': ->
@@ -22,6 +29,9 @@ Template.smallProfile.events
                 if tag.length > 0
                     Meteor.call 'addTag', @_id, tag
                     $('.addTag').val('')
+
+    'click .doc_tag': -> if @valueOf() in selected_tags.array() then selected_tags.remove @valueOf() else selected_tags.push @valueOf()
+
 
     'click .tagUser': ->
         console.log @

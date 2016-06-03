@@ -1,18 +1,16 @@
 template(name='smallProfile')
     .card
-        .image
-            a(href="{{pathFor 'profile' _id=this.user._id}}")
-                +avatar(user=this.user size='small' shape='circle' class='u-pull-left')
         .content
-            .header
-                a(href="{{pathFor 'profile' _id=this.user._id}}") @{{this.user.username}}
-                span.fa(class='{{#if this.user.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline{{/if}}')
-        .right.floated
-            +messageButton user=this.user
-        .tags
+            .right.floated.meta
+                +messageButton user=this.user
+            a(href="{{pathFor 'profile' _id=this.user._id}}")
+                +avatar(user=this.user size='small' shape='circle')
+            a(href="{{pathFor 'profile' _id=this.user._id}}") {{this.user.username}}
+            // span.fa(class='{{#if this.user.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline{{/if}}')
+        .content
             each this.user.tags
-                .ui.compact.button #{this}
-        ul
+                .ui.compact.small.circular.button.doc_tag(class=doc_tag_class) #{this}
+        .content
             strong Other's Tags
                 each tagCloud
                     a(href='#' class=userTagClass)

@@ -1,6 +1,6 @@
 template(name='browseUsers')
     .ui.fluid.container
         +cloud
-    each users
-        .ui.stackable.link.cards
+    .ui.stackable.cards
+        each users
             +smallProfile user=this

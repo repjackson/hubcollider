@@ -127,7 +127,6 @@ url@1.0.9
 useraccounts:core@1.14.2
 useraccounts:flow-routing@1.14.2
 useraccounts:semantic-ui@1.14.2
-useraccounts:unstyled@1.14.2
 utilities:avatar@0.9.2
 verron:autosize@3.0.8
 webapp@1.2.8

@@ -1,4 +1,4 @@
-template(name='header')
+template(name='nav')
     .ui.menu
         a.item(href='/')
             img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
@@ -12,9 +12,8 @@ template(name='header')
             | Messages #{getUnreadCount}
         if currentUser
             a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
-                i.settings.icon
+                i.setting.icon
                 |  Profile
-            .item.sign-out
-                .ui.button(data-id='sign-out')
-                    i.fa.fa-sign-out.fa-lg
-                    |Sign out #{currentUser.username}
+            a.item.sign-out(data-id='sign-out')
+                i.sign.out.icon
+                |Logout #{currentUser.username}

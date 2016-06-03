@@ -2,7 +2,7 @@ template(name='your_tags')
     .ui.header Self Tags
     div
         each user.tags
-            .ui.button.remove_self_tag
+            .ui.circular.basic.button.remove_self_tag
                 |#{this}
                 i.remove.icon
         .ui.icon.input

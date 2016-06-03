@@ -1,16 +1,16 @@
-Template.header.events 'click [data-id=sign-out]': ->
+Template.nav.events 'click [data-id=sign-out]': ->
     Meteor.logout (error) ->
         if error
             alert error.reason
         else
             FlowRouter.go '/sign-in'
 
-Template.header.onCreated ->
+Template.nav.onCreated ->
     @autorun =>
         # Set subscriptions
         @subscribe 'messages.all'
 
-Template.header.helpers
+Template.nav.helpers
     activeIfRouteNameIs: (routeName) ->
         if FlowRouter.getRouteName() == routeName
             return 'active'

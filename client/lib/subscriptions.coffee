@@ -1,1 +1,1 @@
-Meteor.subscribe 'userStatus'
+# Meteor.subscribe 'userStatus'

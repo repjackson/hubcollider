@@ -32,7 +32,7 @@ template(name='allMessages')
 
 // Template to display a single message that the user clicked on
 template(name='singleMessage')
-    #singleMessageContainer
+    #singleMessageContainer.ui.segment
         with getSingleMessage
             #singleMessageHeaderArea.ui.dividing.header {{getOtherUsername originatingFromName originatingToName}}
             #singleMessageArea
