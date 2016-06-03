@@ -1,8 +1,8 @@
 // Main template for the Messages page
 template(name='messages')
     #messagesButtons
-        button#allMessagesButton Messages
-        button#composeButton Compose
+        .ui.button#allMessagesButton Messages
+        .ui.right.floated.button#composeButton Compose
     // Use session variables to determine which template to display
     if showAllMessages
         +allMessages
@@ -15,20 +15,20 @@ template(name='messages')
 
 // Template to display all messages for current user
 template(name='allMessages')
-    #allMessagesArea
+    #allMessagesArea.ui.segment
         if messagesEmpty
             h1.emptyMessage None
         else
-            table
-                tbody
-                    each getAllMessages
-                        tr.msg(id='{{_id}}', class='{{getMostRecentRead conversation}}')
-                            td.smallCol {{getOtherUsername originatingFromName originatingToName}}
-                            td.largeCol {{getMostRecentBody conversation}}
-                            td.smallCol {{formatDate conversation}}
-                            td
-                                button.u-pull-right.no-button.remove-message(data-id='remove-message')
-                                    i.fa.fa-trash
+            .ui.relaxed.divided.selection.list
+                each getAllMessages
+                    .item.msg(id='{{_id}}', class='{{getMostRecentRead conversation}}')
+                        .right.floated.content
+                            .ui.icon.button.u-pull-right.no-button.remove-message(data-id='remove-message')
+                                i.fa.fa-trash
+                        .content
+                            .header {{getOtherUsername originatingFromName originatingToName}}
+                            .description {{getMostRecentBody conversation}}
+                            .meta {{formatDate conversation}}
 
 // Template to display a single message that the user clicked on
 template(name='singleMessage')
@@ -50,18 +50,21 @@ template(name='singleMessage')
                                 p {{body}}
                                 span.individualMessageDate.right {{formatDate sentOn}}
             #singleMessageReplyArea
-                form(data-id='reply-message-form')
+                form.ui.form(data-id='reply-message-form')
                     textarea.u-full-width.message-body-form(rows='1', placeholder='Write something...', data-id='reply-body')
-                    input.button-primary.u-pull-right(type='submit', data-id='reply-submit', value='Send')
+                    input.ui.floated.right.button(type='submit', data-id='reply-submit', value='Send')
 
 // Template to compose a new message
 template(name='compose')
     .send-message
-        form(data-id='send-message-form')
-            +inputAutocomplete settings=settings data-id="message-to" class="u-full-width insert-post-form" placeholder="To"
-            textarea.u-full-width.message-body-form(rows='1', placeholder='Write something...', data-id='message-body')
-            input.button-primary.u-pull-right(type='submit', data-id='message-submit', value='Send')
+        form.ui.form(data-id='send-message-form')
+            .field
+                +inputAutocomplete settings=settings data-id="message-to" class="u-full-width insert-post-form" placeholder="To"
+            .field
+                textarea.u-full-width.message-body-form(rows='1', placeholder='Write something...', data-id='message-body')
+            button.ui.floated.right.primary.button(type='submit', data-id='message-submit') Send
 
 // Template to display list of matching users in To field on compose
 template(name='userList')
-    span.label #{username}
+    i.user.icon
+    span #{username}

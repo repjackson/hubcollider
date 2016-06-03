@@ -13,7 +13,7 @@ template(name='header')
         if currentUser
             a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
                 i.settings.icon
-                |  Update profile
+                |  Profile
             .item.sign-out
                 .ui.button(data-id='sign-out')
                     i.fa.fa-sign-out.fa-lg
