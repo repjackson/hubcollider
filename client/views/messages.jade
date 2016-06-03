@@ -34,10 +34,7 @@ template(name='allMessages')
 template(name='singleMessage')
     #singleMessageContainer
         with getSingleMessage
-            #singleMessageHeaderArea
-                var
-                    b {{getOtherUsername originatingFromName originatingToName}}
-                hr
+            #singleMessageHeaderArea.ui.dividing.header {{getOtherUsername originatingFromName originatingToName}}
             #singleMessageArea
                 each conversation
                     if showMessage originatingFromDeleted originatingToDeleted

@@ -1,0 +1,12 @@
+template(name='cloud')
+    .ui.center.aligned.basic.segment
+        if selected_tags
+            .ui.primary.large.circular.icon.button#cleartags
+                i.remove.icon
+        if selected_tags
+            each selected_tags
+                button.ui.button.large.circular.primary.unselecttag
+                    strong #{this}
+        each globaltags
+            .ui.basic.circular.button.selecttag(class=globalTagClass) #{this.name}
+                small #{this.count}

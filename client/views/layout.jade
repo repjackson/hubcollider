@@ -1,5 +1,4 @@
 template(name='layout')
     +header
-    .ui.container(style='min-height: {{instance.minHeight.get}}')
+    .ui.four.column.doubling.stackable.grid.container
         +Template.dynamic template=main
-    +footer

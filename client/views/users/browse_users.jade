@@ -1,19 +1,6 @@
 template(name='browseUsers')
-    .row
-        .twelve.columns
-            h4.text-center Browse
-            +cloud
-            // form(data-id='search-users-form')
-            //     input.u-full-width(type='text', placeholder='Search users...', data-id='search-query')
-    .row
-        .twelve.columns
-                each users
-                    .ui.segment
-                        +smallProfile user=this
-            // if Template.subscriptionsReady
-            //     unless instance.usersCount.get
-            //         .alert.info There are no matching users to display
-            //     if hasMoreUsers
-            //         button.u-full-width(data-id='load-more') Load more
-            // else
-            //     .text-center Loading users...
+    .ui.fluid.container
+        +cloud
+    each users
+        .ui.stackable.link.cards
+            +smallProfile user=this
