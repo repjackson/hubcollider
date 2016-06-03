@@ -1,13 +1,20 @@
 template(name='header')
-    header.main-header
-        .container
-            ul
-                li
-                    a(href='/')
-                        img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
-                        span HubCollider
-                if currentUser
-                    li.u-pull-right.sign-out
-                        button(data-id='sign-out')
-                            i.fa.fa-sign-out.fa-lg
-                            |Sign out #{currentUser.username}
+    .ui.menu
+        a.item(href='/')
+            img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
+            span Hub
+                strong Collider
+        a.icon.item(class="{{activeIfRouteNameIs 'browseUsers'}}" href="{{pathFor 'browseUsers'}}")
+            i.fa.fa-users
+            |  People
+        a.icon.item(href="{{pathFor 'messages'}}" class="{{activeIfRouteNameIs 'messages'}}")
+            i.fa.fa-envelope
+            | Messages #{getUnreadCount}
+        if currentUser
+            a.icon.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
+                i.fa.fa-cogs
+                |  Update profile
+            .item.sign-out
+                .ui.button(data-id='sign-out')
+                    i.fa.fa-sign-out.fa-lg
+                    |Sign out #{currentUser.username}

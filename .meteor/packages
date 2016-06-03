@@ -13,10 +13,7 @@ jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 
 standard-minifiers      # JS/CSS minifiers run for production mode
-es5-shim                # ECMAScript 5 compatibility for older browsers.
-ecmascript              # Enable ECMAScript2015+ syntax in app code
 
-skeleton:skeleton
 accounts-base
 accounts-password
 useraccounts:unstyled
@@ -37,7 +34,6 @@ kevohagan:sweetalert
 mizzao:autocomplete
 markdown
 simple:highlight.js
-less
 constellation:console
 mquandalle:jade
 coffeescript
@@ -46,3 +42,6 @@ random
 meteorhacks:aggregate
 babrahams:constellation
 okgrow:analytics
+useraccounts:semantic-ui
+semantic:ui
+flemay:less-autoprefixer

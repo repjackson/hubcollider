@@ -1,40 +1,39 @@
 template(name='navigation')
-    .row
-        .twelve.columns
-            .navigation
-                ul
-                    // li(class="{{activeIfRouteNameIs 'feed'}}")
-                    //     a(href="{{pathFor 'feed'}}")
-                    //         i.fa.fa-newspaper-o
-                    //         |  Feed
-                    li(class="{{activeIfRouteNameIs 'browseUsers'}}")
-                        a(href="{{pathFor 'browseUsers'}}")
-                            i.fa.fa-users
-                            |  People
-                    li(class="{{activeIfRouteNameIs 'messages'}}")
-                        a(href="{{pathFor 'messages'}}")
-                            i.fa.fa-envelope
-                            |  Messages #{getUnreadCount}
-                    // li(class="{{activeIfRouteNameIs 'jobBoard'}}")
-                    //     a(href="{{pathFor 'jobBoard'}}")
-                    //         i.fa.fa-briefcase
-                    //         |  Job board
-                hr
-                h2.text-center.username #{currentUser.username}
-                +your_tags
-                hr
-                // ul
-                //     li(class="{{activeIfRouteNameIs 'updateProfile'}}")
-                //         a(href="{{pathFor 'updateProfile'}}")
-                //             i.fa.fa-cogs
-                //             |  Update profile
-                //     li(class="{{activeIfRouteNameIs 'following'}}")
-                //         a(href="{{pathFor 'following'}}")
-                //             i.fa.fa-arrow-left
-                //             i.fa.fa-user
-                //             |  Following
-                //     li(class="{{activeIfRouteNameIs 'follower'}}")
-                //         a(href="{{pathFor 'follower'}}")
-                //             i.fa.fa-arrow-right
-                //             i.fa.fa-user
-                //             |  Followers
+    .ui.menu
+        .navigation
+            ul
+                // li(class="{{activeIfRouteNameIs 'feed'}}")
+                //     a(href="{{pathFor 'feed'}}")
+                //         i.fa.fa-newspaper-o
+                //         |  Feed
+                li.item(class="{{activeIfRouteNameIs 'browseUsers'}}")
+                    a(href="{{pathFor 'browseUsers'}}")
+                        i.fa.fa-users
+                        |  People
+                li(class="{{activeIfRouteNameIs 'messages'}}")
+                    a(href="{{pathFor 'messages'}}")
+                        i.fa.fa-envelope
+                        |  Messages #{getUnreadCount}
+                // li(class="{{activeIfRouteNameIs 'jobBoard'}}")
+                //     a(href="{{pathFor 'jobBoard'}}")
+                //         i.fa.fa-briefcase
+                //         |  Job board
+            hr
+            h2.text-center.username #{currentUser.username}
+            +your_tags
+            hr
+            // ul
+            //     li(class="{{activeIfRouteNameIs 'updateProfile'}}")
+            //         a(href="{{pathFor 'updateProfile'}}")
+            //             i.fa.fa-cogs
+            //             |  Update profile
+            //     li(class="{{activeIfRouteNameIs 'following'}}")
+            //         a(href="{{pathFor 'following'}}")
+            //             i.fa.fa-arrow-left
+            //             i.fa.fa-user
+            //             |  Following
+            //     li(class="{{activeIfRouteNameIs 'follower'}}")
+            //         a(href="{{pathFor 'follower'}}")
+            //             i.fa.fa-arrow-right
+            //             i.fa.fa-user
+            //             |  Followers

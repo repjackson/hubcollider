@@ -1,14 +1,5 @@
 template(name='layout')
     +header
-    .container(style='min-height: {{instance.minHeight.get}}')
-        if currentUser
-            .row
-                .four.columns
-                    +navigation
-                .eight.columns
-                    +Template.dynamic template=main
-        else
-            .row
-                .four.columns.offset-by-four
-                    +Template.dynamic template=main
+    .ui.container(style='min-height: {{instance.minHeight.get}}')
+        +Template.dynamic template=main
     +footer

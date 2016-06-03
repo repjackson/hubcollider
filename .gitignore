@@ -90,3 +90,6 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+client/sem/*
+!client/sem/custom.semantic.json

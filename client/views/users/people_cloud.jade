@@ -1,12 +1,12 @@
 template(name='cloud')
     .ui.center.aligned.segment
         if selected_tags
-            button#cleartags.button-primary
+            button.ui.button#cleartags.primary
                 i.fa.fa-minus
         if selected_tags
             each selected_tags
-                button.button-primary.unselecttag
+                button.ui.button.primary.unselecttag
                     strong #{this}
         each globaltags
-            button.selecttag #{this.name}
+            button.ui.basic.button.selecttag #{this.name}
                 small #{this.count}

@@ -8,7 +8,8 @@ template(name='browseUsers')
     .row
         .twelve.columns
                 each users
-                    +smallProfile user=this
+                    .ui.segment
+                        +smallProfile user=this
             // if Template.subscriptionsReady
             //     unless instance.usersCount.get
             //         .alert.info There are no matching users to display
