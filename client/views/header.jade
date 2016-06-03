@@ -4,15 +4,15 @@ template(name='header')
             img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
             span Hub
                 strong Collider
-        a.icon.item(class="{{activeIfRouteNameIs 'browseUsers'}}" href="{{pathFor 'browseUsers'}}")
-            i.fa.fa-users
+        a.item(class="{{activeIfRouteNameIs 'browseUsers'}}" href="{{pathFor 'browseUsers'}}")
+            i.users.icon
             |  People
-        a.icon.item(href="{{pathFor 'messages'}}" class="{{activeIfRouteNameIs 'messages'}}")
-            i.fa.fa-envelope
+        a.item(href="{{pathFor 'messages'}}" class="{{activeIfRouteNameIs 'messages'}}")
+            i.envelope.icon
             | Messages #{getUnreadCount}
         if currentUser
-            a.icon.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
-                i.fa.fa-cogs
+            a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
+                i.settings.icon
                 |  Update profile
             .item.sign-out
                 .ui.button(data-id='sign-out')

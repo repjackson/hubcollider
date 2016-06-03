@@ -4,7 +4,7 @@ template(name='smallProfile')
             +avatar(user=this.user size='small' shape='circle' class='u-pull-left')
         a.u-pull-left(href="{{pathFor 'profile' _id=this.user._id}}") @{{this.user.username}}
         span.fa(class='{{#if this.user.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline{{/if}}')
-        .u-pull-right
+        .float.right
             +messageButton user=this.user
         .tags
             each this.user.tags

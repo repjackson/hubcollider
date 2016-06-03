@@ -1,14 +1,14 @@
 template(name='your_tags')
-
-    strong Self Tags
+    .ui.header Self Tags
     div
         each user.tags
-            button.remove_self_tag
+            .ui.button.remove_self_tag
                 |#{this}
-                i.fa.fa-times
-        .input
+                i.remove.icon
+        .ui.icon.input
             input#add_self_tag(type='text' autofocus='' placeholder='Tag yourself...')
-    strong Top Matched
+            i.plus.icon
+    .ui.header Top Matched People
     div
         each matchedUsersList
             .item
