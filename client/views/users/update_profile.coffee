@@ -5,6 +5,7 @@ Template.updateProfile.onCreated ->
     @autorun =>
         # Set subscriptions
         @subscribe 'users.all', @searchQuery.get(), @limit.get()
+        @subscribe 'selftags'
         @usersCount.set Counts.get('users.all')
         # Get current user's social media accounts
         currentUser = Meteor.users.findOne(_id: Meteor.userId())
@@ -87,3 +88,36 @@ Template.updateProfile.events
                     return
             else
                 Bert.alert 'Invalid social media links', 'danger', 'growl-top-right'
+
+    'keydown #add_self_tag': (e,t)->
+        e.preventDefault
+        tag = $('#add_self_tag').val().toLowerCase().trim()
+        switch e.which
+            when 13
+                if tag.length > 0
+                    Meteor.call 'add_self_tag', tag, ->
+                        $('#add_self_tag').val('')
+
+    'click .remove_self_tag': ->
+        tag = @valueOf()
+        Meteor.call 'remove_self_tag', tag, ->
+            $('#add_self_tag').val(tag)
+
+Template.updateProfile.helpers
+    user: -> Meteor.user()
+
+    people: -> Meteor.users.find()
+
+    matchedUsersList:->
+        users = Meteor.users.find({_id: $ne: Meteor.userId()}).fetch()
+        userMatches = []
+        for user in users
+            tagIntersection = _.intersection(user.tags, Meteor.user().tags)
+            userMatches.push
+                matchedUser: user.username
+                tagIntersection: tagIntersection
+                length: tagIntersection.length
+        sortedList = _.sortBy(userMatches, 'length').reverse()
+        return sortedList
+
+    selftags: -> Docs.findOne().tags

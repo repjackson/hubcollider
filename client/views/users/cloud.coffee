@@ -11,7 +11,7 @@ Template.cloud.helpers
 
     globalTagClass: ->
         buttonClass = switch
-            when @index <= 10 then 'large'
+            when @index <= 10 then 'big'
             when @index <= 20 then 'large'
             when @index <= 30 then ''
             when @index <= 40 then 'small'

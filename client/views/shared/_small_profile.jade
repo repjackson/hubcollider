@@ -9,14 +9,18 @@ template(name='smallProfile')
             // span.fa(class='{{#if this.user.status.online}} fa-circle presence online {{else}} fa-circle-o presence offline{{/if}}')
         .content
             each this.user.tags
-                .ui.compact.small.circular.button.doc_tag(class=doc_tag_class) #{this}
-        .content
-            strong Other's Tags
-                each tagCloud
-                    a(href='#' class=userTagClass)
-                        |#{this.name}
-                        small #{this.count}
-
+                div
+                    .ui.left.attached.button.doc_tag(class=doc_tag_class)
+                        | #{this}
+                        | 4
+                    .ui.right.attached.icon.basic.button.endorse
+                        i.plus.icon
+        // .content
+        //     strong Other's Tags
+        //         each tagCloud
+        //             a(href='#' class=userTagClass)
+        //                 |#{this.name}
+        //                 small #{this.count}
         unless isUser
             if currentUser
                 .extra.content

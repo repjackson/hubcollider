@@ -2,22 +2,17 @@ Meteor.methods
     remove_self_tag: (tag)->
         Meteor.users.update Meteor.userId(),
             $pull: tags: tag
+        Docs.remove
+            $all: ['selftag', tag]
 
     add_self_tag: (tag)->
-        Meteor.users.update Meteor.userId(),
-            $addToSet: tags: tag
+        Docs.insert
+            tags: ['selftag', tag]
 
-    tag_user: (uId)->
-        console.log uId
-        Meteor.users.update uId,
-            $addToSet:
-                taggers: Meteor.userId()
 
-        Meteor.users.update Meteor.userId(),
-            $addToSet:
-                userTags:
-                    uId: uId
-                    tags: []
+    endorse: (uId, tag)->
+        Docs.insert
+            tags: ['uId', 'endorsement', tag]
         return
 
     add_other_tag: (uId, tag)->

@@ -5,9 +5,19 @@ template(name='updateProfile')
                 +avatar user=currentUser size='extra-large' shape='circle' class='avatar-center'
                 h1.text-center.username #{currentUser.username}
                 // #socialMediaAccounts
-                +your_tags
-                // form(data-id='update-profile-form')
-                    // <a href="#">Add Social Media Accounts</a>
-                    // textarea.u-full-width.socialMedia(rows='1', placeholder='Add Social Media Accounts (separated by a comma)', data-id='addSocialMedia')
-                    // textarea.u-full-width.biography(placeholder='Write something about you...', data-id='biography') {{currentUser.biography}}
-                    // input.button-primary.u-pull-right(type='submit', value='Update profile')
+                    .ui.header Self Tags
+        div
+            each selftags
+                .ui.basic.button.remove_self_tag
+                    |#{this}
+                    i.remove.icon
+            .ui.icon.input
+                input#add_self_tag(type='text' autofocus='' placeholder='Tag yourself...')
+                i.plus.icon
+        .ui.header Top Matched People
+        div
+            each matchedUsersList
+                .item
+                    strong #{this.matchedUser} (#{this.length}):
+                    each this.tagIntersection
+                        | #{this} &nbsp;

@@ -80,23 +80,6 @@ Meteor.publish 'users.all', (query, limit) ->
         []
 
 
-Meteor.publish 'users.following', ->
-    if @userId
-        currentUser = Meteor.users.findOne(_id: @userId)
-        if currentUser.followingIds and currentUser.followingIds.length != 0
-            Meteor.users.find { _id: $in: currentUser.followingIds }, sort: username: 1
-        else
-            []
-    else
-        []
-
-
-Meteor.publish 'users.follower', ->
-    if @userId
-        currentUser = Meteor.users.findOne(_id: @userId)
-        Meteor.users.find { followingIds: $in: [ currentUser._id ] }, sort: username: 1
-    else
-        []
 
 
 Meteor.publish 'messages.all', ->
@@ -109,26 +92,10 @@ Meteor.publish 'messages.all', ->
     else
         []
 
-
-Meteor.publish 'jobs.all', (query, limit) ->
-    if @userId
-        if query
-            Counts.publish this, 'jobs.all', Jobs.find(title:
-                $regex: '.*' + query + '.*'
-                $options: 'i'), noReady: true
-            Jobs.find { title:
-                $regex: '.*' + query + '.*'
-                $options: 'i' },
-                sort: createdOn: -1
-                limit: limit
-        else
-            Counts.publish this, 'jobs.all', Jobs.find({}), noReady: true
-            Jobs.find {},
-                sort: createdOn: -1
-                limit: limit
-    else
-        []
-
+Meteor.publish 'selftags', ->
+    Docs.find()
+        # $all: tags: ['selftag']
+        # authorId: @userId
 
 Meteor.publish 'filtered_people', (selectedUserTags)->
     self = @

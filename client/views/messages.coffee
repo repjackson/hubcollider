@@ -205,17 +205,20 @@ Template.singleMessage.onRendered ->
 Template.singleMessage.helpers
     getSingleMessage: ->
         Messages.findOne '_id': Session.get('selectedMsg')
+
     showMessage: (originatingFromDeleted, originatingToDeleted) ->
         #Don't show messages that have been previously deleted
         if Session.equals('originating', 'from')
             !originatingFromDeleted
         else
             !originatingToDeleted
+
     fromOtherUser: (from, to) ->
         if from.userId != Meteor.userId()
             true
         else
             false
+
     formatDate: (date) ->
         performFormatting date
 
