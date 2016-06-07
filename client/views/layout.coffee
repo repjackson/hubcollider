@@ -1,3 +1,8 @@
+Template.body.events
+    'click #leftMenu': (e) ->
+        $('#leftSidebarMenu.ui.sidebar')
+                .sidebar('toggle');
+
 # getHeight = ->
 #     windowHeight = $(window).height()
 #     headerHeight = $('.main-header').outerHeight(true)
