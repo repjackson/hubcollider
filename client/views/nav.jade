@@ -1,22 +1,18 @@
 template(name='nav')
-    .ui.menu
+    .ui.stackable.fixed.menu
         a.item(href='/')
             img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
             span Hub
                 strong Collider
-        a.item(class="{{activeIfRouteNameIs 'browseUsers'}}" href="{{pathFor 'browseUsers'}}")
-            i.users.icon
-            |  People
-        a.item(href="{{pathFor 'messages'}}" class="{{activeIfRouteNameIs 'messages'}}")
-            i.envelope.icon
-            | Messages #{getUnreadCount}
-        if currentUser
-            a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
-                i.setting.icon
-                |  Profile
-            a.item.sign-out(data-id='sign-out')
-                i.sign.out.icon
-                |Logout #{currentUser.username}
-        a.item.inverted(class="ui button red" data-id='inverted')
-            i.setting.icon
-            |   Inverted
+        .item
+            .ui.transparent.icon.input
+                input(type='text', placeholder='Search...')
+                i.search.link.icon
+        .right.menu
+            if currentUser
+                a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
+                    i.alarm.outline.icon
+                    |  Profile
+                a.item.sign-out(data-id='sign-out')
+                    i.sign.out.icon
+                    |Logout #{currentUser.username}
