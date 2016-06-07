@@ -30,12 +30,6 @@ Template.cloud.helpers
     user: -> Meteor.user()
     selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
 
-    upvoted_cloud: -> if Session.get 'upvoted_cloud' then Meteor.users.findOne(Session.get('upvoted_cloud'))?.username
-
-    downvoted_cloud: -> if Session.get 'downvoted_cloud' then Meteor.users.findOne(Session.get('downvoted_cloud'))?.username
-
-    globalUsernames: -> Usernames.find()
-    selectedUsernames: -> selectedUsernames.list()
 
 
 Template.cloud.events
@@ -77,43 +71,3 @@ Template.cloud.events
             alert "Selection bookmarked"
 
     'click .selected_user_button': -> Session.set 'selected_user', null
-    'click .upvoted_cloud_button': -> Session.set 'upvoted_cloud', null
-    'click .downvoted_cloud_button': -> Session.set 'downvoted_cloud', null
-
-    'click #mine': ->
-        Session.set 'downvoted_cloud', null
-        Session.set 'upvoted_cloud', null
-        Session.set 'selected_user', Meteor.userId()
-
-    'click #my_upvoted': ->
-        Session.set 'selected_user', null
-        Session.set 'downvoted_cloud', null
-        Session.set 'upvoted_cloud', Meteor.userId()
-
-    'click #my_downvoted': ->
-        Session.set 'selected_user', null
-        Session.set 'upvoted_cloud', null
-        Session.set 'downvoted_cloud', Meteor.userId()
-
-    'click #unvoted': ->
-        if Session.equals('unvoted', true) then Session.set('unvoted', false) else Session.set('unvoted', true)
-
-
-    'click .selectUsername': -> selectedUsernames.push @text
-    'click .unselectUsername': -> selectedUsernames.remove @valueOf()
-    'click #clearUsernames': -> selectedUsernames.clear()
-
-    'keyup #quickAdd': (e,t)->
-        e.preventDefault
-        tag = $('#quickAdd').val().toLowerCase()
-        switch e.which
-            when 13
-                if tag.length > 0
-                    splitTags = tag.match(/\S+/g)
-                    $('#quickAdd').val('')
-                    Meteor.call 'createDoc', splitTags, (err,res)->
-                        console.log res
-                    selectedTags.clear()
-                    for tag in splitTags
-                        selectedTags.push tag
-                    FlowRouter.go '/'
