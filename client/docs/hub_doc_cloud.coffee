@@ -1,10 +1,10 @@
 @selectedTags = new ReactiveArray []
 @selectedUsernames = new ReactiveArray []
-
+Session.setDefault('view_more': false)
 
 Template.cloud.onCreated ->
-    @autorun -> Meteor.subscribe 'tags', selectedTags.array(), Session.get('selected_user'), Session.get('upvoted_cloud'), Session.get('downvoted_cloud'), Session.get('unvoted')
-    @autorun -> Meteor.subscribe('usernames', selectedTags.array(), selectedUsernames.array(), Session.get('view'))
+    @autorun -> Meteor.subscribe 'tags', selectedTags.array(), Session.get('selected_user'), Session.get('view_more')
+    # @autorun -> Meteor.subscribe('usernames', selectedTags.array(), selectedUsernames.array(), Session.get('view'))
 
 
 Template.cloud.helpers
@@ -23,8 +23,6 @@ Template.cloud.helpers
             when @index <= 50 then 'tiny'
         return buttonClass
 
-    unvoted_button_class: -> if Session.equals('unvoted', true) then 'grey' else 'basic'
-
     selectedTags: -> selectedTags.list()
 
     user: -> Meteor.user()
@@ -33,6 +31,10 @@ Template.cloud.helpers
 
 
 Template.cloud.events
+    'click #view_more': ->
+        Session.set 'view_more': true
+
+
     'keyup #search': (e,t)->
         e.preventDefault()
         val = $('#search').val()
