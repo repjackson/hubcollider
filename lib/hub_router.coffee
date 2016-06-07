@@ -28,22 +28,11 @@ signInRequired.route '/users/:_id',
 
 
 signInRequired.route '/',
-    name: 'browseUsers'
+    name: 'docs'
     action: ->
-        BlazeLayout.render 'layout', main: 'browseUsers'
-        setTitle 'People'
+        BlazeLayout.render 'layout', main: 'docs'
+        setTitle 'Docs'
 
-signInRequired.route '/following',
-    name: 'following'
-    action: ->
-        BlazeLayout.render 'layout', main: 'following'
-        setTitle 'Following'
-
-signInRequired.route '/follower',
-    name: 'follower'
-    action: ->
-        BlazeLayout.render 'layout', main: 'follower'
-        setTitle 'Follower'
 
 signInRequired.route '/messages',
     name: 'messages'
@@ -51,8 +40,6 @@ signInRequired.route '/messages',
         BlazeLayout.render 'layout', main: 'messages'
         setTitle 'Messages'
 
-signInRequired.route '/jobBoard',
-    name: 'jobBoard'
-    action: ->
-        BlazeLayout.render 'layout', main: 'jobBoard'
-        setTitle 'Job board'
+signInRequired.route '/edit/:docId', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'edit'
