@@ -10,40 +10,6 @@ Meteor.publish null, ->
 Meteor.publish 'userStatus', ->
     Meteor.users.find 'status.online': true
 
-Meteor.publishComposite 'posts.all', (query, filter, limit) ->
-    if @userId
-        currentUser = Meteor.users.findOne(_id: @userId)
-        parameters =
-            find: {}
-            options: {}
-        if filter == 'following'
-            if currentUser.followingIds and currentUser.followingIds.length != 0
-                parameters.find.authorId = $in: currentUser.followingIds
-            else
-                parameters.find.authorId = $in: []
-        {
-            find: ->
-                if query
-                    parameters.find.$text = $search: query
-                    parameters.options =
-                        fields: score: $meta: 'textScore'
-                        sort: score: $meta: 'textScore'
-                        limit: limit
-                else
-                    parameters.options =
-                        sort: createdAt: -1
-                        limit: limit
-                Counts.publish this, 'posts.all', Posts.find(parameters.find), noReady: true
-                Posts.find parameters.find, parameters.options
-            children: [ { find: (post) ->
-                Meteor.users.find { _id: post.authorId }, fields:
-                    emails: 1
-                    username: 1
-             } ]
-        }
-    else
-        []
-
 
 Meteor.publishComposite 'users.profile', (_id, limit) ->
     if @userId
@@ -80,25 +46,6 @@ Meteor.publish 'users.all', (query, limit) ->
         []
 
 
-Meteor.publish 'users.following', ->
-    if @userId
-        currentUser = Meteor.users.findOne(_id: @userId)
-        if currentUser.followingIds and currentUser.followingIds.length != 0
-            Meteor.users.find { _id: $in: currentUser.followingIds }, sort: username: 1
-        else
-            []
-    else
-        []
-
-
-Meteor.publish 'users.follower', ->
-    if @userId
-        currentUser = Meteor.users.findOne(_id: @userId)
-        Meteor.users.find { followingIds: $in: [ currentUser._id ] }, sort: username: 1
-    else
-        []
-
-
 Meteor.publish 'messages.all', ->
     if @userId
         currentUser = Meteor.users.findOne(_id: @userId)
@@ -109,25 +56,6 @@ Meteor.publish 'messages.all', ->
     else
         []
 
-
-Meteor.publish 'jobs.all', (query, limit) ->
-    if @userId
-        if query
-            Counts.publish this, 'jobs.all', Jobs.find(title:
-                $regex: '.*' + query + '.*'
-                $options: 'i'), noReady: true
-            Jobs.find { title:
-                $regex: '.*' + query + '.*'
-                $options: 'i' },
-                sort: createdOn: -1
-                limit: limit
-        else
-            Counts.publish this, 'jobs.all', Jobs.find({}), noReady: true
-            Jobs.find {},
-                sort: createdOn: -1
-                limit: limit
-    else
-        []
 
 
 Meteor.publish 'filtered_people', (selectedUserTags)->
@@ -169,3 +97,48 @@ Meteor.publish 'people_tags', (selectedtags)->
     # console.log tagCloud
 
     self.ready()
+
+
+Meteor.publish 'doc', (id)-> Docs.find id
+
+
+Meteor.publish 'tags', (selectedTags, selected_user, view_more)->
+    self = @
+
+    match = {}
+    if view_more is true then limit = 50 else limit = 10
+    if selectedTags.length > 0 then match.tags = $all: selectedTags
+    if selected_user then match.authorId = selected_user
+
+    cloud = Docs.aggregate [
+        { $match: match }
+        { $project: tags: 1 }
+        { $unwind: '$tags' }
+        { $group: _id: '$tags', count: $sum: 1 }
+        { $match: _id: $nin: selectedTags }
+        { $sort: count: -1, _id: 1 }
+        { $limit: limit }
+        { $project: _id: 0, name: '$_id', count: 1 }
+        ]
+
+    cloud.forEach (tag, i) ->
+        self.added 'tags', Random.id(),
+            name: tag.name
+            count: tag.count
+            index: i
+
+    self.ready()
+
+
+
+Meteor.publish 'docs', (selectedtags, selected_user)->
+    match = {}
+    match.tagCount = $gt: 0
+    if selected_user then match.authorId = selected_user
+    if selectedtags.length > 0 then match.tags = $all: selectedtags
+
+    Docs.find match,
+        limit: 5
+        sort:
+            tagCount: 1
+            timestamp: -1

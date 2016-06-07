@@ -10,6 +10,9 @@ template(name='nav')
                 i.search.link.icon
         .right.menu
             if currentUser
+                a#add_doc.item
+                    i.plus.icon
+                    | Add
                 a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
                     i.alarm.outline.icon
                     |  Profile

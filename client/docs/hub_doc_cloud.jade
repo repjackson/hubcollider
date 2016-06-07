@@ -2,9 +2,9 @@ template(name='cloud')
     .ui.center.aligned.bottom.attached.segment
         div
             if currentUser
-                .ui.left.icon.input
-                    i.lightning.icon
-                    input#quickAdd(type='text' autofocus='' placeholder='Quick Add')
+                // .ui.left.icon.input
+                //     i.lightning.icon
+                //     input#quickAdd(type='text' autofocus='' placeholder='Quick Add')
                 // div View:
                 //     #mine.ui.basic.button
                 //         i.user.icon
@@ -43,15 +43,11 @@ template(name='cloud')
             //             .item.selectBookmark
             //                 each this
             //                     .ui.label #{this}
-        .ui.left.icon.input
-            i.search.icon
-            input#search(type='text' placeholder="Search/'clear'" autofocus='')
+        // .ui.left.icon.input
+        //     i.search.icon
+        //     input#search(type='text' placeholder="Search/'clear'" autofocus='')
 
         // .ui.center.aligned.header Filter Docs:
-        if selectedTags
-            if currentUser
-                #bookmarkSelection.ui.basic.icon.circular.button
-                    i.bookmark.icon
         // if $.Session.get 'selected_user'
         //     .ui.button.primary.selected_user_button
         //         i.remove.icon
@@ -71,7 +67,7 @@ template(name='cloud')
             #clearTags.ui.compact.primary.icon.button
                 i.remove.icon
             each selectedTags
-                a.ui.compact.primary.button.unselectTag
+                a.ui.compact.primary.big.button.unselectTag
                     strong #{this}
         each globalTags
             .ui.compact.basic.button.selectTag(class=globalTagClass) #{this.name}

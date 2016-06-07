@@ -1,4 +1,5 @@
 template(name='docs')
+    +cloud
     .ui.container
         // .ui.center.aligned.header Top Doc:
         .ui.cards
@@ -15,13 +16,8 @@ template(name='view')
                 +markdown
                     !{body}
         .extra.content
-            span by #{author.username} [#{author.points} points] #{when}
-            .ui.basic.large.label
-                | Doc points: #{points}
+            span by #{author.username} #{when}
             if currentUser
-                .ui.basic.compact.button.cloneDoc
-                    i.fork.icon
-                    |Clone
                 if isAuthor
                     .ui.basic.compact.button.editDoc
                         i.blue.pencil.icon

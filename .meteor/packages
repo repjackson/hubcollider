@@ -43,3 +43,5 @@ useraccounts:semantic-ui
 semantic:ui
 flemay:less-autoprefixer
 mquandalle:stylus
+froala:editor
+matb33:collection-hooks

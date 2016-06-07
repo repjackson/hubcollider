@@ -1,9 +1,17 @@
-Template.nav.events 'click [data-id=sign-out]': ->
-    Meteor.logout (error) ->
-        if error
-            alert error.reason
-        else
-            FlowRouter.go '/sign-in'
+Template.nav.events
+    'click [data-id=sign-out]': ->
+        Meteor.logout (error) ->
+            if error
+                alert error.reason
+            else
+                FlowRouter.go '/sign-in'
+
+    'click #add_doc': ->
+        Meteor.call 'create_doc', (err, id)->
+            if err then console.log err
+            else FlowRouter.go "/edit/#{id}"
+
+
 
 Template.nav.onCreated ->
     @autorun =>
@@ -15,6 +23,7 @@ Template.nav.helpers
         if FlowRouter.getRouteName() == routeName
             return 'active'
         ''
+
     getUnreadCount: ->
         unreadMessageCount = 0
         messages = Messages.find($or: [
@@ -39,7 +48,7 @@ Template.nav.helpers
         else
             ''
 
-Template.body.events 
+Template.body.events
     'click .inverted': (e,t) ->
         e.preventDefault()
         document.documentElement.style.Filter = 'invert(0%)'
