@@ -39,9 +39,10 @@ Template.nav.helpers
         else
             ''
 
-# Template.body.events 'click .inverted': (e,t) ->
-#     e.preventDefault()
-#     document.documentElement.style.Filter = 'invert(0%)'
-#     console.log 'this was clicked'
-#     console.log document.documentElement.style.Filter
-#     return
+Template.body.events 
+    'click .inverted': (e,t) ->
+        e.preventDefault()
+        document.documentElement.style.Filter = 'invert(0%)'
+        console.log 'this was clicked'
+        console.log document.documentElement.style.Filter
+        return

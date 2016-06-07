@@ -12,7 +12,7 @@ Template.smallProfile.helpers
 
     doc_tag_class: ->
         result = ''
-        if @valueOf() in selected_tags.array() then result += ' primary' else result += ' basic'
+        if @valueOf() in selected_tags.array() then result += ' blue' else result += ''
         # if Meteor.userId() in Template.parentData(1).up_voters then result += ' green'
         # else if Meteor.userId() in Template.parentData(1).down_voters then result += ' red'
         return result

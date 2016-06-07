@@ -1,11 +1,15 @@
 template(name='layout')
     +nav
-    .ui.big.black.left.floated.fixed.button
+    #leftMenu.ui.big.black.left.floated.fixed.button
         i.content.icon
-        | Menu
-    .ui.big.black.right.floated.fixed.button
+        | Menu    
+    #rightMenu.ui.big.black.right.floated.fixed.button
         | Feed &nbsp;
         i.content.icon
-    .ui.container
-        +Template.dynamic template=main
-  
+          // Site content !
+    .pusher
+        #mainContent.ui.container
+            +Template.dynamic template=main
+    
+        
+    
