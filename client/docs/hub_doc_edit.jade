@@ -1,26 +1,36 @@
 template(name='edit')
     with doc
-        .ui.container
-            .ui.segment
-                div
+        .ui.raised.very.padded.text.container.segment
+            .ui.form
+                .field
+                    label Title
+                    input#title(type='text' placeholder='Add Title' value=title)
+                .field
+                    label Image
+                    input#img_url(type='text' placeholder='Add image url' value=img_url)
+                .field
+                    label Tags
                     each hub_doc_tags
                         .ui.basic.button.docTag
                             i.minus.icon
                             |#{this}
-                    .ui.left.icon.input
+                    .ui.left.icon.four.wide.input
                         i.add.icon
                         input#addTag(type='text' autofocus='' placeholder='Add Tag')
-                div
-                    .ui.input
-                        textarea#body
-                            |#{body}
-                if tags.length
-                    #saveDoc.ui.large.green.basic.button
-                        i.check.icon
-                        |Save
-                #delete.ui.red.small.compact.basic.button
-                    i.remove.icon
-                    |Delete
+                .field
+                    label Description
+                    textarea#body
+                        |#{body}
+                .field
+                    label Price
+                    input#price(type='number' min='0' value=price)
+            .ui.divider
+            #saveDoc.ui.large.green.basic.button
+                i.check.icon
+                |Save
+            #delete.ui.red.small.compact.basic.button
+                i.remove.icon
+                |Delete
         .ui.modal
             .header Confirm Delete
             .content

@@ -63,8 +63,14 @@ Template.edit.events
 
     'click #saveDoc': ->
         body = $('#body').val()
+        title = $('#title').val()
+        price = $('#price').val()
+        img_url = $('#img_url').val()
         Docs.update FlowRouter.getParam('docId'),
             $set:
+                img_url: img_url
+                price: price
+                title: title
                 body: body
                 tagCount: @tags.length
         selected_tags.clear()
