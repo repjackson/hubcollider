@@ -48,9 +48,9 @@ Template.edit.events
                         $set:
                             body: body
                             tagCount: @tags.length
-                    selectedTags.clear()
+                    selected_tags.clear()
                     for tag in @tags
-                        selectedTags.push tag
+                        selected_tags.push tag
                     FlowRouter.go '/'
 
     'click .docTag': ->
@@ -67,9 +67,9 @@ Template.edit.events
             $set:
                 body: body
                 tagCount: @tags.length
-        selectedTags.clear()
+        selected_tags.clear()
         for tag in @tags
-            selectedTags.push tag
+            selected_tags.push tag
         FlowRouter.go '/'
 
     'keyup #url': (e,t)->

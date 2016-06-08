@@ -11,6 +11,8 @@ Docs.after.update ((userId, doc, fieldNames, modifier, options) ->
     # Meteor.call 'generatePersonalCloud', Meteor.userId()
 ), fetchPrevious: true
 
+Docs.helpers
+    author: -> Meteor.users.findOne @authorId
 
 
 Meteor.methods

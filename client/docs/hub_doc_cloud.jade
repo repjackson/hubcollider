@@ -1,9 +1,9 @@
 template(name='cloud')
     .ui.center.aligned.basic.segment
-        if selectedTags
+        if selected_tags
             #clearTags.ui.big.compact.circular.primary.icon.button
                 i.remove.icon
-            each selectedTags
+            each selected_tags
                 a.ui.compact.primary.big.button.unselectTag
                     strong #{this}
         each globalTags

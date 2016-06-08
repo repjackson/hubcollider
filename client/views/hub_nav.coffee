@@ -18,15 +18,15 @@ Template.nav.events
             when 13 #enter
                 switch val
                     when 'clear'
-                        selectedTags.clear()
+                        selected_tags.clear()
                         $('#search').val ''
                     else
                         unless val.length is 0
-                            selectedTags.push val.toString()
+                            selected_tags.push val.toString()
                             $('#search').val ''
             when 8
                 if val.length is 0
-                    selectedTags.pop()
+                    selected_tags.pop()
 
 
 Template.nav.onCreated ->

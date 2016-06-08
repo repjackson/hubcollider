@@ -29,6 +29,7 @@ constellation:session@0.4.2
 constellation:subscriptions@0.4.2
 constellation:tiny@0.4.1
 dandv:caret-position@2.1.1
+dburles:collection-helpers@1.0.4
 dburles:mongo-collection-instances@0.3.5
 ddp@1.2.5
 ddp-client@1.2.7
@@ -45,7 +46,7 @@ fastclick@1.0.11
 flemay:less-autoprefixer@1.2.0
 fortawesome:fontawesome@4.5.0
 fourseven:scss@3.3.3_3
-froala:editor@2.3.1
+froala:editor@2.3.2
 geojson-utils@1.0.8
 gwendall:body-events@0.1.6
 gwendall:session-json@0.1.7
