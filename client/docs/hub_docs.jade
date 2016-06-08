@@ -11,11 +11,12 @@ template(name='view')
         .image
             img.ui.image(src=img_url)
         .content
-            |#{title}
-        .content
             .header
-                each hub_tags
-                    .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
+                .ui.header #{title}
+        .content
+            each hub_tags
+                .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
+        .content
             .description
                 +markdown
                     !{body}

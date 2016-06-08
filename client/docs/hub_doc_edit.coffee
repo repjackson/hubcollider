@@ -6,12 +6,15 @@ Template.edit.onCreated ->
 
 Template.edit.onRendered ->
     docId = FlowRouter.getParam('docId')
-    Meteor.setTimeout (->
-        $('#body').froalaEditor
-            height: 400
-            toolbarButtonsXS: ['bold', 'italic', 'fontFamily', 'fontSize', 'undo', 'redo', 'insertImage']
+    # Meteor.setTimeout (->
+    #     $('#body').froalaEditor
+    #         height: 400
+    #         toolbarButtons: ['bold', 'italic', 'fontSize', 'undo', 'redo']
+    #         toolbarButtonsMD: ['bold', 'italic', 'fontSize', 'undo', 'redo']
+    #         toolbarButtonsSM: ['bold', 'italic', 'fontSize', 'undo', 'redo']
+    #         toolbarButtonsXS: ['bold', 'italic', 'fontSize', 'undo', 'redo']
 
-        ), 400
+    #     ), 500
 
 
 
