@@ -1,10 +1,10 @@
-@selectedTags = new ReactiveArray []
+@selected_tags = new ReactiveArray []
 @selectedUsernames = new ReactiveArray []
 Session.setDefault('view_more': false)
 
 Template.cloud.onCreated ->
-    @autorun -> Meteor.subscribe 'tags', selectedTags.array(), Session.get('selected_user'), Session.get('view_more')
-    # @autorun -> Meteor.subscribe('usernames', selectedTags.array(), selectedUsernames.array(), Session.get('view'))
+    @autorun -> Meteor.subscribe 'tags', selected_tags.array(), Session.get('selected_user'), Session.get('view_more')
+    # @autorun -> Meteor.subscribe('usernames', selected_tags.array(), selectedUsernames.array(), Session.get('view'))
 
 
 Template.cloud.helpers
@@ -23,7 +23,7 @@ Template.cloud.helpers
             when @index <= 50 then 'tiny'
         return buttonClass
 
-    selectedTags: -> selectedTags.list()
+    selected_tags: -> selected_tags.list()
 
     user: -> Meteor.user()
     selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
@@ -34,42 +34,24 @@ Template.cloud.events
     'click #view_more': ->
         Session.set 'view_more': true
 
-
-    'keyup #search': (e,t)->
-        e.preventDefault()
-        val = $('#search').val()
-        switch e.which
-            when 13 #enter
-                switch val
-                    when 'clear'
-                        selectedTags.clear()
-                        $('#search').val ''
-                    else
-                        unless val.length is 0
-                            selectedTags.push val.toString()
-                            $('#search').val ''
-            when 8
-                if val.length is 0
-                    selectedTags.pop()
-
     'click .selectTag': ->
-        selectedTags.push @name
-        FlowRouter.setQueryParams( filter: selectedTags.array() )
+        selected_tags.push @name
+        FlowRouter.setQueryParams( filter: selected_tags.array() )
         # console.log FlowRouter.getQueryParam('filter');
 
     'click .unselectTag': ->
-        selectedTags.remove @valueOf()
-        FlowRouter.setQueryParams( filter: selectedTags.array() )
+        selected_tags.remove @valueOf()
+        FlowRouter.setQueryParams( filter: selected_tags.array() )
         # console.log FlowRouter.getQueryParam('filter');
 
     'click #clearTags': ->
-        selectedTags.clear()
+        selected_tags.clear()
         FlowRouter.setQueryParams( filter: null )
         # console.log FlowRouter.getQueryParam('filter');
 
     'click #bookmarkSelection': ->
         # if confirm 'Bookmark Selection?'
-        Meteor.call 'addBookmark', selectedTags.array(), (err,res)->
+        Meteor.call 'addBookmark', selected_tags.array(), (err,res)->
             alert "Selection bookmarked"
 
     'click .selected_user_button': -> Session.set 'selected_user', null

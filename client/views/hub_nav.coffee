@@ -11,6 +11,22 @@ Template.nav.events
             if err then console.log err
             else FlowRouter.go "/edit/#{id}"
 
+    'keyup #search': (e,t)->
+        e.preventDefault()
+        val = $('#search').val()
+        switch e.which
+            when 13 #enter
+                switch val
+                    when 'clear'
+                        selectedTags.clear()
+                        $('#search').val ''
+                    else
+                        unless val.length is 0
+                            selectedTags.push val.toString()
+                            $('#search').val ''
+            when 8
+                if val.length is 0
+                    selectedTags.pop()
 
 
 Template.nav.onCreated ->
