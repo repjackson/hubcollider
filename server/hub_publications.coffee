@@ -1,9 +1,8 @@
 Meteor.publish null, ->
     if @userId
         return Meteor.users.find({ _id: @userId }, fields:
-            biography: 1
-            followingIds: 1
             apps: 1
+            bookmarks: 1
             tags: 1)
     return
 

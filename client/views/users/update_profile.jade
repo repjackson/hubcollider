@@ -1,13 +1,6 @@
 template(name='updateProfile')
-    .row
-        .twelve.columns
-            .profile
-                +avatar user=currentUser size='extra-large' shape='circle' class='avatar-center'
-                h1.text-center.username #{currentUser.username}
-                // #socialMediaAccounts
-                +your_tags
-                // form(data-id='update-profile-form')
-                    // <a href="#">Add Social Media Accounts</a>
-                    // textarea.u-full-width.socialMedia(rows='1', placeholder='Add Social Media Accounts (separated by a comma)', data-id='addSocialMedia')
-                    // textarea.u-full-width.biography(placeholder='Write something about you...', data-id='biography') {{currentUser.biography}}
-                    // input.button-primary.u-pull-right(type='submit', value='Update profile')
+    .ui.container
+        .ui.center.aligned.basic.segment
+            +avatar user=currentUser size='extra-large' shape='circle' class='center aligned'
+            h1.ui.header #{currentUser.username}
+            +your_tags

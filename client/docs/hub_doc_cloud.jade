@@ -1,6 +1,10 @@
 template(name='cloud')
     .ui.center.aligned.basic.segment
         if selected_tags
+            if currentUser
+                #bookmarkSelection.ui.basic.icon.circular.button
+                    i.bookmark.icon
+        if selected_tags
             #clearTags.ui.big.compact.circular.primary.icon.button
                 i.remove.icon
             each selected_tags

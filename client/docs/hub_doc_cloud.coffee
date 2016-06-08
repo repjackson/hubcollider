@@ -51,7 +51,7 @@ Template.cloud.events
 
     'click #bookmarkSelection': ->
         # if confirm 'Bookmark Selection?'
-        Meteor.call 'addBookmark', selected_tags.array(), (err,res)->
+        Meteor.call 'add_bookmark', selected_tags.array(), (err,res)->
             alert "Selection bookmarked"
 
     'click .selected_user_button': -> Session.set 'selected_user', null

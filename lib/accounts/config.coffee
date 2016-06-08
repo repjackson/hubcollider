@@ -30,6 +30,7 @@ AccountsTemplates.configure
             resetPwd: 'Reset Password'
             signIn: 'Sign in'
             signUp: 'Sign up'
+
 # configuring useraccounts for login with both username or email
 pwd = AccountsTemplates.removeField('password')
 AccountsTemplates.removeField 'email'

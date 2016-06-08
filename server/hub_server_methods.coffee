@@ -69,3 +69,9 @@ Meteor.methods
             _id: Meteor.userId()
             'userTags.uId': uId
         }, {$pull: 'userTags.$.tags': tag}
+
+
+    add_bookmark: (tags)->
+        Meteor.users.update Meteor.userId(),
+            $addToSet:
+                bookmarks: tags
