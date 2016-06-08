@@ -107,7 +107,8 @@ Meteor.publish 'tags', (selectedTags, selected_user, view_more)->
 
     match = {}
     if view_more is true then limit = 50 else limit = 10
-    if selectedTags.length > 0 then match.tags = $all: selectedTags
+    selectedTags.push 'hubcollider'
+    match.tags = $all: selectedTags
     if selected_user then match.authorId = selected_user
 
     cloud = Docs.aggregate [
@@ -131,11 +132,12 @@ Meteor.publish 'tags', (selectedTags, selected_user, view_more)->
 
 
 
-Meteor.publish 'docs', (selectedtags, selected_user)->
+Meteor.publish 'docs', (selected_tags, selected_user)->
     match = {}
-    match.tagCount = $gt: 0
+    # match.tagCount = $gt: 0
     if selected_user then match.authorId = selected_user
-    if selectedtags.length > 0 then match.tags = $all: selectedtags
+    selected_tags.push 'hubcollider'
+    match.tags = $all: selected_tags
 
     Docs.find match,
         limit: 5

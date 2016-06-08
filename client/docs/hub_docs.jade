@@ -10,7 +10,7 @@ template(name='view')
     .ui.fluid.card
         .content
             .header
-                each tags
+                each hub_tags
                     .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
             .description
                 +markdown

@@ -19,17 +19,7 @@ Template.view.helpers
 
     when: -> moment(@timestamp).fromNow()
 
-    user: -> Meteor.user()
-
-    vote_upButtonClass: ->
-        if not Meteor.userId() then 'disabled basic'
-        else if Meteor.userId() in @up_voters then 'green'
-        else 'basic'
-
-    vote_downButtonClass: ->
-        if not Meteor.userId() then 'disabled basic'
-        else if Meteor.userId() in @down_voters then 'red'
-        else 'basic'
+    hub_tags: -> _.without(@tags, 'hubcollider')
 
     doc_tag_class: ->
         result = ''
