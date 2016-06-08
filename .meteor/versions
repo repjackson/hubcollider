@@ -3,6 +3,7 @@ accounts-password@1.1.8
 aldeed:template-extension@4.0.0
 allow-deny@1.0.4
 amplify@1.0.0
+anti:fake@0.4.1
 arillo:flow-router-helpers@0.5.1
 autoupdate@1.2.9
 babel-compiler@6.6.4
@@ -30,6 +31,7 @@ constellation:subscriptions@0.4.2
 constellation:tiny@0.4.1
 dandv:caret-position@2.1.1
 dburles:collection-helpers@1.0.4
+dburles:factory@1.0.0
 dburles:mongo-collection-instances@0.3.5
 ddp@1.2.5
 ddp-client@1.2.7

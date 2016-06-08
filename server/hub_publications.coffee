@@ -139,7 +139,7 @@ Meteor.publish 'docs', (selected_tags, selected_user)->
     match.tags = $all: selected_tags
 
     Docs.find match,
-        limit: 5
+        # limit: 5
         sort:
             tagCount: 1
             timestamp: -1
