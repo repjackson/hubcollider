@@ -1,10 +1,10 @@
 @selected_tags = new ReactiveArray []
-@selected_usernames = new ReactiveArray []
+@selected_authors = new ReactiveArray []
 Session.setDefault('view_more', false)
 
 Template.cloud.onCreated ->
     @autorun -> Meteor.subscribe('tags', selected_tags.array(), Session.get('selected_user'), Session.get('view_more'))
-    @autorun -> Meteor.subscribe('usernames', selected_tags.array(), selected_usernames.array())
+    @autorun -> Meteor.subscribe('authors', selected_tags.array(), selected_authors.array())
 
 
 Template.cloud.helpers
@@ -13,6 +13,10 @@ Template.cloud.helpers
         if 0 < docCount < 3 then Tags.find { count: $lt: docCount } else Tags.find()
         # Tags.find()
 
+    global_usernames: -> Usernames.find()
+    selected_authors: -> selected_authors.list()
+
+    username_view: -> Meteor.users.findOne(@text).username
 
     globalTagClass: ->
         tag_class = ''
@@ -72,6 +76,6 @@ Template.cloud.events
     'click .selected_user_button': -> Session.set 'selected_user', null
 
 
-    'click .select_username': -> selected_usernames.push @text
-    'click .unselect_username': -> selected_usernames.remove @valueOf()
-    'click #clear_usernames': -> selected_usernames.clear()
+    'click .select_username': -> selected_authors.push @text
+    'click .unselect_username': -> selected_authors.remove @valueOf()
+    'click #clear_usernames': -> selected_authors.clear()

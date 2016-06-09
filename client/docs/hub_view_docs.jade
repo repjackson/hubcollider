@@ -30,26 +30,19 @@ template(name='view_card')
                     .ui.basic.compact.button.editDoc
                         i.blue.pencil.icon
                         |Edit
-                else
-                    .ui.basic.button
-                        i.bitcoin.icon
-                        | Tip
+                // else
+                //     .ui.basic.button
+                //         i.bitcoin.icon
+                //         | Tip
         .extra.content
-            if liked
-                .ui.labeled.compact.small.button
-                    .ui.red.button
-                        i.heart.icon
-                        |  Like
-                    a.ui.basic.red.left.pointing.label
-                        | 1,048
-                a.left.floated.unlike
-                    i.heart.icon
-                    strong Liked
-            else
-                a.left.floated.like
-                    i.empty.heart.icon
-                    | Like
             if price
-                span.right.floated.star
-                    i.dollar.icon
-                    | #{price}
+                span.right.floated
+                    .ui.mini.statistic
+                        .value
+                            i.dollar.icon
+                            | #{price}
+            a.left.floated.unlike
+                i.empty.heart.large.icon
+            .center.aligned
+                i.thumbs.up.outline.large.icon
+                i.thumbs.down.outline.large.icon

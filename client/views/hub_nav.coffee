@@ -2,7 +2,7 @@ Template.nav.onCreated ->
     @autorun =>
         # Set subscriptions
         @subscribe 'messages.all'
-        @subscribe 'users.all'
+        # @subscribe 'users.all'
 
 
 Template.nav.events

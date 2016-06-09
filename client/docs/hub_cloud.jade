@@ -23,7 +23,6 @@ template(name='cloud')
                 #view_less.ui.basic.button
                     i.minus.icon
                     |Less
-        |By Author:
         if selected_usernames
             #clear_usernames.ui.circular.primary.icon.button
                 i.remove.icon
@@ -34,5 +33,5 @@ template(name='cloud')
         each global_usernames
             .ui.basic.circular.button.select_username
                 i.user.icon
-                |#{this.text}
+                |#{username_view}
                 small #{this.count}

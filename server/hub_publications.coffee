@@ -140,18 +140,18 @@ Meteor.publish 'docs', (selected_tags, selected_user)->
             timestamp: -1
 
 
-Meteor.publish 'usernames', (selected_tags, selected_usernames)->
+Meteor.publish 'usernames', (selected_tags)->
     self = @
 
     match = {}
     if selected_tags.length > 0 then match.tags = $all: selected_tags
-    if selected_usernames.length > 0 then match.username = $in: selected_usernames
+    # if selected_usernames.length > 0 then match.username = $in: selected_usernames
 
     cloud = Docs.aggregate [
         { $match: match }
-        { $project: username: 1 }
-        { $group: _id: '$username', count: $sum: 1 }
-        { $match: _id: $nin: selected_usernames }
+        { $project: authorId: 1 }
+        { $group: _id: '$authorId', count: $sum: 1 }
+        # { $match: _id: $nin: selected_usernames }
         { $sort: count: -1, _id: 1 }
         { $limit: 50 }
         { $project: _id: 0, text: '$_id', count: 1 }
