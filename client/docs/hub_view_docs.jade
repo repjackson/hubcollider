@@ -36,6 +36,12 @@ template(name='view_card')
                         | Tip
         .extra.content
             if liked
+                .ui.labeled.compact.small.button
+                    .ui.red.button
+                        i.heart.icon
+                        |  Like
+                    a.ui.basic.red.left.pointing.label
+                        | 1,048
                 a.left.floated.unlike
                     i.heart.icon
                     strong Liked

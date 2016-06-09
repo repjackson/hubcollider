@@ -30,7 +30,7 @@ Template.edit.events
     'click #delete': ->
         $('.modal').modal(
             onApprove: ->
-                Meteor.call 'deleteDoc', FlowRouter.getParam('docId'), ->
+                Meteor.call 'delete_doc', FlowRouter.getParam('docId'), ->
                 $('.ui.modal').modal('hide')
                 FlowRouter.go '/'
         	).modal 'show'
@@ -80,14 +80,3 @@ Template.edit.events
         for tag in @tags
             selected_tags.push tag
         FlowRouter.go '/'
-
-    'keyup #url': (e,t)->
-        docId = FlowRouter.getParam('docId')
-        url = $('#url').val()
-        switch e.which
-            when 13
-                if url.length > 0
-                    Docs.update docId,
-                        $set: url: url
-                    Meteor.call 'fetchUrlTags', docId, url
-
