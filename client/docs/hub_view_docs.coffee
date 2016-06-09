@@ -1,5 +1,5 @@
 Template.docs.onCreated ->
-    @autorun -> Meteor.subscribe 'docs', selected_tags.array(), Session.get('selected_user')
+    @autorun -> Meteor.subscribe 'docs', selected_tags.array(), selected_authors.array()
 
 Template.docs.helpers
     docs: -> Docs.find {},

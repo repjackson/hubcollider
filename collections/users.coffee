@@ -1,4 +1,4 @@
-@Usernames = new Meteor.Collection 'usernames'
+@Authors = new Meteor.Collection 'authors'
 
 
 Meteor.methods

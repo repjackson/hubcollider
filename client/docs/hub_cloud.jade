@@ -10,7 +10,7 @@ template(name='cloud')
             each selected_tags
                 .ui.compact.big.button.unselectTag(class=selected_tag_class)
                     strong #{this}
-        each globalTags
+        each all_tags
             .ui.compact.basic.button.selectTag(class=globalTagClass) #{this.name}
                 small #{this.count}
         if can_view_more
@@ -23,15 +23,15 @@ template(name='cloud')
                 #view_less.ui.basic.button
                     i.minus.icon
                     |Less
-        if selected_usernames
-            #clear_usernames.ui.circular.primary.icon.button
+        if selected_authors
+            #clear_authors.ui.circular.primary.icon.button
                 i.remove.icon
-            each selected_usernames
-                a.ui.primary.circular.button.unselect_username
+            each selected_authors
+                a.ui.primary.circular.button.unselect_author
                     i.user.icon
-                    strong #{this}
-        each global_usernames
-            .ui.basic.circular.button.select_username
+                    strong #{selected_username_view}
+        each all_authors
+            .ui.basic.circular.button.select_author
                 i.user.icon
                 |#{username_view}
                 small #{this.count}

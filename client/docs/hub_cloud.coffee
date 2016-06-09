@@ -3,20 +3,23 @@
 Session.setDefault('view_more', false)
 
 Template.cloud.onCreated ->
-    @autorun -> Meteor.subscribe('tags', selected_tags.array(), Session.get('selected_user'), Session.get('view_more'))
+    @autorun -> Meteor.subscribe('tags', selected_tags.array(), selected_authors.array(), Session.get('view_more'))
     @autorun -> Meteor.subscribe('authors', selected_tags.array(), selected_authors.array())
 
 
 Template.cloud.helpers
-    globalTags: ->
-        docCount = Docs.find().count()
-        if 0 < docCount < 3 then Tags.find { count: $lt: docCount } else Tags.find()
-        # Tags.find()
+    all_tags: ->
+        # docCount = Docs.find().count()
+        # if 0 < docCount < 3 then Tags.find { count: $lt: docCount } else Tags.find()
+        Tags.find()
 
-    global_usernames: -> Usernames.find()
+    all_authors: -> Authors.find()
+
     selected_authors: -> selected_authors.list()
 
-    username_view: -> Meteor.users.findOne(@text).username
+    username_view: -> Meteor.users.findOne(@text)?.username
+
+    selected_username_view: -> Meteor.users.findOne(@valueOf())?.username
 
     globalTagClass: ->
         tag_class = ''
@@ -35,6 +38,7 @@ Template.cloud.helpers
     selected_tags: -> selected_tags.list()
 
     user: -> Meteor.user()
+
     selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
 
     selected_tag_class: ->
@@ -76,6 +80,6 @@ Template.cloud.events
     'click .selected_user_button': -> Session.set 'selected_user', null
 
 
-    'click .select_username': -> selected_authors.push @text
-    'click .unselect_username': -> selected_authors.remove @valueOf()
-    'click #clear_usernames': -> selected_authors.clear()
+    'click .select_author': -> selected_authors.push @text
+    'click .unselect_author': -> selected_authors.remove @valueOf()
+    'click #clear_authors': -> selected_authors.clear()

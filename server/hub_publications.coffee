@@ -96,14 +96,15 @@ Meteor.publish 'people_tags', (selected_tags)->
 Meteor.publish 'doc', (id)-> Docs.find id
 
 
-Meteor.publish 'tags', (selected_tags, selected_user, view_more)->
+Meteor.publish 'tags', (selected_tags, selected_authors, view_more)->
     self = @
 
     match = {}
     if view_more is true then limit = 50 else limit = 10
     selected_tags.push 'hubcollider'
     match.tags = $all: selected_tags
-    if selected_user then match.authorId = selected_user
+
+    if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
     cloud = Docs.aggregate [
         { $match: match }
@@ -126,12 +127,11 @@ Meteor.publish 'tags', (selected_tags, selected_user, view_more)->
 
 
 
-Meteor.publish 'docs', (selected_tags, selected_user)->
+Meteor.publish 'docs', (selected_tags, selected_authors)->
     match = {}
-    # match.tagCount = $gt: 0
-    if selected_user then match.authorId = selected_user
     selected_tags.push 'hubcollider'
     match.tags = $all: selected_tags
+    if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
     Docs.find match,
         # limit: 5
@@ -140,25 +140,25 @@ Meteor.publish 'docs', (selected_tags, selected_user)->
             timestamp: -1
 
 
-Meteor.publish 'usernames', (selected_tags)->
+Meteor.publish 'authors', (selected_tags, selected_authors)->
     self = @
 
     match = {}
     if selected_tags.length > 0 then match.tags = $all: selected_tags
-    # if selected_usernames.length > 0 then match.username = $in: selected_usernames
+    if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
     cloud = Docs.aggregate [
         { $match: match }
         { $project: authorId: 1 }
         { $group: _id: '$authorId', count: $sum: 1 }
-        # { $match: _id: $nin: selected_usernames }
+        { $match: _id: $nin: selected_authors }
         { $sort: count: -1, _id: 1 }
         { $limit: 50 }
         { $project: _id: 0, text: '$_id', count: 1 }
         ]
 
-    cloud.forEach (username) ->
-        self.added 'usernames', Random.id(),
-            text: username.text
-            count: username.count
+    cloud.forEach (author) ->
+        self.added 'authors', Random.id(),
+            text: author.text
+            count: author.count
     self.ready()
