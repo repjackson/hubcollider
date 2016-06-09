@@ -22,7 +22,7 @@ Template.small_card.helpers
 
     when: -> moment(@timestamp).fromNow()
 
-    hub_tags: -> _.without(@tags, 'hubcollider')
+    clipped_hub_tags: -> _.without(@tags, 'hubcollider').slice(0,5)
 
     doc_tag_class: ->
         result = ''
@@ -38,15 +38,6 @@ Template.small_card.helpers
 
 
 Template.small_card.events
-    # 'mouseenter .special.cards .image': ->
-    #     $('.special.cards .image').dimmer('show')
-
-    # 'mouseenter .image': (e, t)->
-    #     t.$('.image').dimmer('show')
-
-    # 'mouseleave .image': (e, t)->
-    #     t.$('.image').dimmer('hide')
-
     'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
 
     'click .editDoc': -> FlowRouter.go "/edit/#{@_id}"

@@ -1,6 +1,6 @@
 template(name='big_card')
     .ui.fluid.card(class=doc_card_class)
-        .blurring.dimmable.large.image
+        .blurring.dimmable.fluid.image
             .ui.dimmer
                 .content
                     .center
@@ -16,7 +16,7 @@ template(name='big_card')
                 |#{title}
         .content
             each hub_tags
-                .ui.basic.label  #{this}
+                .ui.basic.large.label  #{this}
         if body
             .extra.content
                 |#{body}

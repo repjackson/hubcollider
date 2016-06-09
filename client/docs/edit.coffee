@@ -104,3 +104,21 @@ Template.edit.events
         Docs.update FlowRouter.getParam('docId'),
             $set:
                 title: title
+
+
+    update_address = ->
+
+    'keyup #address': (e,t)->
+        address = $('#address').val()
+        old_address = @address
+        switch e.which
+            when 13
+                Docs.update FlowRouter.getParam('docId'),
+                    $addToSet: tags: address
+                Docs.update FlowRouter.getParam('docId'),
+                    $pull: tags: old_address
+                Docs.update FlowRouter.getParam('docId'),
+                    $set: address: address
+
+        # _.debounce(update_address, 300)
+

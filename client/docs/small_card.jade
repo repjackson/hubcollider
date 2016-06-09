@@ -16,7 +16,7 @@ template(name='small_card')
                     i.green.cart.icon
                 |#{title}
         .content
-            each hub_tags
+            each clipped_hub_tags
                 .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
         .extra.content
             | by &nbsp;
