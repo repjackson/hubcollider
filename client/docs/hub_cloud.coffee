@@ -1,10 +1,10 @@
 @selected_tags = new ReactiveArray []
-@selectedUsernames = new ReactiveArray []
+@selected_usernames = new ReactiveArray []
 Session.setDefault('view_more', false)
 
 Template.cloud.onCreated ->
-    @autorun -> Meteor.subscribe 'tags', selected_tags.array(), Session.get('selected_user'), Session.get('view_more')
-    # @autorun -> Meteor.subscribe('usernames', selected_tags.array(), selectedUsernames.array(), Session.get('view'))
+    @autorun -> Meteor.subscribe('tags', selected_tags.array(), Session.get('selected_user'), Session.get('view_more'))
+    @autorun -> Meteor.subscribe('usernames', selected_tags.array(), selected_usernames.array())
 
 
 Template.cloud.helpers
@@ -70,3 +70,8 @@ Template.cloud.events
             alert "Selection bookmarked"
 
     'click .selected_user_button': -> Session.set 'selected_user', null
+
+
+    'click .select_username': -> selected_usernames.push @text
+    'click .unselect_username': -> selected_usernames.remove @valueOf()
+    'click #clear_usernames': -> selected_usernames.clear()

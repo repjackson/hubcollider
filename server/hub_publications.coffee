@@ -55,11 +55,16 @@ Meteor.publish 'messages.all', ->
     else
         []
 
+Meteor.publish 'person', (id)->
+    Meteor.users.find id,
+        fields:
+            tags: 1
+            username: 1
 
 
 Meteor.publish 'filtered_people', (selectedUserTags)->
     self = @
-    # console.log selectedTags
+    # console.log selected_tags
     match = {}
     # match.apps = $in: ['hub_collider']
     if selectedUserTags and selectedUserTags.length > 0 then match.tags = $all: selectedUserTags
@@ -69,10 +74,10 @@ Meteor.publish 'filtered_people', (selectedUserTags)->
             tags: 1
             username: 1
 
-Meteor.publish 'people_tags', (selectedtags)->
+Meteor.publish 'people_tags', (selected_tags)->
     self = @
     match = {}
-    if selectedtags?.length > 0 then match.tags = $all: selectedtags
+    if selected_tags?.length > 0 then match.tags = $all: selected_tags
     # match.apps = $in: ['hub_collider']
     match._id = $ne: @userId
 
@@ -81,7 +86,7 @@ Meteor.publish 'people_tags', (selectedtags)->
         { $project: tags: 1 }
         { $unwind: "$tags" }
         { $group: _id: "$tags", count: $sum: 1 }
-        { $match: _id: $nin: selectedtags }
+        { $match: _id: $nin: selected_tags }
         { $sort: count: -1, _id: 1 }
         { $limit: 50 }
         { $project: _id: 0, name: '$_id', count: 1 }
@@ -101,13 +106,13 @@ Meteor.publish 'people_tags', (selectedtags)->
 Meteor.publish 'doc', (id)-> Docs.find id
 
 
-Meteor.publish 'tags', (selectedTags, selected_user, view_more)->
+Meteor.publish 'tags', (selected_tags, selected_user, view_more)->
     self = @
 
     match = {}
     if view_more is true then limit = 50 else limit = 10
-    selectedTags.push 'hubcollider'
-    match.tags = $all: selectedTags
+    selected_tags.push 'hubcollider'
+    match.tags = $all: selected_tags
     if selected_user then match.authorId = selected_user
 
     cloud = Docs.aggregate [
@@ -115,7 +120,7 @@ Meteor.publish 'tags', (selectedTags, selected_user, view_more)->
         { $project: tags: 1 }
         { $unwind: '$tags' }
         { $group: _id: '$tags', count: $sum: 1 }
-        { $match: _id: $nin: selectedTags }
+        { $match: _id: $nin: selected_tags }
         { $sort: count: -1, _id: 1 }
         { $limit: limit }
         { $project: _id: 0, name: '$_id', count: 1 }
@@ -143,3 +148,27 @@ Meteor.publish 'docs', (selected_tags, selected_user)->
         sort:
             tagCount: 1
             timestamp: -1
+
+
+Meteor.publish 'usernames', (selected_tags, selected_usernames)->
+    self = @
+
+    match = {}
+    if selected_tags.length > 0 then match.tags = $all: selected_tags
+    if selected_usernames.length > 0 then match.username = $in: selected_usernames
+
+    cloud = Docs.aggregate [
+        { $match: match }
+        { $project: username: 1 }
+        { $group: _id: '$username', count: $sum: 1 }
+        { $match: _id: $nin: selected_usernames }
+        { $sort: count: -1, _id: 1 }
+        { $limit: 50 }
+        { $project: _id: 0, text: '$_id', count: 1 }
+        ]
+
+    cloud.forEach (username) ->
+        self.added 'usernames', Random.id(),
+            text: username.text
+            count: username.count
+    self.ready()

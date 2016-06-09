@@ -23,3 +23,16 @@ template(name='cloud')
                 #view_less.ui.basic.button
                     i.minus.icon
                     |Less
+        |By Author:
+        if selected_usernames
+            #clear_usernames.ui.circular.primary.icon.button
+                i.remove.icon
+            each selected_usernames
+                a.ui.primary.circular.button.unselect_username
+                    i.user.icon
+                    strong #{this}
+        each global_usernames
+            .ui.basic.circular.button.select_username
+                i.user.icon
+                |#{this.text}
+                small #{this.count}
