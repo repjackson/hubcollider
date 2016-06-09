@@ -7,7 +7,6 @@ Template.docs.helpers
     docs: -> Docs.find {},
         # limit: 5
         sort:
-            tagCount: 1
             timestamp: -1
     # docs: -> Docs.find()
 

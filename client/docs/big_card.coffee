@@ -3,9 +3,9 @@ Template.big_card.onCreated ->
     Meteor.subscribe 'person', @data.authorId
 
 Template.big_card.onRendered ->
-    $('.special.cards .image').dimmer({
-      on: 'hover'
-    });
+    # $('.special.cards .image').dimmer({
+    #   on: 'hover'
+    # });
 
 
 

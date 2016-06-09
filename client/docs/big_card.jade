@@ -1,12 +1,12 @@
 template(name='big_card')
     .ui.fluid.card(class=doc_card_class)
-        .blurring.dimmable.fluid.image
-            .ui.dimmer
-                .content
-                    .center
-                        .ui.inverted.icon.button.make_small
-                            i.compress.icon
-            img.ui.image(src=img_url)
+        // .blurring.dimmable.fluid.image
+        //     .ui.dimmer
+        //         .content
+        //             .center
+        //                 .ui.inverted.icon.button.make_small
+        //                     i.compress.icon
+        img.ui.image(src=img_url)
         .content
             a.header.doc_title
                 if is_in_academy
