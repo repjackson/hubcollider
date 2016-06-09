@@ -64,33 +64,33 @@ Meteor.publish 'person', (id)->
 #             tags: 1
 #             username: 1
 
-Meteor.publish 'people_tags', (selected_tags)->
-    self = @
-    match = {}
-    if selected_tags?.length > 0 then match.tags = $all: selected_tags
-    # match.apps = $in: ['hub_collider']
-    match._id = $ne: @userId
+# Meteor.publish 'people_tags', (selected_tags)->
+#     self = @
+#     match = {}
+#     if selected_tags?.length > 0 then match.tags = $all: selected_tags
+#     # match.apps = $in: ['hub_collider']
+#     match._id = $ne: @userId
 
-    tagCloud = Meteor.users.aggregate [
-        { $match: match }
-        { $project: tags: 1 }
-        { $unwind: "$tags" }
-        { $group: _id: "$tags", count: $sum: 1 }
-        { $match: _id: $nin: selected_tags }
-        { $sort: count: -1, _id: 1 }
-        { $limit: 50 }
-        { $project: _id: 0, name: '$_id', count: 1 }
-        ]
+#     tagCloud = Meteor.users.aggregate [
+#         { $match: match }
+#         { $project: tags: 1 }
+#         { $unwind: "$tags" }
+#         { $group: _id: "$tags", count: $sum: 1 }
+#         { $match: _id: $nin: selected_tags }
+#         { $sort: count: -1, _id: 1 }
+#         { $limit: 50 }
+#         { $project: _id: 0, name: '$_id', count: 1 }
+#         ]
 
-    tagCloud.forEach (tag, i) ->
-        self.added 'people_tags', Random.id(),
-            name: tag.name
-            count: tag.count
-            index: i
+#     tagCloud.forEach (tag, i) ->
+#         self.added 'people_tags', Random.id(),
+#             name: tag.name
+#             count: tag.count
+#             index: i
 
-    # console.log tagCloud
+#     # console.log tagCloud
 
-    self.ready()
+#     self.ready()
 
 
 Meteor.publish 'doc', (id)-> Docs.find id
@@ -144,7 +144,8 @@ Meteor.publish 'authors', (selected_tags, selected_authors)->
     self = @
 
     match = {}
-    if selected_tags.length > 0 then match.tags = $all: selected_tags
+    selected_tags.push 'hubcollider'
+    match.tags = $all: selected_tags
     if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
     cloud = Docs.aggregate [
