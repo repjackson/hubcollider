@@ -9,12 +9,20 @@ Template.docs.helpers
             timestamp: -1
     # docs: -> Docs.find()
 
-
 Template.view.onCreated ->
     # console.log @data.authorId
     Meteor.subscribe 'person', @data.authorId
 
 Template.view.helpers
+    doc_card_class: ->
+        console.log @
+        if 'academy' in @tags then return 'yellow'
+        if 'economy' in @tags then return 'green'
+
+    is_in_academy: -> 'academy' in @tags
+
+    is_in_economy: -> 'economy' in @tags
+
     isAuthor: -> @authorId is Meteor.userId()
 
     when: -> moment(@timestamp).fromNow()

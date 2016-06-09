@@ -11,6 +11,16 @@ Template.nav.events
             if err then console.log err
             else FlowRouter.go "/edit/#{id}"
 
+    'click #add_econ': ->
+        Meteor.call 'create_doc', 'economy', (err, id)->
+            if err then console.log err
+            else FlowRouter.go "/edit/#{id}"
+
+    'click #add_acad': ->
+        Meteor.call 'create_doc', 'academy', (err, id)->
+            if err then console.log err
+            else FlowRouter.go "/edit/#{id}"
+
     'keyup #search': (e,t)->
         e.preventDefault()
         val = $('#search').val()
@@ -65,9 +75,9 @@ Template.nav.helpers
             ''
 
 Template.body.events
-    'click .inverted': (e,t) ->
-        e.preventDefault()
-        document.documentElement.style.Filter = 'invert(0%)'
-        console.log 'this was clicked'
-        console.log document.documentElement.style.Filter
-        return
+    # 'click .inverted': (e,t) ->
+    #     e.preventDefault()
+    #     document.documentElement.style.Filter = 'invert(0%)'
+    #     console.log 'this was clicked'
+    #     console.log document.documentElement.style.Filter
+    #     return

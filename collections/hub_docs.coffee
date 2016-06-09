@@ -3,7 +3,6 @@
 Docs.before.insert (userId, doc)->
     doc.timestamp = Date.now()
     doc.authorId = Meteor.userId()
-    doc.tags.push 'hubcollider'
     return
 
 Docs.after.update ((userId, doc, fieldNames, modifier, options) ->
@@ -16,7 +15,9 @@ Docs.helpers
 
 
 Meteor.methods
-    create_doc: (tags=[])->
+    create_doc: (tag)->
+        tags = []
+        tags.push 'hubcollider', tag
         Docs.insert
             tags: tags
 

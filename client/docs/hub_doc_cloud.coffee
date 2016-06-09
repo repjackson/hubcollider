@@ -15,20 +15,30 @@ Template.cloud.helpers
 
 
     globalTagClass: ->
-        buttonClass = switch
-            when @index <= 10 then 'big'
-            when @index <= 20 then 'large'
-            when @index <= 30 then ''
-            when @index <= 40 then 'small'
-            when @index <= 50 then 'tiny'
-        return buttonClass
+        tag_class = ''
+        switch
+            when @index <= 10 then tag_class += ' big'
+            when @index <= 20 then tag_class += ' large'
+            when @index <= 30 then tag_class += ' '
+            when @index <= 40 then tag_class += ' small'
+            when @index <= 50 then tag_class += ' tiny'
+
+        if @name is 'academy' then tag_class += ' yellow'
+        if @name is 'economy' then tag_class += ' green'
+
+        return tag_class
 
     selected_tags: -> selected_tags.list()
 
     user: -> Meteor.user()
     selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
 
-
+    selected_tag_class: ->
+        tag_class = switch
+            when @valueOf() is 'academy' then 'yellow'
+            when @valueOf() is 'economy' then 'green'
+            else 'primary'
+        return tag_class
 
 Template.cloud.events
     'click #view_more': ->

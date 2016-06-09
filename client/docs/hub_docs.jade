@@ -7,12 +7,16 @@ template(name='docs')
                 +view
 
 template(name='view')
-    .ui.card
+    .ui.card(class=doc_card_class)
         .image
             img.ui.image(src=img_url)
         .content
             .header
-                .ui.header #{title}
+                if is_in_academy
+                    i.yellow.university.icon
+                if is_in_economy
+                    i.green.cart.icon
+                |#{title}
         .content
             each hub_tags
                 .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}

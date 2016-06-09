@@ -1,7 +1,20 @@
 template(name='nav')
-    .ui.stackable.menu
-        a#leftMenu.icon.item
+    .ui.stackable.top.attached.menu
+        .ui.simple.dropdown.icon.item
             i.content.icon
+            .menu
+                a#economy_link.item
+                    i.cart.green.icon
+                    | Economy
+                a#accelerator_link.item
+                    i.university.yellow.icon
+                    | Accelerator
+                a#perks_link.item
+                    i.trophy.big.icon
+                    | Perks
+                a#crowd_sourcing_link.item
+                    i.users.big.icon
+                    | Crowd Sourcing
         a.item(href='/')
             img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
             span Hub
@@ -12,9 +25,12 @@ template(name='nav')
                 i.search.link.icon
         .right.menu
             if currentUser
-                a#add_doc.item
+                a#add_econ.item
                     i.plus.icon
-                    | Add
+                    i.large.green.cart.icon
+                a#add_acad.item
+                    i.plus.icon
+                    i.large.yellow.university.icon
                 a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
                     |  Profile
                 a.item.sign-out(data-id='sign-out')
