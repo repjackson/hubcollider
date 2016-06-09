@@ -35,7 +35,7 @@ Template.view_card.helpers
         # else if Meteor.userId() in Template.parentData(1).down_voters then result += ' red'
         return result
 
-    select_user_button_class: -> if Session.equals 'selected_user', @authorId then 'primary' else 'basic'
+    select_author_button_class: -> if @authorId in selected_authors.array() then 'primary' else 'basic'
 
     cloud_label_class: -> if @name in selected_tags.array() then 'primary' else 'basic'
 
@@ -52,8 +52,8 @@ Template.view_card.events
         if confirm 'Delete?'
             Meteor.call 'deleteDoc', @_id
 
-    'click .authorFilterButton': ->
-        if @username in selectedUsernames.array() then selectedUsernames.remove @username else selectedUsernames.push @username
+    'click .select_author': ->
+        if @authorId in selected_authors.array() then selected_authors.remove @authorId else selected_authors.push @authorId
 
     'click .cloneDoc': ->
         # if confirm 'Clone?'

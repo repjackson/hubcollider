@@ -24,7 +24,12 @@ template(name='view_card')
             .description
                 #{body}
         .extra.content
-            span by #{author.username} #{when}
+            | by &nbsp;
+            .ui.circular.button.select_author(class=select_author_button_class)
+                i.user.icon
+                |#{author.username}
+            | &nbsp; #{when}
+        .extra.content
             if currentUser
                 if isAuthor
                     .ui.basic.compact.button.editDoc
