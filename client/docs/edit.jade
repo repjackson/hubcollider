@@ -1,7 +1,7 @@
 template(name='edit')
     with doc
         .ui.raised.very.padded.text.container.segment
-            form#edit_doc_form.ui.form
+            #edit_doc_form.ui.form
                 .required.field
                     label Title
                     input#title(type='text' placeholder='Add Title' value=title)
@@ -34,7 +34,7 @@ template(name='edit')
                     i.remove.icon
                     |Delete
                 if title
-                    button(type='submit')#saveDoc.ui.large.green.button
+                    #saveDoc.ui.large.green.button
                         i.check.icon
                         |Save
         .ui.basic.modal.delete_modal
