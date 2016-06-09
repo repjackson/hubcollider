@@ -30,7 +30,6 @@ mizzao:user-status
 kevohagan:sweetalert
 mizzao:autocomplete
 markdown
-simple:highlight.js
 constellation:console
 mquandalle:jade
 coffeescript
@@ -43,9 +42,8 @@ useraccounts:semantic-ui
 semantic:ui
 flemay:less-autoprefixer
 mquandalle:stylus
-froala:editor
 matb33:collection-hooks
 dburles:collection-helpers
-dburles:factory
-anti:fake
 raix:handlebar-helpers
+jeremy:geocomplete
+drewy:datetimepicker

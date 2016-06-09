@@ -16,7 +16,18 @@ template(name='edit')
                             |#{this}
                     .ui.left.icon.four.wide.input
                         i.add.icon
-                        input#addTag(type='text' autofocus='' placeholder='Add Tag')
+                        input#addTag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
+                .inline.field
+                    label Add Address
+                    // i.map.icon
+                    input#place(type='text' value=locationob.formatted_address)
+                    .ui.basic.button.clearAddress Clear
+                .inline.field
+                    label Add Date/Time
+                    // i.calendar.outline.icon
+                    // .ui.left.icon.input
+                    input#datetimepicker(type="text" value=dateTime)
+                    .ui.basic.button.clearDT Clear
                 .field
                     label Description
                     textarea#body
