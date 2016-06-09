@@ -35,6 +35,7 @@ template(name='nav')
                     i.plus.icon
                     i.large.yellow.university.icon
                 a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
+                    i.user.icon
                     |  Profile
                 a.item.sign-out(data-id='sign-out')
                     i.sign.out.icon
