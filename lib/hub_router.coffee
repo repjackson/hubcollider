@@ -20,12 +20,6 @@ signInRequired.route '/users/:_id',
         BlazeLayout.render 'layout', main: 'profile'
         setTitle 'Profile'
 
-# signInRequired.route '/browse-users',
-#     name: 'browseUsers'
-#     action: ->
-#         BlazeLayout.render 'layout', main: 'browseUsers'
-#         setTitle 'Browse users'
-
 
 signInRequired.route '/',
     name: 'docs'
@@ -43,3 +37,7 @@ signInRequired.route '/messages',
 signInRequired.route '/edit/:docId', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'edit'
+
+signInRequired.route '/view/:docId', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'doc_page'

@@ -4,14 +4,14 @@ template(name='docs')
         // .ui.center.aligned.header Top Doc:
         .ui.centered.cards
             each docs
-                +view
+                +view_card
 
-template(name='view')
+template(name='view_card')
     .ui.card(class=doc_card_class)
         .image
             img.ui.image(src=img_url)
         .content
-            .header
+            a.header.doc_title
                 if is_in_academy
                     i.yellow.university.icon
                 if is_in_economy
@@ -22,8 +22,7 @@ template(name='view')
                 .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
         .content
             .description
-                +markdown
-                    !{body}
+                #{body}
         .extra.content
             span by #{author.username} #{when}
             if currentUser
@@ -36,9 +35,15 @@ template(name='view')
                         i.bitcoin.icon
                         | Tip
         .extra.content
-            span.left.floated.like
-                i.like.icon
-                | Like
-            span.right.floated.star
-                i.dollar.icon
-                | #{price}
+            if liked
+                a.left.floated.unlike
+                    i.heart.icon
+                    strong Liked
+            else
+                a.left.floated.like
+                    i.empty.heart.icon
+                    | Like
+            if price
+                span.right.floated.star
+                    i.dollar.icon
+                    | #{price}
