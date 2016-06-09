@@ -22,19 +22,19 @@ template(name='edit')
                     // i.map.icon
                     input#place(type='text' value=locationob.formatted_address)
                     .ui.basic.button.clearAddress Clear
-                .inline.field
-                    label Add Date/Time
-                    // i.calendar.outline.icon
-                    // .ui.left.icon.input
-                    input#datetimepicker(type="text" value=dateTime)
-                    .ui.basic.button.clearDT Clear
+                // .inline.field
+                //     label Add Date/Time
+                //     // i.calendar.outline.icon
+                //     // .ui.left.icon.input
+                //     input#datetimepicker(type="text" value=dateTime)
+                //     .ui.basic.button.clearDT Clear
                 .field
                     label Description
-                    textarea#body
+                    textarea#body(maxlength='2000')
                         |#{body}
                 .field
                     label Price
-                    input#price(type='number' min='0' value=price)
+                    input#price(type='number' min='0' max='10000' value=price)
             .ui.divider
             #saveDoc.ui.large.green.basic.button
                 i.check.icon

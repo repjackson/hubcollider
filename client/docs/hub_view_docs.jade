@@ -20,9 +20,6 @@ template(name='view_card')
         .content
             each hub_tags
                 .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
-        .content
-            .description
-                #{body}
         .extra.content
             | by &nbsp;
             .ui.circular.button.select_author(class=select_author_button_class)
