@@ -26,21 +26,11 @@ Meteor.publishComposite 'users.profile', (_id, limit) ->
         []
 
 
-Meteor.publish 'users.all', (query, limit) ->
+Meteor.publish 'users.all', () ->
     if @userId
-        if query
-            Counts.publish this, 'users.all', Meteor.users.find($text: $search: query), noReady: true
-            Meteor.users.find { $text: $search: query },
-                fields:
-                    score: $meta: 'textScore'
-                    tags: 1
-                sort: score: $meta: 'textScore'
-                limit: limit
-        else
-            Counts.publish this, 'users.all', Meteor.users.find(), noReady: true
-            Meteor.users.find {},
-                sort: createdAt: -1
-                limit: limit
+        Counts.publish this, 'users.all', Meteor.users.find(), noReady: true
+        Meteor.users.find {},
+            sort: createdAt: -1
     else
         []
 
@@ -62,17 +52,17 @@ Meteor.publish 'person', (id)->
             username: 1
 
 
-Meteor.publish 'filtered_people', (selectedUserTags)->
-    self = @
-    # console.log selected_tags
-    match = {}
-    # match.apps = $in: ['hub_collider']
-    if selectedUserTags and selectedUserTags.length > 0 then match.tags = $all: selectedUserTags
+# Meteor.publish 'filtered_people', (selectedUserTags)->
+#     self = @
+#     # console.log selected_tags
+#     match = {}
+#     # match.apps = $in: ['hub_collider']
+#     if selectedUserTags and selectedUserTags.length > 0 then match.tags = $all: selectedUserTags
 
-    Meteor.users.find match,
-        fields:
-            tags: 1
-            username: 1
+#     Meteor.users.find match,
+#         fields:
+#             tags: 1
+#             username: 1
 
 Meteor.publish 'people_tags', (selected_tags)->
     self = @

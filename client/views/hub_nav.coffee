@@ -1,3 +1,10 @@
+Template.nav.onCreated ->
+    @autorun =>
+        # Set subscriptions
+        @subscribe 'messages.all'
+        @subscribe 'users.all'
+
+
 Template.nav.events
     'click [data-id=sign-out]': ->
         Meteor.logout (error) ->
@@ -7,7 +14,7 @@ Template.nav.events
                 FlowRouter.go '/sign-in'
 
     'click #add_doc': ->
-        Meteor.call 'create_doc', (err, id)->
+        Meteor.call 'create_doc', null ,(err, id)->
             if err then console.log err
             else FlowRouter.go "/edit/#{id}"
 
@@ -57,12 +64,6 @@ Template.nav.events
         selected_tags.clear()
         FlowRouter.go '/'
         selected_tags.push 'crowd sourcing'
-
-
-Template.nav.onCreated ->
-    @autorun =>
-        # Set subscriptions
-        @subscribe 'messages.all'
 
 Template.nav.helpers
     activeIfRouteNameIs: (routeName) ->
