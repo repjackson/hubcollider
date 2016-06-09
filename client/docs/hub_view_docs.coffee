@@ -15,7 +15,6 @@ Template.view.onCreated ->
 
 Template.view.helpers
     doc_card_class: ->
-        console.log @
         if 'academy' in @tags then return 'yellow'
         if 'economy' in @tags then return 'green'
 
