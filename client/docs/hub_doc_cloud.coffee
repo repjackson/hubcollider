@@ -1,6 +1,6 @@
 @selected_tags = new ReactiveArray []
 @selectedUsernames = new ReactiveArray []
-Session.setDefault('view_more': false)
+Session.setDefault('view_more', false)
 
 Template.cloud.onCreated ->
     @autorun -> Meteor.subscribe 'tags', selected_tags.array(), Session.get('selected_user'), Session.get('view_more')
@@ -40,9 +40,14 @@ Template.cloud.helpers
             else 'primary'
         return tag_class
 
+    can_view_less: -> Session.equals('view_more', true)
+
+    can_view_more: -> Session.equals('view_more', false)
+
+
 Template.cloud.events
-    'click #view_more': ->
-        Session.set 'view_more': true
+    'click #view_more': -> Session.set 'view_more', true
+    'click #view_less': -> Session.set 'view_more', false
 
     'click .selectTag': ->
         selected_tags.push @name

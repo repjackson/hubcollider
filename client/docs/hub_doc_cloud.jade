@@ -13,8 +13,13 @@ template(name='cloud')
         each globalTags
             .ui.compact.basic.button.selectTag(class=globalTagClass) #{this.name}
                 small #{this.count}
-        div
-            #view_more.ui.basic.button
-                i.plus.icon
-                |View More
-            // .ui.compact.basic.button.selectTag #{this.name}
+        if can_view_more
+            div
+                #view_more.ui.basic.button
+                    i.plus.icon
+                    |More
+        if can_view_less
+            div
+                #view_less.ui.basic.button
+                    i.minus.icon
+                    |Less
