@@ -72,7 +72,7 @@ Template.small_card.events
 
     'click .make_big': ->
         # Session.set('is_big', @_id)
-        # console.log @
+        console.log @
         $(".modal.#{@_id}").modal(
             onApprove: ->
                 $('.ui.modal').modal('hide')

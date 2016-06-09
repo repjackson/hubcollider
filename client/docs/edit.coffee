@@ -7,11 +7,11 @@ Template.edit.onCreated ->
 Template.edit.onRendered ->
     docId = FlowRouter.getParam('docId')
 
-    @autorun ->
-        if GoogleMaps.loaded()
-            $('#place').geocomplete().bind 'geocode:result', (event, result) ->
-                # console.log result.geometry.location.lat()
-                Meteor.call 'updatelocation', docId, result, ->
+    # @autorun ->
+    #     if GoogleMaps.loaded()
+    #         $('#place').geocomplete().bind 'geocode:result', (event, result) ->
+    #             console.log JSON.stringify(result, null, 4)
+    #             Meteor.call 'updatelocation', docId, result, ->
 
 
 Template.edit.helpers
@@ -24,7 +24,7 @@ Template.edit.helpers
 
 Template.edit.events
     'click #delete': ->
-        $('.modal').modal(
+        $('.modal.delete_modal').modal(
             onApprove: ->
                 Meteor.call 'delete_doc', FlowRouter.getParam('docId'), ->
                 $('.ui.modal').modal('hide')
@@ -64,11 +64,13 @@ Template.edit.events
         body = $('#body').val()
         title = $('#title').val()
         price = $('#price').val()
+        address = $('#address').val()
         img_url = $('#img_url').val()
         Docs.update FlowRouter.getParam('docId'),
             $set:
                 img_url: img_url
                 price: price
+                address: address
                 title: title
                 body: body
                 tagCount: @tags.length
@@ -95,3 +97,10 @@ Template.edit.events
                 addresstags: []
                 locationob: null
         $('#place').val('')
+
+
+    'keyup #title': ->
+        title = $('#title').val()
+        Docs.update FlowRouter.getParam('docId'),
+            $set:
+                title: title

@@ -76,20 +76,20 @@ Meteor.methods
             $addToSet:
                 bookmarks: tags
 
-    updatelocation: (docid, result)->
-        addresstags = (component.long_name for component in result.address_components)
-        loweredAddressTags = _.map(addresstags, (tag)->
-            tag.toLowerCase()
-            )
+    # updatelocation: (docid, result)->
+    #     addresstags = (component.long_name for component in result.address_components)
+    #     loweredAddressTags = _.map(addresstags, (tag)->
+    #         tag.toLowerCase()
+    #         )
 
-        #console.log addresstags
+    #     #console.log addresstags
 
-        doc = Docs.findOne docid
-        tagsWithoutAddress = _.difference(doc.tags, doc.addresstags)
-        tagsWithNew = _.union(tagsWithoutAddress, loweredAddressTags)
+    #     doc = Docs.findOne docid
+    #     tagsWithoutAddress = _.difference(doc.tags, doc.addresstags)
+    #     tagsWithNew = _.union(tagsWithoutAddress, loweredAddressTags)
 
-        Docs.update docid,
-            $set:
-                tags: tagsWithNew
-                locationob: result
-                addresstags: loweredAddressTags
+    #     Docs.update docid,
+    #         $set:
+    #             tags: tagsWithNew
+    #             locationob: result
+    #             addresstags: loweredAddressTags

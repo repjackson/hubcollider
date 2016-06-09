@@ -16,7 +16,7 @@ template(name='big_card')
                 |#{title}
         .content
             each hub_tags
-                .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
+                .ui.basic.label  #{this}
         if body
             .extra.content
                 |#{body}
