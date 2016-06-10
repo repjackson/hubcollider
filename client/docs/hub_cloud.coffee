@@ -51,7 +51,7 @@ Template.cloud.helpers
     can_view_less: -> Session.equals('view_more', true)
 
     can_view_more: ->
-        Tags.find().count() > 10 and Session.equals('view_more', false)
+        Session.equals('view_more', false)
 
 
 Template.cloud.events
