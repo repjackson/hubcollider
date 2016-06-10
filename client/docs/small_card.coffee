@@ -4,7 +4,7 @@ Template.small_card.onCreated ->
 
 
 Template.small_card.onRendered ->
-    $('.special.cards .image').dimmer({
+    $('.special.cards .blurring.dimmable.image').dimmer({
       on: 'hover'
     });
 
@@ -44,10 +44,6 @@ Template.small_card.events
 
     'click .doc_tag': -> if @valueOf() in selected_tags.array() then selected_tags.remove @valueOf() else selected_tags.push @valueOf()
 
-    'click .deleteDoc': ->
-        if confirm 'Delete?'
-            Meteor.call 'deleteDoc', @_id
-
     'click .select_author': ->
         if @authorId in selected_authors.array() then selected_authors.remove @authorId else selected_authors.push @authorId
 
@@ -63,7 +59,7 @@ Template.small_card.events
 
     'click .make_big': ->
         # Session.set('is_big', @_id)
-        console.log @
+        # console.log @
         $(".modal.#{@_id}").modal(
             onApprove: ->
                 $('.ui.modal').modal('hide')

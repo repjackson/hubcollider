@@ -38,8 +38,8 @@ Template.big_card.helpers
 
 
 Template.big_card.events
-    'mouseenter .special.cards .image': ->
-        $('.special.cards .image').dimmer('show')
+    # 'mouseenter .special.cards .image': ->
+    #     $('.special.cards .image').dimmer('show')
 
 
     'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
@@ -47,10 +47,6 @@ Template.big_card.events
     'click .editDoc': -> FlowRouter.go "/edit/#{@_id}"
 
     'click .doc_tag': -> if @valueOf() in selected_tags.array() then selected_tags.remove @valueOf() else selected_tags.push @valueOf()
-
-    'click .deleteDoc': ->
-        if confirm 'Delete?'
-            Meteor.call 'deleteDoc', @_id
 
     'click .select_author': ->
         if @authorId in selected_authors.array() then selected_authors.remove @authorId else selected_authors.push @authorId
