@@ -20,29 +20,35 @@ Template.nav.events
     'click .add_from_bookmark': ->
         Meteor.call 'create_doc', @, (err,id)->
             if err then console.log err
-            else FlowRouter.go "/edit/#{id}"
+            else Session.set('is_editing', id)
 
 
     'click #add_doc': ->
         Meteor.call 'create_doc', null ,(err, id)->
             if err then console.log err
-            else FlowRouter.go "/edit/#{id}"
+            else Session.set('is_editing', id)
 
     'click #add_econ': ->
         Meteor.call 'create_doc', 'economy', (err, id)->
             if err then console.log err
-            else FlowRouter.go "/edit/#{id}"
+            else Session.set('is_editing', id)
 
     'click #add_acad': ->
         Meteor.call 'create_doc', 'academy', (err, id)->
             if err then console.log err
-            else FlowRouter.go "/edit/#{id}"
+            else Session.set('is_editing', id)
 
     'click #new_from_selection': ->
         # if confirm 'Create new document from selection?'
         Meteor.call 'create_doc', selectedTags.array(), (err,id)->
             if err then console.log err
-            else FlowRouter.go "/edit/#{id}"
+            else
+                Session.set('is_editing', id)
+                $(".modal.#{id}").modal(
+                    onApprove: ->
+                        $('.ui.modal').modal('hide')
+                	).modal 'show'
+
 
     'keyup #search': (e,t)->
         e.preventDefault()
@@ -81,6 +87,10 @@ Template.nav.events
         FlowRouter.go '/'
         selected_tags.push 'crowd sourcing'
 
+    'click #home_link': ->
+        selected_tags.clear()
+        selected_authors.clear()
+        FlowRouter.go '/'
 
 
 

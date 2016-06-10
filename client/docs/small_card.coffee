@@ -4,9 +4,14 @@ Template.small_card.onCreated ->
 
 
 Template.small_card.onRendered ->
-    $('.special.cards .blurring.dimmable.image').dimmer({
-      on: 'hover'
-    });
+    # $('.special.cards .blurring.dimmable.image').dimmer({
+    #   on: 'hover'
+    # });
+
+    Meteor.setTimeout (->
+        $('.shape').shape();
+        ), 300
+
 
 
 Template.small_card.helpers
@@ -59,7 +64,6 @@ Template.small_card.events
             onApprove: ->
                 $('.ui.modal').modal('hide')
         	).modal 'show'
-
 
     'click .doc_tag': -> if @valueOf() in selected_tags.array() then selected_tags.remove @valueOf() else selected_tags.push @valueOf()
 
