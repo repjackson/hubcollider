@@ -1,36 +1,36 @@
 head
     meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', name='viewport')
-    title HubCollider
+    title Collider
 
-body
-    +left_bar
-    +right_bar
-
-
+// body
+//     +left_bar
+//     +right_bar
 
 
 
-template(name='left_bar')
-    #leftSidebarMenu.ui.sidebar.inverted.vertical.labeled.icon.menu
-        a#economy_link.item
-            i.cart.green.icon
-            | Economy
-        a#accelerator_link.item
-            i.university.yellow.icon
-            | Accelerator
-        a#perks_link.item
-            i.trophy.big.icon
-            | Perks
-        a#crowd_sourcing_link.item
-            i.users.big.icon
-            | Crowd Sourcing
 
 
-template(name='right_bar')
-    #rightSidebarMenu.ui.right.sidebar.inverted.vertical.menu
-        .ui.header Bookmarks
-        if currentUser
-            each currentUser.bookmarks
-                a.item.select_bookmark
-                    each this
-                        span #{this}, &nbsp;
+// template(name='left_bar')
+//     #leftSidebarMenu.ui.sidebar.inverted.vertical.labeled.icon.menu
+//         a#economy_link.item
+//             i.cart.green.icon
+//             | Economy
+//         a#accelerator_link.item
+//             i.university.yellow.icon
+//             | Accelerator
+//         a#perks_link.item
+//             i.trophy.big.icon
+//             | Perks
+//         a#crowd_sourcing_link.item
+//             i.users.big.icon
+//             | Crowd Sourcing
+
+
+// template(name='right_bar')
+//     #rightSidebarMenu.ui.right.sidebar.inverted.vertical.menu
+//         .ui.header Bookmarks
+//         if currentUser
+//             each currentUser.bookmarks
+//                 a.item.select_bookmark
+//                     each this
+//                         span #{this}, &nbsp;

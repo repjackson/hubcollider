@@ -13,6 +13,16 @@ Template.nav.events
             else
                 FlowRouter.go '/sign-in'
 
+    'click .select_bookmark': ->
+        selected_tags.clear()
+        selected_tags.push(tag) for tag in @
+
+    'click .add_from_bookmark': ->
+        Meteor.call 'create_doc', @, (err,id)->
+            if err then console.log err
+            else FlowRouter.go "/edit/#{id}"
+
+
     'click #add_doc': ->
         Meteor.call 'create_doc', null ,(err, id)->
             if err then console.log err
@@ -25,6 +35,12 @@ Template.nav.events
 
     'click #add_acad': ->
         Meteor.call 'create_doc', 'academy', (err, id)->
+            if err then console.log err
+            else FlowRouter.go "/edit/#{id}"
+
+    'click #new_from_selection': ->
+        # if confirm 'Create new document from selection?'
+        Meteor.call 'create_doc', selectedTags.array(), (err,id)->
             if err then console.log err
             else FlowRouter.go "/edit/#{id}"
 
@@ -65,11 +81,17 @@ Template.nav.events
         FlowRouter.go '/'
         selected_tags.push 'crowd sourcing'
 
+
+
+
 Template.nav.helpers
     activeIfRouteNameIs: (routeName) ->
         if FlowRouter.getRouteName() == routeName
             return 'active'
         ''
+
+    selected_tags: -> selected_tags.list()
+
 
     getUnreadCount: ->
         unreadMessageCount = 0

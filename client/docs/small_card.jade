@@ -30,10 +30,6 @@ template(name='small_card')
                     .ui.basic.compact.button.editDoc
                         i.blue.pencil.icon
                         |Edit
-                // else
-                //     .ui.basic.button
-                //         i.bitcoin.icon
-                //         | Tip
         .extra.content
             if price
                 span.right.floated
@@ -51,4 +47,6 @@ template(name='small_card')
                     i.thumbs.down.outline.icon
         .ui.modal(class=this._id)
             .content
+                if is_editing
+                    +edit
                 +big_card

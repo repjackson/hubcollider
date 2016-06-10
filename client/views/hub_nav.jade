@@ -15,26 +15,48 @@ template(name='nav')
                 a#crowd_sourcing_link.item
                     i.users.big.icon
                     | Crowd Sourcing
-        a.item(href='/')
-            img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
-            span Hub
+        a.icon.item(href='/')
+            // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
+            i.large.pied.piper.alternate.icon
             strong Collider
-            span Beta
         .item
             .ui.transparent.icon.input
                 input#search(type='text', placeholder='Search...')
                 i.search.link.icon
         .right.menu
             if currentUser
-                a#add_doc.item
+                .ui.simple.dropdown.item
                     i.plus.icon
-                    i.file.outline.icon
-                a#add_econ.item
-                    i.plus.icon
-                    i.large.green.cart.icon
-                a#add_acad.item
-                    i.plus.icon
-                    i.large.yellow.university.icon
+                    span.text Add
+                    i.dropdown.icon
+                    .menu
+                        if selected_tags
+                            #newFromSelection.item
+                                i.external.square.icon
+                                |From Selection
+                        a#add_doc.item
+                            i.file.outline.icon
+                            |Blank
+                        a#add_econ.item
+                            i.large.green.cart.icon
+                            |Economy
+                        a#add_acad.item
+                            i.large.yellow.university.icon
+                            |Academy
+                        .header From Bookmarks
+                        each currentUser.bookmarks
+                            .item.add_from_bookmark
+                                each this
+                                    .ui.label #{this}
+                .ui.simple.dropdown.item
+                    i.bookmark.icon
+                    span.text Bookmarks
+                    i.dropdown.icon
+                    .menu
+                        each currentUser.bookmarks
+                            .item.select_bookmark
+                                each this
+                                    .ui.label #{this}
                 a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
                     i.user.icon
                     |  Profile
