@@ -1,7 +1,7 @@
 Template.edit.onCreated ->
     self = @
     self.autorun ->
-        self.subscribe 'doc', FlowRouter.getParam('docId')
+        self.subscribe 'doc', Session.get('is_editing')
 
 
 Template.edit.onRendered ->
@@ -16,8 +16,8 @@ Template.edit.onRendered ->
 
 Template.edit.helpers
     doc: ->
-        docId = FlowRouter.getParam('docId')
-        Docs.findOne docId
+        # docId = FlowRouter.getParam('docId')
+        Docs.findOne Session.get('is_editing')
 
     hub_doc_tags: -> _.without(@tags, 'hubcollider')
 
@@ -39,7 +39,7 @@ Template.edit.events
                     Bert.alert error.reason, 'danger', 'growl-top-right'
                 else
                     Bert.alert 'Post successfully removed', 'success', 'growl-top-right'
-                    FlowRouter.go '/'
+                    $('.ui.modal').modal('hide')
 
         # $('.modal.delete_modal').modal(
         #     onApprove: ->
@@ -55,23 +55,24 @@ Template.edit.events
         switch e.which
             when 13
                 if tag.length > 0
-                    Docs.update FlowRouter.getParam('docId'),
+                    Docs.update Session.get('is_editing'),
                         $addToSet: tags: tag
                     $('#addTag').val('')
                 else
                     body = $('#body').val()
-                    Docs.update FlowRouter.getParam('docId'),
+                    Docs.update Session.get('is_editing'),
                         $set:
                             body: body
                             tagCount: @tags.length
                     selected_tags.clear()
                     for tag in @tags
                         selected_tags.push tag
-                    FlowRouter.go '/'
+                    Session.set('is_editing', null)
+                    $('.ui.modal').modal('hide')
 
     'click .docTag': ->
         tag = @valueOf()
-        Docs.update FlowRouter.getParam('docId'),
+        Docs.update Session.get('is_editing'),
             $pull: tags: tag
         $('#addTag').val(tag)
 
@@ -83,7 +84,7 @@ Template.edit.events
         price = $('#price').val()
         address = $('#address').val()
         img_url = $('#img_url').val()
-        Docs.update FlowRouter.getParam('docId'),
+        Docs.update Session.get('is_editing'),
             $set:
                 img_url: img_url
                 price: price
@@ -94,12 +95,13 @@ Template.edit.events
         selected_tags.clear()
         for tag in @tags
             selected_tags.push tag
-        FlowRouter.go '/'
+        Session.set('is_editing', null)
+        $('.ui.modal').modal('hide')
 
 
     'click .clearDT': ->
         tagsWithoutDate = _.difference(@tags, @datearray)
-        Docs.update FlowRouter.getParam('docId'),
+        Docs.update Session.get('is_editing'),
             $set:
                 tags: tagsWithoutDate
                 datearray: []
@@ -108,7 +110,7 @@ Template.edit.events
 
     'click .clearAddress': ->
         tagsWithoutAddress = _.difference(@tags, @addresstags)
-        Docs.update FlowRouter.getParam('docId'),
+        Docs.update Session.get('is_editing'),
             $set:
                 tags: tagsWithoutAddress
                 addresstags: []
@@ -116,26 +118,25 @@ Template.edit.events
         $('#place').val('')
 
 
-    'keyup #title': ->
+    'blur #title': ->
         title = $('#title').val()
-        Docs.update FlowRouter.getParam('docId'),
+        if title.length is 0
+            Bert.alert 'Must include title', 'danger', 'growl-top-right'
+        Docs.update Session.get('is_editing'),
             $set:
                 title: title
 
-
-    update_address = ->
 
     'keyup #address': (e,t)->
         address = $('#address').val()
         old_address = @address
         switch e.which
             when 13
-                Docs.update FlowRouter.getParam('docId'),
+                Docs.update Session.get('is_editing'),
                     $addToSet: tags: address
-                Docs.update FlowRouter.getParam('docId'),
+                Docs.update Session.get('is_editing'),
                     $pull: tags: old_address
-                Docs.update FlowRouter.getParam('docId'),
+                Docs.update Session.get('is_editing'),
                     $set: address: address
 
-        # _.debounce(update_address, 300)
 

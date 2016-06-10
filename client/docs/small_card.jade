@@ -49,4 +49,5 @@ template(name='small_card')
             .content
                 if is_editing
                     +edit
-                +big_card
+                else
+                    +big_card

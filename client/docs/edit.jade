@@ -1,46 +1,45 @@
 template(name='edit')
     with doc
-        .ui.raised.very.padded.text.container.segment
-            #edit_doc_form.ui.form
-                .required.field
-                    label Title
-                    input#title(type='text' placeholder='Add Title' value=title)
-                .field
-                    label Image
-                    input#img_url(type='text' placeholder='Add image url' value=img_url)
-                .field
-                    label Tags
-                    each hub_doc_tags
-                        .ui.basic.button.docTag
-                            i.minus.icon
-                            |#{this}
-                    .ui.hidden.fitted.divider
-                    .ui.left.icon.four.wide.input
-                        i.add.icon
-                        input#addTag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
-                // .field
-                //     label Address
-                //         i.marker.icon
-                //     input#address(type='text' value=address)
-                .field
-                    label Description
-                    textarea#body(maxlength='2000')
-                        |#{body}
-                .field
-                    label Price
-                    input#price(type='number' min='0' max='10000' value=price)
-                .ui.hidden.divider
-                #delete.ui.right.floated.red.compact.button
-                    i.remove.icon
-                    |Delete
-                if title
-                    #saveDoc.ui.large.green.button
-                        i.check.icon
-                        |Save
-        .ui.small.basic.modal.delete_modal
-            .header Confirm Delete
-            // .content
-            //     .meta Confirm?
-            .actions
-                .ui.button.cancel Cancel
-                .ui.red.button.approve Delete
+        #edit_doc_form.ui.form
+            .required.field
+                label Title
+                input#title(type='text' placeholder='Add Title' value=title)
+            .field
+                label Image
+                input#img_url(type='text' placeholder='Add image url' value=img_url)
+            .field
+                label Tags
+                each hub_doc_tags
+                    .ui.basic.button.docTag
+                        i.minus.icon
+                        |#{this}
+                .ui.hidden.fitted.divider
+                .ui.left.icon.four.wide.input
+                    i.add.icon
+                    input#addTag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
+            // .field
+            //     label Address
+            //         i.marker.icon
+            //     input#address(type='text' value=address)
+            .field
+                label Description
+                textarea#body(maxlength='2000')
+                    |#{body}
+            .field
+                label Price
+                input#price(type='number' min='0' max='10000' value=price)
+            .ui.hidden.divider
+            #delete.ui.right.floated.red.compact.button
+                i.remove.icon
+                |Delete
+            if title
+                #saveDoc.ui.large.green.button
+                    i.check.icon
+                    |Save
+    .ui.small.basic.modal.delete_modal
+        .header Confirm Delete
+        // .content
+        //     .meta Confirm?
+        .actions
+            .ui.button.cancel Cancel
+            .ui.red.button.approve Delete

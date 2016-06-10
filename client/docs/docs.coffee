@@ -7,7 +7,7 @@ Template.docs.helpers
     docs: -> Docs.find {},
         # limit: 5
         sort:
-            points: 1
+            points: -1
             timestamp: -1
     # docs: -> Docs.find()
 

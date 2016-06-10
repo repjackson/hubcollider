@@ -38,13 +38,12 @@ Template.big_card.helpers
 
 
 Template.big_card.events
-    # 'mouseenter .special.cards .image': ->
-    #     $('.special.cards .image').dimmer('show')
-
-
     'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
 
-    'click .editDoc': -> FlowRouter.go "/edit/#{@_id}"
+    'click .editDoc': ->
+        # FlowRouter.go "/edit/#{@_id}"
+        $('.big_card').transition 'horizontal flip'
+        Session.set('is_editing', @_id)
 
     'click .doc_tag': -> if @valueOf() in selected_tags.array() then selected_tags.remove @valueOf() else selected_tags.push @valueOf()
 

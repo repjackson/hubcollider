@@ -16,6 +16,8 @@ Template.small_card.helpers
 
     is_in_academy: -> 'academy' in @tags
 
+    is_editing: -> Session.equals('is_editing', @_id)
+
     is_in_economy: -> 'economy' in @tags
 
     isAuthor: -> @authorId is Meteor.userId()
@@ -49,7 +51,15 @@ Template.small_card.helpers
 Template.small_card.events
     'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
 
-    'click .editDoc': -> FlowRouter.go "/edit/#{@_id}"
+    'click .editDoc': ->
+        # FlowRouter.go "/edit/#{@_id}"
+        Session.set('is_editing', @_id)
+        # console.log @
+        $(".modal.#{@_id}").modal(
+            onApprove: ->
+                $('.ui.modal').modal('hide')
+        	).modal 'show'
+
 
     'click .doc_tag': -> if @valueOf() in selected_tags.array() then selected_tags.remove @valueOf() else selected_tags.push @valueOf()
 
