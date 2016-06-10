@@ -35,6 +35,15 @@ Template.small_card.helpers
 
     cloud_label_class: -> if @name in selected_tags.array() then 'primary' else 'basic'
 
+    vote_up_button_class: ->
+        if not Meteor.userId() then 'disabled basic'
+        else if Meteor.userId() in @up_voters then 'green'
+        else 'basic'
+
+    vote_down_button_class: ->
+        if not Meteor.userId() then 'disabled basic'
+        else if Meteor.userId() in @down_voters then 'red'
+        else 'basic'
 
 
 Template.small_card.events
@@ -64,3 +73,21 @@ Template.small_card.events
             onApprove: ->
                 $('.ui.modal').modal('hide')
         	).modal 'show'
+
+    'click .vote_down': ->
+        # if Meteor.userId() in @down_voters?
+        #     if confirm "Undo Downvote? This will give you and #{@author().username} back a point."
+        #         Meteor.call 'vote_down', @_id
+        # else
+        #     if confirm "Confirm Downvote? This will cost you a point and take one from #{@author().username}"
+        #         if Meteor.userId() then Meteor.call 'vote_down', @_id
+        Meteor.call 'vote_down', @_id
+
+    'click .vote_up': ->
+        # if Meteor.userId() in @up_voters?
+        #     if confirm "Undo Upvote? This will give you back a point and take one from #{@author().username}."
+        #         Meteor.call 'vote_up', @_id
+        # else
+        #     if confirm "Confirm Upvote? This will give a point from you to #{@author().username}."
+        #         if Meteor.userId() then Meteor.call 'vote_up', @_id
+        Meteor.call 'vote_up', @_id
