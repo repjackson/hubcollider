@@ -24,12 +24,29 @@ Template.edit.helpers
 
 Template.edit.events
     'click #delete': ->
-        $('.modal.delete_modal').modal(
-            onApprove: ->
-                Meteor.call 'delete_doc', FlowRouter.getParam('docId'), ->
-                $('.ui.modal').modal('hide')
-                FlowRouter.go '/'
-        	).modal 'show'
+        swal {
+            title: 'Delete post?'
+            text: 'Confirm delete?'
+            type: 'error'
+            showCancelButton: true
+            closeOnConfirm: true
+            cancelButtonText: 'No'
+            confirmButtonText: 'Delete'
+            confirmButtonColor: '#da5347'
+        }, ->
+            Meteor.call 'delete_doc', FlowRouter.getParam('docId'), (error, result) ->
+                if error
+                    Bert.alert error.reason, 'danger', 'growl-top-right'
+                else
+                    Bert.alert 'Post successfully removed', 'success', 'growl-top-right'
+                    FlowRouter.go '/'
+
+        # $('.modal.delete_modal').modal(
+        #     onApprove: ->
+        #         Meteor.call 'delete_doc', FlowRouter.getParam('docId'), ->
+        #         $('.ui.modal').modal('hide')
+        #         FlowRouter.go '/'
+        # 	).modal 'show'
 
 
     'keydown #addTag': (e,t)->
