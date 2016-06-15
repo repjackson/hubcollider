@@ -47,9 +47,3 @@ template(name='small_card')
                 span #{points}
                 .ui.circular.icon.button.vote_down(class=vote_down_button_class)
                     i.thumbs.down.outline.icon
-        .ui.modal(class=this._id)
-            .content
-                if is_editing
-                    +edit
-                else
-                    +big_card

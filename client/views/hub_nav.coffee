@@ -4,6 +4,9 @@ Template.nav.onCreated ->
         @subscribe 'messages.all'
         # @subscribe 'users.all'
 
+Template.nav.helpers
+    is_editing: -> Session.equals('is_editing', @_id)
+
 
 Template.nav.events
     'click [data-id=sign-out]': ->
@@ -28,15 +31,15 @@ Template.nav.events
             if err then console.log err
             else Session.set('is_editing', id)
 
-    'click #add_econ': ->
-        Meteor.call 'create_doc', 'economy', (err, id)->
-            if err then console.log err
-            else Session.set('is_editing', id)
+    # 'click #add_econ': ->
+    #     Meteor.call 'create_doc', 'economy', (err, id)->
+    #         if err then console.log err
+    #         else Session.set('is_editing', id)
 
-    'click #add_acad': ->
-        Meteor.call 'create_doc', 'academy', (err, id)->
-            if err then console.log err
-            else Session.set('is_editing', id)
+    # 'click #add_acad': ->
+    #     Meteor.call 'create_doc', 'academy', (err, id)->
+    #         if err then console.log err
+    #         else Session.set('is_editing', id)
 
     'click #new_from_selection': ->
         # if confirm 'Create new document from selection?'
@@ -44,7 +47,7 @@ Template.nav.events
             if err then console.log err
             else
                 Session.set('is_editing', id)
-                $(".modal.#{id}").modal(
+                $(".modal.view_doc").modal(
                     onApprove: ->
                         $('.ui.modal').modal('hide')
                 	).modal 'show'
@@ -67,25 +70,25 @@ Template.nav.events
                 if val.length is 0
                     selected_tags.pop()
 
-    'click #academy_link': ->
-        FlowRouter.go '/'
-        selected_tags.clear()
-        selected_tags.push 'academy'
+    # 'click #academy_link': ->
+    #     FlowRouter.go '/'
+    #     selected_tags.clear()
+    #     selected_tags.push 'academy'
 
-    'click #perks_link': ->
-        selected_tags.clear()
-        selected_tags.push 'perks'
-        FlowRouter.go '/'
+    # 'click #perks_link': ->
+    #     selected_tags.clear()
+    #     selected_tags.push 'perks'
+    #     FlowRouter.go '/'
 
-    'click #economy_link': ->
-        selected_tags.clear()
-        FlowRouter.go '/'
-        selected_tags.push 'economy'
+    # 'click #economy_link': ->
+    #     selected_tags.clear()
+    #     FlowRouter.go '/'
+    #     selected_tags.push 'economy'
 
-    'click #crowd_sourcing_link': ->
-        selected_tags.clear()
-        FlowRouter.go '/'
-        selected_tags.push 'crowd sourcing'
+    # 'click #crowd_sourcing_link': ->
+    #     selected_tags.clear()
+    #     FlowRouter.go '/'
+    #     selected_tags.push 'crowd sourcing'
 
     'click #home_link': ->
         selected_tags.clear()

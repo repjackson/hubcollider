@@ -21,19 +21,14 @@ Template.cloud.helpers
 
     selected_username_view: -> Meteor.users.findOne(@valueOf())?.username
 
-    globalTagClass: ->
-        tag_class = ''
-        switch
-            when @index <= 10 then tag_class += ' big'
-            when @index <= 20 then tag_class += ' large'
-            when @index <= 30 then tag_class += ' '
-            when @index <= 40 then tag_class += ' small'
-            when @index <= 50 then tag_class += ' tiny'
-
-        if @name is 'academy' then tag_class += ' yellow'
-        if @name is 'economy' then tag_class += ' green'
-
-        return tag_class
+    cloud_tag_class: ->
+        buttonClass = switch
+            when @index <= 10 then 'big'
+            when @index <= 20 then 'large'
+            when @index <= 30 then ''
+            when @index <= 40 then 'small'
+            when @index <= 50 then 'tiny'
+        return buttonClass
 
     selected_tags: -> selected_tags.list()
 

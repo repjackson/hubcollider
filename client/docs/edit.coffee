@@ -4,8 +4,8 @@ Template.edit.onCreated ->
         self.subscribe 'doc', Session.get('is_editing')
 
 
-Template.edit.onRendered ->
-    docId = FlowRouter.getParam('docId')
+# Template.edit.onRendered ->
+#     docId = FlowRouter.getParam('docId')
 
     # @autorun ->
     #     if GoogleMaps.loaded()

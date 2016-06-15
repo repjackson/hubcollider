@@ -21,8 +21,6 @@ Template.small_card.helpers
 
     is_in_academy: -> 'academy' in @tags
 
-    is_editing: -> Session.equals('is_editing', @_id)
-
     is_in_economy: -> 'economy' in @tags
 
     isAuthor: -> @authorId is Meteor.userId()
@@ -54,13 +52,13 @@ Template.small_card.helpers
 
 
 Template.small_card.events
-    'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
+    # 'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
 
     'click .editDoc': ->
         # FlowRouter.go "/edit/#{@_id}"
         Session.set('is_editing', @_id)
         # console.log @
-        $(".modal.#{@_id}").modal(
+        $(".modal.view_doc").modal(
             onApprove: ->
                 $('.ui.modal').modal('hide')
         	).modal 'show'
@@ -70,15 +68,15 @@ Template.small_card.events
     'click .select_author': ->
         if @authorId in selected_authors.array() then selected_authors.remove @authorId else selected_authors.push @authorId
 
-    'click .cloneDoc': ->
-        # if confirm 'Clone?'
-        id = Docs.insert
-            tags: @tags
-            body: @body
-        FlowRouter.go "/edit/#{id}"
+    # 'click .cloneDoc': ->
+    #     # if confirm 'Clone?'
+    #     id = Docs.insert
+    #         tags: @tags
+    #         body: @body
+    #     FlowRouter.go "/edit/#{id}"
 
-    'click .select_user': ->
-        if Session.equals('selected_user', @authorId) then Session.set('selected_user', null) else Session.set('selected_user', @authorId)
+    # 'click .select_user': ->
+    #     if Session.equals('selected_user', @authorId) then Session.set('selected_user', null) else Session.set('selected_user', @authorId)
 
     'click .make_big': ->
         # Session.set('is_big', @_id)
@@ -88,20 +86,6 @@ Template.small_card.events
                 $('.ui.modal').modal('hide')
         	).modal 'show'
 
-    'click .vote_down': ->
-        # if Meteor.userId() in @down_voters?
-        #     if confirm "Undo Downvote? This will give you and #{@author().username} back a point."
-        #         Meteor.call 'vote_down', @_id
-        # else
-        #     if confirm "Confirm Downvote? This will cost you a point and take one from #{@author().username}"
-        #         if Meteor.userId() then Meteor.call 'vote_down', @_id
-        Meteor.call 'vote_down', @_id
+    'click .vote_down': -> Meteor.call 'vote_down', @_id
 
-    'click .vote_up': ->
-        # if Meteor.userId() in @up_voters?
-        #     if confirm "Undo Upvote? This will give you back a point and take one from #{@author().username}."
-        #         Meteor.call 'vote_up', @_id
-        # else
-        #     if confirm "Confirm Upvote? This will give a point from you to #{@author().username}."
-        #         if Meteor.userId() then Meteor.call 'vote_up', @_id
-        Meteor.call 'vote_up', @_id
+    'click .vote_up': -> Meteor.call 'vote_up', @_id

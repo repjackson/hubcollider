@@ -1,23 +1,23 @@
 template(name='nav')
     .ui.stackable.fixed.menu
-        .ui.simple.dropdown.icon.item
-            i.content.icon
-            .menu
-                a#economy_link.item
-                    i.cart.green.icon
-                    | Economy
-                a#academy_link.item
-                    i.university.yellow.icon
-                    | Academy
-                a#perks_link.item
-                    i.trophy.big.icon
-                    | Perks
-                a#crowd_sourcing_link.item
-                    i.users.big.icon
-                    | Crowd Sourcing
+        // .ui.simple.dropdown.icon.item
+        //     i.content.icon
+        //     .menu
+        //         a#economy_link.item
+        //             i.cart.green.icon
+        //             | Economy
+        //         a#academy_link.item
+        //             i.university.yellow.icon
+        //             | Academy
+        //         a#perks_link.item
+        //             i.trophy.big.icon
+        //             | Perks
+        //         a#crowd_sourcing_link.item
+        //             i.users.big.icon
+        //             | Crowd Sourcing
         a#home_link.icon.item
             // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
-            i.large.pied.piper.alternate.icon
+            // i.large.pied.piper.alternate.icon
             strong Collider
         .item
             .ui.transparent.icon.input
@@ -37,12 +37,12 @@ template(name='nav')
                         a#add_doc.item
                             i.file.outline.icon
                             |Blank
-                        a#add_econ.item
-                            i.large.green.cart.icon
-                            |Economy
-                        a#add_acad.item
-                            i.large.yellow.university.icon
-                            |Academy
+                        // a#add_econ.item
+                        //     i.large.green.cart.icon
+                        //     |Economy
+                        // a#add_acad.item
+                        //     i.large.yellow.university.icon
+                        //     |Academy
                         .header From Bookmarks
                         each currentUser.bookmarks
                             .item.add_from_bookmark
@@ -65,5 +65,12 @@ template(name='nav')
                 a.item.sign-out(data-id='sign-out')
                     i.sign.out.icon
                     |Logout #{currentUser.username}
+            // +atNavButton
             a#rightMenu.icon.item
                 i.alarm.outline.icon
+    .ui.modal.view_doc
+        .content
+            if is_editing
+                +edit
+            else
+                +big_card
