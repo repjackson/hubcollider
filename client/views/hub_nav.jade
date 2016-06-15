@@ -48,9 +48,9 @@ template(name='nav')
                             .item.add_from_bookmark
                                 each this
                                     .ui.label #{this}
-                .ui.simple.dropdown.item
+                .ui.simple.dropdown.icon.item
                     i.bookmark.icon
-                    span.text Bookmarks
+                    // span.text Bookmarks
                     i.dropdown.icon
                     .menu
                         each currentUser.bookmarks

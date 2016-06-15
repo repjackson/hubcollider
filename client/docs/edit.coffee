@@ -81,7 +81,7 @@ Template.edit.events
 
     'click #saveDoc': ->
         body = $('#body').val()
-        title = $('#title').val()
+        # title = $('#title').val()
         price = $('#price').val()
         address = $('#address').val()
         img_url = $('#img_url').val()
@@ -90,7 +90,7 @@ Template.edit.events
                 img_url: img_url
                 price: price
                 address: address
-                title: title
+                # title: title
                 body: body
                 tagCount: @tags.length
         selected_tags.clear()
@@ -120,25 +120,25 @@ Template.edit.events
     #     $('#place').val('')
 
 
-    'blur #title': ->
-        title = $('#title').val()
-        if title.length is 0
-            Bert.alert 'Must include title', 'danger', 'growl-top-right'
-        Docs.update FlowRouter.getParam('docId'),
-            $set:
-                title: title
+    # 'blur #title': ->
+    #     title = $('#title').val()
+    #     if title.length is 0
+    #         Bert.alert 'Must include title', 'danger', 'growl-top-right'
+    #     Docs.update FlowRouter.getParam('docId'),
+    #         $set:
+    #             title: title
 
 
-    'keyup #address': (e,t)->
-        address = $('#address').val()
-        old_address = @address
-        switch e.which
-            when 13
-                Docs.update FlowRouter.getParam('docId'),
-                    $addToSet: tags: address
-                Docs.update FlowRouter.getParam('docId'),
-                    $pull: tags: old_address
-                Docs.update FlowRouter.getParam('docId'),
-                    $set: address: address
+    # 'keyup #address': (e,t)->
+    #     address = $('#address').val()
+    #     old_address = @address
+    #     switch e.which
+    #         when 13
+    #             Docs.update FlowRouter.getParam('docId'),
+    #                 $addToSet: tags: address
+    #             Docs.update FlowRouter.getParam('docId'),
+    #                 $pull: tags: old_address
+    #             Docs.update FlowRouter.getParam('docId'),
+    #                 $set: address: address
 
 

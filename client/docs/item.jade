@@ -1,10 +1,14 @@
 template(name='item')
     .ui.item
         if img_url
+            // a.image.doc_title
             a.image.doc_title
                 img.ui.image(src=img_url)
         .content
-            a.header.doc_title #{title}
+            each clipped_hub_tags
+                .ui.compact.small.button.doc_tag(class=doc_tag_class)  #{this}
+            // a.header.doc_title #{title}
+            // .header #{title}
             .meta
                 | by
                 .ui.small.circular.button.select_author(class=select_author_button_class)
@@ -12,8 +16,7 @@ template(name='item')
                     |#{author.username}
                 |#{when}
             .description
-                each clipped_hub_tags
-                    .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
+                |#{body}
             // .extra.content
             //     a.view_comments Comment Count: #{comment_count}
             .extra
@@ -22,12 +25,12 @@ template(name='item')
                         .ui.basic.compact.button.editDoc
                             i.blue.pencil.icon
                             |Edit
-                if price
-                    span.right.floated
-                        .ui.mini.statistic
-                            .value
-                                i.dollar.icon
-                                | #{price}
+                // if price
+                //     span.right.floated
+                //         .ui.mini.statistic
+                //             .value
+                //                 i.dollar.icon
+                //                 | #{price}
                 // .ui.circular.icon.basic.button.like(class=like_button_class)
                 //     i.empty.heart.icon
                 // .ui.buttons
