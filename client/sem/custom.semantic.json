@@ -5,7 +5,7 @@
     "api": false,
     "breadcrumb": false,
     "button": true,
-    "card": true,
+    "card": false,
     "checkbox": true,
     "colorize": true,
     "comment": true,

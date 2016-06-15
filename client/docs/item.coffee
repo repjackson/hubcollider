@@ -1,20 +1,8 @@
-Template.card.onCreated ->
-    # console.log @data.authorId
+Template.item.onCreated ->
     Meteor.subscribe 'person', @data.authorId
 
 
-Template.card.onRendered ->
-    # $('.special.cards .blurring.dimmable.image').dimmer({
-    #   on: 'hover'
-    # });
-
-    # Meteor.setTimeout (->
-    #     $('.shape').shape();
-    #     ), 300
-
-
-
-Template.card.helpers
+Template.item.helpers
     isAuthor: -> @authorId is Meteor.userId()
 
     when: -> moment(@timestamp).fromNow()
@@ -43,7 +31,7 @@ Template.card.helpers
         else 'basic'
 
 
-Template.card.events
+Template.item.events
     'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
 
     'click .editDoc': ->

@@ -100,7 +100,8 @@ Meteor.publish 'tags', (selected_tags, selected_authors, view_more)->
     self = @
 
     match = {}
-    if view_more is true then limit = 50 else limit = 10
+    # if view_more is true then limit = 50 else limit = 10
+    limit = 20
     selected_tags.push 'hubcollider'
     match.tags = $all: selected_tags
 

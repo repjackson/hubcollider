@@ -5,7 +5,7 @@ template(name='cloud')
                 #bookmarkSelection.ui.basic.icon.circular.button
                     i.bookmark.icon
         if selected_tags
-            #clearTags.ui.big.compact.circular.primary.icon.button
+            #clearTags.ui.big.compact.primary.icon.button
                 i.remove.icon
             each selected_tags
                 .ui.compact.big.primary.button.unselectTag
@@ -13,14 +13,14 @@ template(name='cloud')
         each all_tags
             .ui.compact.basic.button.selectTag(class=globalTagClass) #{this.name}
                 small #{this.count}
-        if can_view_more
-            #view_more.ui.compact.black.basic.button
-                i.plus.icon
-                |More...
-        if can_view_less
-            #view_less.ui.compact.black.basic.button
-                i.minus.icon
-                |Less...
+        // if can_view_more
+        //     #view_more.ui.compact.black.basic.button
+        //         i.plus.icon
+        //         |More...
+        // if can_view_less
+        //     #view_less.ui.compact.black.basic.button
+        //         i.minus.icon
+        //         |Less...
         .ui.hidden.fitted.divider
         if selected_authors
             #clear_authors.ui.circular.primary.icon.button

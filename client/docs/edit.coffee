@@ -101,23 +101,23 @@ Template.edit.events
         # $('.ui.modal').modal('hide')
 
 
-    'click .clearDT': ->
-        tagsWithoutDate = _.difference(@tags, @datearray)
-        Docs.update FlowRouter.getParam('docId'),
-            $set:
-                tags: tagsWithoutDate
-                datearray: []
-                dateTime: null
-        $('#datetimepicker').val('')
+    # 'click .clearDT': ->
+    #     tagsWithoutDate = _.difference(@tags, @datearray)
+    #     Docs.update FlowRouter.getParam('docId'),
+    #         $set:
+    #             tags: tagsWithoutDate
+    #             datearray: []
+    #             dateTime: null
+    #     $('#datetimepicker').val('')
 
-    'click .clearAddress': ->
-        tagsWithoutAddress = _.difference(@tags, @addresstags)
-        Docs.update FlowRouter.getParam('docId'),
-            $set:
-                tags: tagsWithoutAddress
-                addresstags: []
-                locationob: null
-        $('#place').val('')
+    # 'click .clearAddress': ->
+    #     tagsWithoutAddress = _.difference(@tags, @addresstags)
+    #     Docs.update FlowRouter.getParam('docId'),
+    #         $set:
+    #             tags: tagsWithoutAddress
+    #             addresstags: []
+    #             locationob: null
+    #     $('#place').val('')
 
 
     'blur #title': ->
