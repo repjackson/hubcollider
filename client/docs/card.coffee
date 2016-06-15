@@ -1,28 +1,20 @@
-Template.small_card.onCreated ->
+Template.card.onCreated ->
     # console.log @data.authorId
     Meteor.subscribe 'person', @data.authorId
 
 
-Template.small_card.onRendered ->
+Template.card.onRendered ->
     # $('.special.cards .blurring.dimmable.image').dimmer({
     #   on: 'hover'
     # });
 
-    Meteor.setTimeout (->
-        $('.shape').shape();
-        ), 300
+    # Meteor.setTimeout (->
+    #     $('.shape').shape();
+    #     ), 300
 
 
 
-Template.small_card.helpers
-    doc_card_class: ->
-        if 'academy' in @tags then return 'yellow'
-        if 'economy' in @tags then return 'green'
-
-    is_in_academy: -> 'academy' in @tags
-
-    is_in_economy: -> 'economy' in @tags
-
+Template.card.helpers
     isAuthor: -> @authorId is Meteor.userId()
 
     when: -> moment(@timestamp).fromNow()
@@ -51,17 +43,17 @@ Template.small_card.helpers
         else 'basic'
 
 
-Template.small_card.events
-    # 'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
+Template.card.events
+    'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
 
     'click .editDoc': ->
-        # FlowRouter.go "/edit/#{@_id}"
-        Session.set('is_editing', @_id)
-        # console.log @
-        $(".modal.view_doc").modal(
-            onApprove: ->
-                $('.ui.modal').modal('hide')
-        	).modal 'show'
+        FlowRouter.go "/edit/#{@_id}"
+        # Session.set('is_editing', @_id)
+        # # console.log @
+        # $(".modal.view_doc").modal(
+        #     onApprove: ->
+        #         $('.ui.modal').modal('hide')
+        # 	).modal 'show'
 
     'click .doc_tag': -> if @valueOf() in selected_tags.array() then selected_tags.remove @valueOf() else selected_tags.push @valueOf()
 
@@ -78,13 +70,13 @@ Template.small_card.events
     # 'click .select_user': ->
     #     if Session.equals('selected_user', @authorId) then Session.set('selected_user', null) else Session.set('selected_user', @authorId)
 
-    'click .make_big': ->
-        # Session.set('is_big', @_id)
-        # console.log @
-        $(".modal.#{@_id}").modal(
-            onApprove: ->
-                $('.ui.modal').modal('hide')
-        	).modal 'show'
+    # 'click .make_big': ->
+    #     # Session.set('is_big', @_id)
+    #     # console.log @
+    #     $(".modal.#{@_id}").modal(
+    #         onApprove: ->
+    #             $('.ui.modal').modal('hide')
+    #     	).modal 'show'
 
     'click .vote_down': -> Meteor.call 'vote_down', @_id
 

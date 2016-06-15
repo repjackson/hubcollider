@@ -1,20 +1,10 @@
-template(name='small_card')
-    .ui.card(class=doc_card_class)
+template(name='card')
+    .ui.card
         if img_url
-            .blurring.dimmable.image
-                .ui.dimmer
-                    .content
-                        .center
-                            .ui.inverted.icon.button.make_big
-                                i.expand.icon
+            a.image.doc_title
                 img.ui.image(src=img_url)
         .content
-            a.header.make_big
-                if is_in_academy
-                    i.yellow.university.icon
-                if is_in_economy
-                    i.green.cart.icon
-                |#{title}
+            a.header.doc_title #{title}
         .content
             each clipped_hub_tags
                 .ui.compact.button.doc_tag(class=doc_tag_class)  #{this}
@@ -24,8 +14,8 @@ template(name='small_card')
                 i.user.icon
                 |#{author.username}
             | &nbsp; #{when}
-        .extra.content
-            a.view_comments Comment Count: #{comment_count}
+        // .extra.content
+        //     a.view_comments Comment Count: #{comment_count}
         if currentUser
             if isAuthor
                 .extra.content

@@ -36,12 +36,12 @@ Template.cloud.helpers
 
     selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
 
-    selected_tag_class: ->
-        tag_class = switch
-            when @valueOf() is 'academy' then 'yellow'
-            when @valueOf() is 'economy' then 'green'
-            else 'primary'
-        return tag_class
+    # selected_tag_class: ->
+    #     tag_class = switch
+    #         # when @valueOf() is 'academy' then 'yellow'
+    #         # when @valueOf() is 'economy' then 'green'
+    #         else 'primary'
+    #     return tag_class
 
     can_view_less: -> Session.equals('view_more', true)
 

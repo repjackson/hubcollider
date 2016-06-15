@@ -8,7 +8,7 @@ template(name='cloud')
             #clearTags.ui.big.compact.circular.primary.icon.button
                 i.remove.icon
             each selected_tags
-                .ui.compact.big.button.unselectTag(class=selected_tag_class)
+                .ui.compact.big.primary.button.unselectTag
                     strong #{this}
         each all_tags
             .ui.compact.basic.button.selectTag(class=globalTagClass) #{this.name}

@@ -15,10 +15,10 @@ template(name='nav')
         //         a#crowd_sourcing_link.item
         //             i.users.big.icon
         //             | Crowd Sourcing
-        a#home_link.icon.item
+        a#home_link.item
             // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
-            // i.large.pied.piper.alternate.icon
-            strong Collider
+            i.large.comments.outline.icon
+            | Collider
         .item
             .ui.transparent.icon.input
                 input#search(type='text', placeholder='Search...')
@@ -57,9 +57,9 @@ template(name='nav')
                             .item.select_bookmark
                                 each this
                                     .ui.label #{this}
-                a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
-                    i.user.icon
-                    |  Profile
+                // a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
+                //     i.user.icon
+                //     |  Profile
                 a.icon.item(href="{{pathFor 'messages'}}" class="{{activeIfRouteNameIs 'messages'}}")
                     i.mail.icon
                 a.item.sign-out(data-id='sign-out')
@@ -68,9 +68,9 @@ template(name='nav')
             // +atNavButton
             a#rightMenu.icon.item
                 i.alarm.outline.icon
-    .ui.modal.view_doc
-        .content
-            if is_editing
-                +edit
-            else
-                +big_card
+    // .ui.modal.view_doc
+    //     .content
+    //         if is_editing
+    //             +edit
+    //         else
+    //             +big_card
