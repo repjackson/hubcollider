@@ -125,9 +125,9 @@ Meteor.methods
         #         downvoted_cloud: downvoted_cloud
         #         downvoted_list: downvoted_list
 
-    suggest_tags: (id, body)->
+    yaki_suggest: (id)->
         doc = Docs.findOne id
-        suggested_tags = Yaki(body).extract()
+        suggested_tags = Yaki(doc.body).extract()
         cleaned_suggested_tags = Yaki(suggested_tags).clean()
         uniqued = _.uniq(cleaned_suggested_tags)
         lowered = uniqued.map (tag)-> tag.toLowerCase()
@@ -135,9 +135,9 @@ Meteor.methods
         #lowered = tag.toLowerCase() for tag in uniqued
 
         Docs.update id,
-            $set: suggested_tags: lowered
+            $set: yaki_tags: lowered
 
-    analyze: (id, auto)->
+    alchemy_suggest: (id, auto)->
         doc = Docs.findOne id
         encoded = encodeURIComponent(doc.body)
 
@@ -157,6 +157,6 @@ Meteor.methods
                         )
 
                     Docs.update id,
-                        $addToSet:
-                            keyword_array: $each: loweredKeywords
+                        $set:
+                            alchemy_tags: loweredKeywords
                             # tags: $each: loweredKeywords

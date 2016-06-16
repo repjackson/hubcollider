@@ -1,5 +1,5 @@
 template(name='nav')
-    .ui.stackable.fixed.menu
+    .ui.fixed.menu
         // .ui.simple.dropdown.icon.item
         //     i.content.icon
         //     .menu
@@ -23,54 +23,16 @@ template(name='nav')
             .ui.transparent.icon.input
                 input#search(type='text', placeholder='Search...')
                 i.search.link.icon
-        .right.menu
-            if currentUser
-                a#view_me.item(class=view_me_class)
-                    i.user.icon
-                    | Me
-                a#add_doc.item
-                    i.plus.icon
-                    |Add
-                // .ui.simple.dropdown.item
-                //     i.plus.icon
-                //     span.text Add
-                //     i.dropdown.icon
-                //     .menu
-                //         if selected_tags
-                //             #newFromSelection.item
-                //                 i.external.square.icon
-                //                 |From Selection
-                //         a#add_doc.item
-                //             i.file.outline.icon
-                //             |Blank
-                //         // a#add_econ.item
-                //         //     i.large.green.cart.icon
-                //         //     |Economy
-                //         // a#add_acad.item
-                //         //     i.large.yellow.university.icon
-                //         //     |Academy
-                //         .header From Bookmarks
-                //         each currentUser.bookmarks
-                //             .item.add_from_bookmark
-                //                 each this
-                //                     .ui.label #{this}
-                // .ui.simple.dropdown.icon.item
-                //     i.bookmark.icon
-                //     // span.text Bookmarks
-                //     i.dropdown.icon
-                //     .menu
-                //         each currentUser.bookmarks
-                //             .item.select_bookmark
-                //                 each this
-                //                     .ui.label #{this}
-                // a.item(href="{{pathFor 'updateProfile'}}" class="{{activeIfRouteNameIs 'updateProfile'}}")
-                //     i.user.icon
-                //     |  Profile
-                // a.icon.item(href="{{pathFor 'messages'}}" class="{{activeIfRouteNameIs 'messages'}}")
-                //     i.mail.icon
-                a.item.sign-out(data-id='sign-out')
-                    i.sign.out.icon
-                    |Logout #{currentUser.username}
+        if currentUser
+            a#view_me.item(class=view_me_class)
+                i.user.icon
+                | Me
+            a#create_doc.item
+                i.plus.icon
+                |Add
+        a.item.sign-out(data-id='sign-out')
+            i.sign.out.icon
+            |Logout #{currentUser.username}
             // +atNavButton
             // a#rightMenu.icon.item
             //     i.alarm.outline.icon

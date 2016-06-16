@@ -49,10 +49,10 @@ template(name='edit')
             #delete.ui.right.floated.red.compact.button
                 i.remove.icon
                 |Delete
-            // if title
-            #saveDoc.ui.large.green.button
-                i.check.icon
-                |Save
+            if tags
+                #saveDoc.ui.large.green.button
+                    i.check.icon
+                    |Save
     .ui.small.basic.modal.delete_modal
         .header Confirm Delete
         // .content

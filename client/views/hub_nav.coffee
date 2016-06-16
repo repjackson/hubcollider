@@ -29,7 +29,7 @@ Template.nav.events
     #         else Session.set('is_editing', id)
 
 
-    'click #add_doc': ->
+    'click #create_doc': ->
         Meteor.call 'create_doc', null ,(err, id)->
             if err then console.log err
             else FlowRouter.go "/edit/#{id}"

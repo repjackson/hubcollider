@@ -8,7 +8,7 @@ Docs.before.insert (userId, doc)->
     return
 
 Docs.after.update ((userId, doc, fieldNames, modifier, options) ->
-    doc.tagCount = doc.tags.length
+    doc.tagCount = doc.tags?.length
     # Meteor.call 'generatePersonalCloud', Meteor.userId()
 ), fetchPrevious: true
 
@@ -18,7 +18,7 @@ Docs.helpers
 
 Meteor.methods
     create_doc: ()->
-        Docs.insert()
+        Docs.insert({})
 
     delete_doc: (id)->
         Docs.remove id

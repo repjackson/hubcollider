@@ -43,7 +43,7 @@ Meteor.publish 'tags', (selected_tags, selected_authors, view_more)->
 
     match = {}
     # if view_more is true then limit = 50 else limit = 10
-    limit = 20
+    limit = 25
     if selected_tags.length then match.tags = $all: selected_tags
 
     if selected_authors.length > 0 then match.authorId = $in: selected_authors
@@ -75,11 +75,10 @@ Meteor.publish 'docs', (selected_tags, selected_authors)->
     if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
     Docs.find match,
-        # limit: 5
         sort:
             tagCount: 1
             timestamp: -1
-
+        limit: 10
 
 Meteor.publish 'authors', (selected_tags, selected_authors)->
     self = @
@@ -94,7 +93,7 @@ Meteor.publish 'authors', (selected_tags, selected_authors)->
         { $group: _id: '$authorId', count: $sum: 1 }
         { $match: _id: $nin: selected_authors }
         { $sort: count: -1, _id: 1 }
-        { $limit: 50 }
+        { $limit: 10 }
         { $project: _id: 0, text: '$_id', count: 1 }
         ]
 
