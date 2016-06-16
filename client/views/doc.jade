@@ -11,7 +11,8 @@ template(name='item')
             // .header #{title}
             // .meta
             .description
-                |!{body}
+                .ui.basic.segment
+                    |!{body}
             // .extra.content
             //     a.view_comments Comment Count: #{comment_count}
             .extra

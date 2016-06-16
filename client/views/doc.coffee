@@ -7,7 +7,8 @@ Template.item.helpers
 
     when: -> moment(@timestamp).fromNow()
 
-    clipped_hub_tags: -> _.without(@tags, 'hubcollider').slice(0,5)
+    # clipped_hub_tags: -> _.without(@tags, 'hubcollider').slice(0,5)
+    clipped_hub_tags: -> _.without(@tags, 'hubcollider')
 
     doc_tag_class: ->
         result = ''

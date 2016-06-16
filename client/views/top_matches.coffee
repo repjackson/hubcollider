@@ -1,3 +1,7 @@
+Template.top_matches.onCreated ->
+    Meteor.subscribe 'users.all'
+
+
 Template.top_matches.helpers
     user: -> Meteor.user()
 

@@ -1,10 +1,10 @@
 template(name='docs')
-    .ui.horizontal.segments
-        .ui.segment
+    .ui.grid
+        .ui.ten.wide.column
             +cloud
-        .ui.segment
+        .ui.six.wide.column
             +top_matches
-    .ui.text.container
+    .ui.container
         each docs
             +item
 
