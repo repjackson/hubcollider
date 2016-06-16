@@ -1,0 +1,9 @@
+template(name='doc_page')
+    with doc
+        .ui.stackable.grid.container
+            .ui.twelve.wide.column.very.padded.basic.segment
+                .ui.header #{title}
+                each hub_doc_tags
+                    .ui.basic.label #{this}
+                .ui.large.image
+                    img(src=img_url)

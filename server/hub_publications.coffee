@@ -10,22 +10,6 @@ Meteor.publish 'userStatus', ->
     Meteor.users.find 'status.online': true
 
 
-Meteor.publishComposite 'users.profile', (_id, limit) ->
-    if @userId
-        {
-            find: ->
-                Meteor.users.find _id: _id
-            children: [ { find: (user) ->
-                Counts.publish this, 'users.profile', Posts.find(authorId: user._id), noReady: true
-                Posts.find { authorId: user._id },
-                    sort: createdAt: -1
-                    limit: limit
-             } ]
-        }
-    else
-        []
-
-
 Meteor.publish 'users.all', () ->
     if @userId
         Counts.publish this, 'users.all', Meteor.users.find(), noReady: true

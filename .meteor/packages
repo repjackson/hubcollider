@@ -22,10 +22,7 @@ arillo:flow-router-helpers
 themeteorchef:bert
 reactive-var
 momentjs:moment
-reywood:publish-composite
-utilities:avatar
 tmeasday:publish-counts
-verron:autosize
 mizzao:user-status
 kevohagan:sweetalert
 mizzao:autocomplete
@@ -45,6 +42,4 @@ mquandalle:stylus
 matb33:collection-hooks
 dburles:collection-helpers
 raix:handlebar-helpers
-jeremy:geocomplete
-drewy:datetimepicker
 froala:editor

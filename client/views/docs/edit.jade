@@ -1,0 +1,62 @@
+template(name='edit')
+    with doc
+        #edit_doc_form.ui.form
+            .field
+                .ui.header Tags
+                each hub_doc_tags
+                    .ui.basic.button.docTag
+                        i.minus.icon
+                        |#{this}
+                .ui.left.icon.input
+                    i.add.icon
+                    input#addTag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
+            // .required.field
+            //     label Title
+            //     input#title(type='text' placeholder='Add Title' value=title)
+            if img_url
+                .field
+                    label Image
+                    span #{img_url}
+                // input#img_url(type='text' placeholder='Add image url' value=img_url)
+            // .field
+            //     label Address
+            //         i.marker.icon
+            //     input#address(type='text' value=address)
+            if alchemy_tags.length
+                .ui.segment
+                    .ui.header Suggested Tags (alchemy)
+                    div
+                        each unpicked_alchemy_tags
+                            .add_alchemy_suggestion.ui.button #{this}
+                    a#add_all_alchemy Add All Alchemy Suggestions
+            if yaki_tags.length
+                .ui.segment
+                    .ui.header Suggested Tags (yaki)
+                    div
+                        each unpicked_yaki_tags
+                            .add_yaki_suggestion.ui.button #{this}
+                    a#add_all_yaki Add All Yaki Suggestions
+            .field
+                .ui.header Description
+                #alchemy_suggest.ui.basic.button Suggest Tags with AlchemyAPI
+                #yaki_suggest.ui.basic.button Suggest Tags Yaki
+                textarea#body(maxlength='2000')
+                    |#{body}
+            // .field
+            //     label Price
+            //     input#price(type='number' min='0' max='10000' value=price)
+            .ui.hidden.divider
+            #delete.ui.right.floated.red.compact.button
+                i.remove.icon
+                |Delete
+            // if title
+            #saveDoc.ui.large.green.button
+                i.check.icon
+                |Save
+    .ui.small.basic.modal.delete_modal
+        .header Confirm Delete
+        // .content
+        //     .meta Confirm?
+        .actions
+            .ui.button.cancel Cancel
+            .ui.red.button.approve Delete
