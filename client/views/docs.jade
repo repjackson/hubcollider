@@ -5,6 +5,8 @@ template(name='docs')
         .ui.six.wide.column
             +top_matches
     .ui.container
-        each docs
-            +item
+        .ui.stackable.two.cards
+            each docs
+                .ui.card
+                    +doc
 

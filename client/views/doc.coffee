@@ -1,8 +1,8 @@
-Template.item.onCreated ->
+Template.doc.onCreated ->
     Meteor.subscribe 'person', @data.authorId
 
 
-Template.item.helpers
+Template.doc.helpers
     isAuthor: -> @authorId is Meteor.userId()
 
     when: -> moment(@timestamp).fromNow()
@@ -32,7 +32,7 @@ Template.item.helpers
         else 'basic'
 
 
-Template.item.events
+Template.doc.events
     'click .doc_title': -> FlowRouter.go "/view/#{@_id}"
 
     'click .editDoc': ->

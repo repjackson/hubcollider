@@ -128,10 +128,14 @@ Template.edit.events
                 # title: title
                 body: body
                 tagCount: @tags.length
-        selected_tags.clear()
-        for tag in _.without(@tags, 'hubcollider')
-            selected_tags.push tag
-        FlowRouter.go '/'
+            , (err,res)->
+                if err then console.error err
+                else
+                    Meteor.call 'generate_person_cloud'
+                    FlowRouter.go '/'
+                    selected_tags.clear()
+                    for tag in _.without(@tags, 'hubcollider')
+                        selected_tags.push tag
         # Session.set('is_editing', null)
         # $('.ui.modal').modal('hide')
 

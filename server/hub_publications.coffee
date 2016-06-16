@@ -3,7 +3,9 @@ Meteor.publish null, ->
         return Meteor.users.find({ _id: @userId }, fields:
             apps: 1
             bookmarks: 1
-            tags: 1)
+            tags: 1
+            authored_cloud: 1
+            authored_list: 1)
     return
 
 Meteor.publish 'userStatus', ->
@@ -14,67 +16,23 @@ Meteor.publish 'users.all', () ->
     if @userId
         Counts.publish this, 'users.all', Meteor.users.find(), noReady: true
         Meteor.users.find {},
-            sort: createdAt: -1
+            fields:
+                apps: 1
+                bookmarks: 1
+                tags: 1
+                authored_cloud: 1
+                authored_list: 1
     else
         []
 
-
-Meteor.publish 'messages.all', ->
-    if @userId
-        currentUser = Meteor.users.findOne(_id: @userId)
-        Messages.find $or: [
-            { originatingFromId: currentUser._id }
-            { originatingToId: currentUser._id }
-        ]
-    else
-        []
 
 Meteor.publish 'person', (id)->
     Meteor.users.find id,
         fields:
             tags: 1
             username: 1
-
-
-# Meteor.publish 'filtered_people', (selectedUserTags)->
-#     self = @
-#     # console.log selected_tags
-#     match = {}
-#     # match.apps = $in: ['hub_collider']
-#     if selectedUserTags and selectedUserTags.length > 0 then match.tags = $all: selectedUserTags
-
-#     Meteor.users.find match,
-#         fields:
-#             tags: 1
-#             username: 1
-
-# Meteor.publish 'people_tags', (selected_tags)->
-#     self = @
-#     match = {}
-#     if selected_tags?.length > 0 then match.tags = $all: selected_tags
-#     # match.apps = $in: ['hub_collider']
-#     match._id = $ne: @userId
-
-#     tagCloud = Meteor.users.aggregate [
-#         { $match: match }
-#         { $project: tags: 1 }
-#         { $unwind: "$tags" }
-#         { $group: _id: "$tags", count: $sum: 1 }
-#         { $match: _id: $nin: selected_tags }
-#         { $sort: count: -1, _id: 1 }
-#         { $limit: 50 }
-#         { $project: _id: 0, name: '$_id', count: 1 }
-#         ]
-
-#     tagCloud.forEach (tag, i) ->
-#         self.added 'people_tags', Random.id(),
-#             name: tag.name
-#             count: tag.count
-#             index: i
-
-#     # console.log tagCloud
-
-#     self.ready()
+            authored_cloud: 1
+            authored_list: 1
 
 
 Meteor.publish 'doc', (id)-> Docs.find id

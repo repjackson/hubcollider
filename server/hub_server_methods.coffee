@@ -77,7 +77,7 @@ Meteor.methods
                 bookmarks: tags
 
 
-    generate_person_cloud: (uid)->
+    generate_person_cloud: ()->
         authored_cloud = Docs.aggregate [
             { $match: authorId: Meteor.userId() }
             { $project: tags: 1 }
