@@ -59,8 +59,6 @@ Template.edit.helpers
         # docId = FlowRouter.getParam('docId')
         Docs.findOne FlowRouter.getParam('docId')
 
-    hub_doc_tags: -> _.without(@tags, 'hubcollider')
-
     unpicked_suggested_tags: ->
         _.difference @suggested_tags, @tags
 
@@ -78,10 +76,8 @@ Template.edit.events
         }, ->
             Meteor.call 'delete_doc', FlowRouter.getParam('docId'), (error, result) ->
                 if error
-                    Bert.alert error.reason, 'danger', 'growl-top-right'
+                    console.error error.reason
                 else
-                    Bert.alert 'Post successfully removed', 'success', 'growl-top-right'
-                    # $('.ui.modal').modal('hide')
                     FlowRouter.go '/'
 
 
@@ -132,7 +128,7 @@ Template.edit.events
         Meteor.call 'generate_person_cloud'
         FlowRouter.go '/'
         selected_tags.clear()
-        for tag in _.without(@tags, 'hubcollider')
+        for tag in tags
             selected_tags.push tag
         # Session.set('is_editing', null)
         # $('.ui.modal').modal('hide')

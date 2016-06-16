@@ -19,7 +19,6 @@ useraccounts:flow-routing
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
-themeteorchef:bert
 reactive-var
 momentjs:moment
 tmeasday:publish-counts
@@ -40,5 +39,4 @@ flemay:less-autoprefixer
 mquandalle:stylus
 matb33:collection-hooks
 dburles:collection-helpers
-raix:handlebar-helpers
 froala:editor

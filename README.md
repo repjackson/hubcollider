@@ -1,4 +1,4 @@
-# HubCollider.com
+# www.collider.cloud
 
 ## Setup
 1. Clone / fork the repository
@@ -8,4 +8,4 @@
 
 
 ## Deploy
-DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy www.hubcollider.com --settings settings.json
+DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy www.collider.cloud --settings settings.json

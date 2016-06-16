@@ -44,8 +44,7 @@ Meteor.publish 'tags', (selected_tags, selected_authors, view_more)->
     match = {}
     # if view_more is true then limit = 50 else limit = 10
     limit = 20
-    selected_tags.push 'hubcollider'
-    match.tags = $all: selected_tags
+    if selected_tags.length then match.tags = $all: selected_tags
 
     if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
@@ -72,8 +71,7 @@ Meteor.publish 'tags', (selected_tags, selected_authors, view_more)->
 
 Meteor.publish 'docs', (selected_tags, selected_authors)->
     match = {}
-    selected_tags.push 'hubcollider'
-    match.tags = $all: selected_tags
+    if selected_tags.length then match.tags = $all: selected_tags
     if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
     Docs.find match,
@@ -87,8 +85,7 @@ Meteor.publish 'authors', (selected_tags, selected_authors)->
     self = @
 
     match = {}
-    selected_tags.push 'hubcollider'
-    match.tags = $all: selected_tags
+    if selected_tags.length then match.tags = $all: selected_tags
     if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
     cloud = Docs.aggregate [

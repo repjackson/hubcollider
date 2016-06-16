@@ -4,10 +4,9 @@ template(name='docs')
             +cloud
         .ui.six.wide.column
             +top_matches
-    .ui.container
-        .ui.grid
-            each docs
-                .ui.left.floated.eight.wide.column
-                    .ui.fluid.card
-                        +doc
+    // #column.ui.container
+    #column
+        each docs
+            .pin.ui.segment
+                +doc
 

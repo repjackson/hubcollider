@@ -17,12 +17,8 @@ Docs.helpers
 
 
 Meteor.methods
-    create_doc: (tag)->
-        tags = []
-        if tag then tags.push 'hubcollider', tag
-        else tags.push 'hubcollider'
-        Docs.insert
-            tags: tags
+    create_doc: ()->
+        Docs.insert()
 
     delete_doc: (id)->
         Docs.remove id

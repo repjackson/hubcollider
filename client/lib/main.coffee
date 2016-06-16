@@ -1,5 +1,5 @@
 @setTitle = (title) ->
-    base = 'HubCollider'
+    base = 'Collider'
     if title
         document.title = title + ' - ' + base
 

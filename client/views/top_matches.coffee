@@ -20,7 +20,7 @@ Template.top_matches.helpers
         sortedList = _.sortBy(userMatches, 'length').reverse()
         clipped_list = []
         for item in sortedList
-            console.log item
+            # console.log item
             clipped_list.push
                 matchedUser: item.matchedUser
                 tagIntersection: item.tagIntersection.slice(0,5)
