@@ -1,38 +1,66 @@
 template(name='nav')
-    .ui.fixed.menu
-        // .ui.simple.dropdown.icon.item
-        //     i.content.icon
-        //     .menu
-        //         a#economy_link.item
-        //             i.cart.green.icon
-        //             | Economy
-        //         a#academy_link.item
-        //             i.university.yellow.icon
-        //             | Academy
-        //         a#perks_link.item
-        //             i.trophy.big.icon
-        //             | Perks
-        //         a#crowd_sourcing_link.item
-        //             i.users.big.icon
-        //             | Crowd Sourcing
-        a#home_link.item
-            // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
-            i.asterisk.icon
-            | Collider
-        .item
-            .ui.transparent.icon.input
-                input#search(type='text', placeholder='Search...')
-                i.search.link.icon
-        if currentUser
-            a#view_me.item(class=view_me_class)
-                i.user.icon
-                | Me
-            a#create_doc.item
-                i.plus.icon
-                |Add
-        a.item.sign-out(data-id='sign-out')
-            i.sign.out.icon
-            |Logout #{currentUser.username}
+    .ui.fixed.menu.grid
+        .computer.only.row
+            a#home_link.item
+                // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
+                i.asterisk.icon
+                | Collider
+            .item
+                .ui.transparent.icon.input
+                    input.search(type='text', placeholder='Search...')
+                    i.search.link.icon
+            .right.menu
+                if currentUser
+                    a#view_me.item(class=view_me_class)
+                        i.user.icon
+                        | Me
+                    a#create_doc.item
+                        i.plus.icon
+                        |Add
+                a.item.sign-out(data-id='sign-out')
+                    i.sign.out.icon
+                    |Logout #{currentUser.username}
+        .mobile.only.row
+            .ui.simple.dropdown.item
+                i.content.icon
+                | Menu
+                .menu
+                    a#home_link.item
+                        // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
+                        i.asterisk.link.icon
+                        | Home
+                    if currentUser
+                        a#view_me.item(class=view_me_class)
+                            i.user.icon
+                            | Profile
+                        a#create_doc.item
+                            i.plus.icon
+                            | Create Post
+                    a.item.sign-out(data-id='sign-out')
+                        i.sign.out.icon
+                        | Sign Out
+                    .item
+                        .ui.transparent.icon.input
+                            input.search(type='text', placeholder='Search...')
+                            i.search.link.icon
+        .tablet.only.row
+            a#home_link.item
+                // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
+                i.asterisk.icon
+            .item
+                .ui.transparent.icon.small.input
+                    input.search(type='text', placeholder='Search...')
+                    i.search.link.icon
+            if currentUser
+                a#view_me.item(class=view_me_class)
+                    i.user.icon
+                a#create_doc.item
+                    i.plus.icon
+            a.item.sign-out(data-id='sign-out')
+                i.sign.out.icon
+
+
+
             // +atNavButton
             // a#rightMenu.icon.item
             //     i.alarm.outline.icon
@@ -42,3 +70,5 @@ template(name='nav')
     //             +edit
     //         else
     //             +big_card
+
+

@@ -10,7 +10,10 @@ body
     margin-top 5em
 
 #column
-    column-count: 2
+    @media (max-width: 500px)
+        column-count: 1
+    @media (min-width: 500px)
+        column-count: 2
 	column-fill: auto
 
 .fixed.button
@@ -27,10 +30,16 @@ body
     position: relative
     border 15px solid green
 
-
-.content
-
-
 .ui.tag.label
     margin-left 1em !important
+
+
+.ui.menu.grid > .computer.only.row
+    padding 0
+
+.ui.menu.grid > .mobile.only.row
+    padding 0
+
+.search
+    width 400px
 

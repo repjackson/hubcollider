@@ -28,6 +28,10 @@ Template.nav.events
     #         if err then console.log err
     #         else Session.set('is_editing', id)
 
+    'click .search.link.icon': ->
+        val = $('#search').val()
+        if val.length > 0 then selected_tags.push val.toString()
+
 
     'click #create_doc': ->
         Meteor.call 'create_doc', null ,(err, id)->
@@ -56,19 +60,21 @@ Template.nav.events
     #             	).modal 'show'
 
 
-    'keyup #search': (e,t)->
+    'keyup .search': (e,t)->
         e.preventDefault()
-        val = $('#search').val()
+        val = e.currentTarget.value
+        # console.log val
+        # val = $('#search').val()
         switch e.which
             when 13 #enter
                 switch val
                     when 'clear'
                         selected_tags.clear()
-                        $('#search').val ''
+                        e.currentTarget.value = ''
                     else
-                        unless val.length is 0
+                        unless val.length is 0 or val in selected_tags.array()
                             selected_tags.push val.toString()
-                            $('#search').val ''
+                            e.currentTarget.value = ''
             when 8
                 if val.length is 0
                     selected_tags.pop()
