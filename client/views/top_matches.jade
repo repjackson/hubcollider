@@ -1,0 +1,8 @@
+template(name='top_matches')
+    .ui.header Top Matched People
+    div
+        each matchedUsersList
+            .item
+                strong #{this.matchedUser} (#{this.length}):
+                each this.tagIntersection
+                    | #{this} &nbsp;

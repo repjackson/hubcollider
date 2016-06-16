@@ -1,11 +1,11 @@
-Template.nav.onCreated ->
-    @autorun =>
+# Template.nav.onCreated ->
+#     @autorun =>
         # Set subscriptions
-        @subscribe 'messages.all'
+        # @subscribe 'messages.all'
         # @subscribe 'users.all'
 
-Template.nav.helpers
-    is_editing: -> Session.equals('is_editing', @_id)
+# Template.nav.helpers
+    # is_editing: -> Session.equals('is_editing', @_id)
 
 
 Template.nav.events
@@ -16,14 +16,17 @@ Template.nav.events
             else
                 FlowRouter.go '/sign-in'
 
-    'click .select_bookmark': ->
-        selected_tags.clear()
-        selected_tags.push(tag) for tag in @
+    'click #view_me': -> if Meteor.userId() in selected_authors.array() then selected_authors.remove Meteor.userId() else selected_authors.push Meteor.userId()
 
-    'click .add_from_bookmark': ->
-        Meteor.call 'create_doc', @, (err,id)->
-            if err then console.log err
-            else Session.set('is_editing', id)
+
+    # 'click .select_bookmark': ->
+    #     selected_tags.clear()
+    #     selected_tags.push(tag) for tag in @
+
+    # 'click .add_from_bookmark': ->
+    #     Meteor.call 'create_doc', @, (err,id)->
+    #         if err then console.log err
+    #         else Session.set('is_editing', id)
 
 
     'click #add_doc': ->
@@ -41,16 +44,16 @@ Template.nav.events
     #         if err then console.log err
     #         else Session.set('is_editing', id)
 
-    'click #new_from_selection': ->
-        # if confirm 'Create new document from selection?'
-        Meteor.call 'create_doc', selectedTags.array(), (err,id)->
-            if err then console.log err
-            else
-                Session.set('is_editing', id)
-                $(".modal.view_doc").modal(
-                    onApprove: ->
-                        $('.ui.modal').modal('hide')
-                	).modal 'show'
+    # 'click #new_from_selection': ->
+    #     # if confirm 'Create new document from selection?'
+    #     Meteor.call 'create_doc', selectedTags.array(), (err,id)->
+    #         if err then console.log err
+    #         else
+    #             Session.set('is_editing', id)
+    #             $(".modal.view_doc").modal(
+    #                 onApprove: ->
+    #                     $('.ui.modal').modal('hide')
+    #             	).modal 'show'
 
 
     'keyup #search': (e,t)->
@@ -105,30 +108,8 @@ Template.nav.helpers
 
     selected_tags: -> selected_tags.list()
 
+    view_me_class: -> if Meteor.user().username in selected_authors.array() then 'active' else ''
 
-    getUnreadCount: ->
-        unreadMessageCount = 0
-        messages = Messages.find($or: [
-            {
-                originatingFromId: Meteor.userId()
-                'conversation.originatingFromDeleted': false
-            }
-            {
-                originatingToId: Meteor.userId()
-                'conversation.originatingToDeleted': false
-            }
-        ]).forEach((msg) ->
-            x = 0
-            while x < msg.conversation.length
-                if msg.conversation[x].to.userId == Meteor.userId() and !msg.conversation[x].to.read
-                    unreadMessageCount++
-                x++
-            return
-        )
-        if unreadMessageCount > 0
-            '(' + unreadMessageCount + ')'
-        else
-            ''
 
 Template.body.events
     # 'click .inverted': (e,t) ->

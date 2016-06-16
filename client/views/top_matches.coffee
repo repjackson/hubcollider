@@ -1,4 +1,4 @@
-Template.your_tags.helpers
+Template.top_matches.helpers
     user: -> Meteor.user()
 
     people: -> Meteor.users.find()
@@ -16,7 +16,7 @@ Template.your_tags.helpers
         return sortedList
 
 
-Template.your_tags.events
+Template.top_matches.events
     'keydown #add_self_tag': (e,t)->
         e.preventDefault
         tag = $('#add_self_tag').val().toLowerCase().trim()

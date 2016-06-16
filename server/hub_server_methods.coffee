@@ -76,24 +76,6 @@ Meteor.methods
             $addToSet:
                 bookmarks: tags
 
-    # updatelocation: (docid, result)->
-    #     addresstags = (component.long_name for component in result.address_components)
-    #     loweredAddressTags = _.map(addresstags, (tag)->
-    #         tag.toLowerCase()
-    #         )
-
-    #     #console.log addresstags
-
-    #     doc = Docs.findOne docid
-    #     tagsWithoutAddress = _.difference(doc.tags, doc.addresstags)
-    #     tagsWithNew = _.union(tagsWithoutAddress, loweredAddressTags)
-
-    #     Docs.update docid,
-    #         $set:
-    #             tags: tagsWithNew
-    #             locationob: result
-    #             addresstags: loweredAddressTags
-
 
     generatePersonalCloud: (uid)->
         authored_cloud = Docs.aggregate [
@@ -142,3 +124,39 @@ Meteor.methods
             $set:
                 downvoted_cloud: downvoted_cloud
                 downvoted_list: downvoted_list
+
+    suggest_tags: (id, body)->
+        doc = Docs.findOne id
+        suggested_tags = Yaki(body).extract()
+        cleaned_suggested_tags = Yaki(suggested_tags).clean()
+        uniqued = _.uniq(cleaned_suggested_tags)
+        lowered = uniqued.map (tag)-> tag.toLowerCase()
+
+        #lowered = tag.toLowerCase() for tag in uniqued
+
+        Docs.update id,
+            $set: suggested_tags: lowered
+
+    analyze: (id, auto)->
+        doc = Docs.findOne id
+        encoded = encodeURIComponent(doc.body)
+
+        # result = HTTP.call 'POST', 'http://gateway-a.watsonplatform.net/calls/text/TextGetCombinedData', { params:
+        HTTP.call 'POST', 'http://access.alchemyapi.com/calls/html/HTMLGetCombinedData', { params:
+            apikey: '6656fe7c66295e0a67d85c211066cf31b0a3d0c8'
+            html: doc.body
+            outputMode: 'json'
+            extract: 'keyword' }
+            , (err, result)->
+                if err then console.log err
+                else
+                    keyword_array = _.pluck(result.data.keywords, 'text')
+                    # concept_array = _.pluck(result.data.concepts, 'text')
+                    loweredKeywords = _.map(keyword_array, (keyword)->
+                        keyword.toLowerCase()
+                        )
+
+                    Docs.update id,
+                        $addToSet:
+                            keyword_array: $each: loweredKeywords
+                            # tags: $each: loweredKeywords

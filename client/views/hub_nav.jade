@@ -17,7 +17,7 @@ template(name='nav')
         //             | Crowd Sourcing
         a#home_link.item
             // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
-            i.large.comments.outline.icon
+            i.asterisk.icon
             | Collider
         .item
             .ui.transparent.icon.input
@@ -25,6 +25,9 @@ template(name='nav')
                 i.search.link.icon
         .right.menu
             if currentUser
+                a#view_me.item(class=view_me_class)
+                    i.user.icon
+                    | Me
                 a#add_doc.item
                     i.plus.icon
                     |Add

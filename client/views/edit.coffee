@@ -51,13 +51,7 @@ Template.edit.onRendered ->
             #   'html'
             # ]
 
-        ), 500
-
-    # @autorun ->
-    #     if GoogleMaps.loaded()
-    #         $('#place').geocomplete().bind 'geocode:result', (event, result) ->
-    #             console.log JSON.stringify(result, null, 4)
-    #             Meteor.call 'updatelocation', docId, result, ->
+        ), 300
 
 
 Template.edit.helpers
@@ -67,6 +61,8 @@ Template.edit.helpers
 
     hub_doc_tags: -> _.without(@tags, 'hubcollider')
 
+    unpicked_suggested_tags: ->
+        _.difference @suggested_tags, @tags
 
 Template.edit.events
     'click #delete': ->
@@ -87,13 +83,6 @@ Template.edit.events
                     Bert.alert 'Post successfully removed', 'success', 'growl-top-right'
                     # $('.ui.modal').modal('hide')
                     FlowRouter.go '/'
-
-        # $('.modal.delete_modal').modal(
-        #     onApprove: ->
-        #         Meteor.call 'delete_doc', FlowRouter.getParam('docId'), ->
-        #         $('.ui.modal').modal('hide')
-        #         FlowRouter.go '/'
-        # 	).modal 'show'
 
 
     'keydown #addTag': (e,t)->
