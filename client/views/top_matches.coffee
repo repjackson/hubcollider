@@ -8,16 +8,27 @@ Template.top_matches.helpers
     people: -> Meteor.users.find()
 
     matchedUsersList:->
-        users = Meteor.users.find({_id: $ne: Meteor.userId()}).fetch()
+        users = Meteor.users.find({ _id: $ne: Meteor.userId() }).fetch()
         userMatches = []
         for user in users
-            tagIntersection = _.intersection(user.tags, Meteor.user().tags)
+            tagIntersection = _.intersection(user.authored_list, Meteor.user().authored_list)
             userMatches.push
+                matched_user_id: user._id
                 matchedUser: user.username
                 tagIntersection: tagIntersection
                 length: tagIntersection.length
         sortedList = _.sortBy(userMatches, 'length').reverse()
-        return sortedList
+        clipped_list = []
+        for item in sortedList
+            console.log item
+            clipped_list.push
+                matchedUser: item.matchedUser
+                tagIntersection: item.tagIntersection.slice(0,5)
+                length: item.length
+
+        # console.log(item) for item in clipped_list
+        return clipped_list
+        # return sortedList
 
 
 Template.top_matches.events

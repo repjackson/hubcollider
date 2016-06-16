@@ -5,8 +5,9 @@ template(name='docs')
         .ui.six.wide.column
             +top_matches
     .ui.container
-        .ui.stackable.two.cards
+        .ui.grid
             each docs
-                .ui.card
-                    +doc
+                .ui.left.floated.eight.wide.column
+                    .ui.fluid.card
+                        +doc
 

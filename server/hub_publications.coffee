@@ -17,7 +17,7 @@ Meteor.publish 'users.all', () ->
         Counts.publish this, 'users.all', Meteor.users.find(), noReady: true
         Meteor.users.find {},
             fields:
-                apps: 1
+                username: 1
                 bookmarks: 1
                 tags: 1
                 authored_cloud: 1

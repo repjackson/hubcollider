@@ -95,16 +95,16 @@ Template.edit.events
                     Docs.update doc_id,
                         $addToSet: tags: tag
                     $('#addTag').val('')
-                else
-                    body = $('#body').val()
-                    Docs.update doc_id,
-                        $set:
-                            body: body
-                            tagCount: @tags.length
-                    selected_tags.clear()
-                    for tag in @tags
-                        selected_tags.push tag
-                        FlowRouter.go '/'
+                # else
+                #     body = $('#body').val()
+                #     Docs.update doc_id,
+                #         $set:
+                #             body: body
+                #             tagCount: @tags.length
+                #     selected_tags.clear()
+                #     for tag in @tags
+                #         selected_tags.push tag
+                #         FlowRouter.go '/'
 
     'click .docTag': ->
         tag = @valueOf()
@@ -115,27 +115,25 @@ Template.edit.events
 
 
     'click #saveDoc': ->
+        console.log 'firing savedoc'
         body = $('#body').val()
         # title = $('#title').val()
-        price = $('#price').val()
-        address = $('#address').val()
-        img_url = $('#img_url').val()
+        # price = $('#price').val()
+        # address = $('#address').val()
+        # img_url = $('#img_url').val()
         Docs.update FlowRouter.getParam('docId'),
             $set:
-                img_url: img_url
-                price: price
-                address: address
+                # img_url: img_url
+                # price: price
+                # address: address
                 # title: title
                 body: body
                 tagCount: @tags.length
-            , (err,res)->
-                if err then console.error err
-                else
-                    Meteor.call 'generate_person_cloud'
-                    FlowRouter.go '/'
-                    selected_tags.clear()
-                    for tag in _.without(@tags, 'hubcollider')
-                        selected_tags.push tag
+        Meteor.call 'generate_person_cloud'
+        FlowRouter.go '/'
+        selected_tags.clear()
+        for tag in _.without(@tags, 'hubcollider')
+            selected_tags.push tag
         # Session.set('is_editing', null)
         # $('.ui.modal').modal('hide')
 
