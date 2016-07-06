@@ -37,28 +37,8 @@ Template.nav.events
         Meteor.call 'create_doc', null ,(err, id)->
             if err then console.log err
             else FlowRouter.go "/edit/#{id}"
-
-    # 'click #add_econ': ->
-    #     Meteor.call 'create_doc', 'economy', (err, id)->
-    #         if err then console.log err
-    #         else Session.set('is_editing', id)
-
-    # 'click #add_acad': ->
-    #     Meteor.call 'create_doc', 'academy', (err, id)->
-    #         if err then console.log err
-    #         else Session.set('is_editing', id)
-
-    # 'click #new_from_selection': ->
-    #     # if confirm 'Create new document from selection?'
-    #     Meteor.call 'create_doc', selectedTags.array(), (err,id)->
-    #         if err then console.log err
-    #         else
-    #             Session.set('is_editing', id)
-    #             $(".modal.view_doc").modal(
-    #                 onApprove: ->
-    #                     $('.ui.modal').modal('hide')
-    #             	).modal 'show'
-
+    
+    'click #jobs_link': -> FlowRouter.go "/jobs"
 
     'keyup .search': (e,t)->
         e.preventDefault()
@@ -78,26 +58,6 @@ Template.nav.events
             when 8
                 if val.length is 0
                     selected_tags.pop()
-
-    # 'click #academy_link': ->
-    #     FlowRouter.go '/'
-    #     selected_tags.clear()
-    #     selected_tags.push 'academy'
-
-    # 'click #perks_link': ->
-    #     selected_tags.clear()
-    #     selected_tags.push 'perks'
-    #     FlowRouter.go '/'
-
-    # 'click #economy_link': ->
-    #     selected_tags.clear()
-    #     FlowRouter.go '/'
-    #     selected_tags.push 'economy'
-
-    # 'click #crowd_sourcing_link': ->
-    #     selected_tags.clear()
-    #     FlowRouter.go '/'
-    #     selected_tags.push 'crowd sourcing'
 
     'click #home_link': ->
         selected_tags.clear()

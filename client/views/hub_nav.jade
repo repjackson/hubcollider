@@ -2,13 +2,16 @@ template(name='nav')
     .ui.fixed.menu.grid
         .computer.only.row
             a#home_link.item
-                // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
-                i.asterisk.icon
+                img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
+                // i.asterisk.icon
                 | Collider
             .item
                 .ui.transparent.icon.input
                     input.search(type='text', placeholder='Search...')
                     i.search.link.icon
+            a#jobs_link.item
+                i.suitcase.icon
+                |Jobs
             .right.menu
                 if currentUser
                     a#view_me.item(class=view_me_class)
@@ -64,11 +67,3 @@ template(name='nav')
             // +atNavButton
             // a#rightMenu.icon.item
             //     i.alarm.outline.icon
-    // .ui.modal.view_doc
-    //     .content
-    //         if is_editing
-    //             +edit
-    //         else
-    //             +big_card
-
-
