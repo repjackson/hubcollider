@@ -3,7 +3,6 @@ template(name='nav')
         .computer.only.row
             a#home_link.item
                 img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
-                // i.asterisk.icon
                 | Collider
             .item
                 .ui.transparent.icon.input
@@ -13,14 +12,10 @@ template(name='nav')
                 i.suitcase.icon
                 |Jobs
             .right.menu
-                if currentUser
-                    a#view_me.item(class=view_me_class)
-                        i.user.icon
-                        | Me
-                    a#create_doc.item
-                        i.plus.icon
-                        |Add
-                a.item.sign-out(data-id='sign-out')
+                a.item(href='/profile')
+                    i.user.icon
+                    |Profile
+                a#sign-out.item
                     i.sign.out.icon
                     |Logout #{currentUser.username}
         .mobile.only.row

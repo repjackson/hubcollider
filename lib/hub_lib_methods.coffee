@@ -55,3 +55,10 @@ Meteor.methods
             # Meteor.users.update doc.authorId, $inc: points: -1
             # Meteor.users.update Meteor.userId(), $inc: points: -1
         Meteor.call 'generatePersonalCloud', Meteor.userId()
+
+    update_username: (username)->
+        existing_user = Meteor.users.findOne username:username
+        if existing_user then throw new Meteor.Error 500, 'Username exists'
+        else
+            Meteor.users.update Meteor.userId(),
+                $set: username: username

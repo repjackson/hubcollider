@@ -3,11 +3,11 @@ publicAccessible = FlowRouter.group({})
 signInRequired = FlowRouter.group(triggersEnter: [ AccountsTemplates.ensureSignedIn ])
 
 
-signInRequired.route '/update-profile',
-    name: 'updateProfile'
+signInRequired.route '/profile',
+    name: 'profile'
     action: ->
-        BlazeLayout.render 'layout', main: 'updateProfile'
-        setTitle 'Update profile'
+        BlazeLayout.render 'layout', main: 'profile'
+        setTitle 'Profile'
 
 signInRequired.route '/users/:_id',
     name: 'profile'
@@ -17,10 +17,10 @@ signInRequired.route '/users/:_id',
 
 
 signInRequired.route '/',
-    name: 'docs'
+    name: 'home'
     action: ->
-        BlazeLayout.render 'layout', main: 'docs'
-        setTitle 'Docs'
+        BlazeLayout.render 'layout', main: 'home'
+        setTitle 'Home'
 
 
 signInRequired.route '/messages',
@@ -36,3 +36,21 @@ signInRequired.route '/edit/:docId', action: (params) ->
 signInRequired.route '/view/:docId', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'doc_page'
+
+
+
+# Jobs
+
+signInRequired.route '/jobs',
+    name: 'jobs'
+    action: ->
+        BlazeLayout.render 'layout', main: 'jobs'
+        setTitle 'Jobs'
+
+signInRequired.route '/jobs/edit/:job_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'edit_job'
+
+signInRequired.route '/jobs/view/:job_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'view_job'

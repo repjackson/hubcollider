@@ -1,0 +1,57 @@
+template(name='edit_job')
+    with job
+        .ui.segment
+            .ui.form
+                .required.field
+                    label Title
+                    input#title(type='text' name='title' placeholder='Title')
+                .inline.field
+                    label Type of Job
+                    .ui.basic.buttons
+                        #contract.ui.button(class=type_button_class) Contract or Freelance
+                        #part_time.ui.button(class=type_button_class) Part-time
+                        #full_time.ui.button(class=type_button_class) Full-time
+                        #internship.ui.button(class=type_button_class) Internship
+                .field
+                    label Description
+                    textarea#description(rows='5')
+                .inline.field
+                    label Location
+                    .ui.basic.buttons
+                        #anywhere.ui.button(class=location_button_class) Work from anywhere
+                        #locally.ui.button(class=location_button_class) Work locally, remote okay
+                        #inhouse.ui.button(class=location_button_class) In-house
+                .field
+                    label Field of Work
+                    .ui.selection.dropdown
+                        input(type='hidden', name='gender')
+                        i.dropdown.icon
+                        .default.text Field of Work
+                        .menu
+                            .item(data-value='0') n/a
+                            .item(data-value='1') Accounting
+                            .item(data-value='2') Advertising
+                            .item(data-value='2') Branding & Identity
+                            .item(data-value='2') Business Development
+                .inline.field
+                    label Would you like applicants to include any of the following?
+                    .ui.basic.buttons
+                        #quote.ui.button(class=inclusion_button_class) Quote
+                        #estimated_timeline.ui.button(class=inclusion_button_class) Estimated timeline
+                        #relevant.ui.button(class=inclusion_button_class) Relevant experience
+                .field
+                    .ui.header Tags
+                    each tags
+                        .ui.basic.button.job_tag
+                            i.minus.icon
+                            |#{this}
+                    .ui.left.icon.input
+                        i.add.icon
+                        input#add_job_tag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
+                #delete_job.ui.red.compact.button
+                    i.remove.icon
+                    |Delete
+                if tags
+                    #save_job.ui.large.green.button
+                        i.check.icon
+                        |Save

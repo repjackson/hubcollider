@@ -3,3 +3,8 @@ Docs.allow
     update: (userId, doc)-> doc.authorId is Meteor.userId()
     remove: (userId, doc)-> doc.authorId is Meteor.userId()
 
+Jobs.allow
+    insert: (userId, doc)-> doc.authorId is Meteor.userId()
+    update: (userId, doc)-> doc.authorId is Meteor.userId()
+    remove: (userId, doc)-> doc.authorId is Meteor.userId()
+

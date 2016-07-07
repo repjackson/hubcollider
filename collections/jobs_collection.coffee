@@ -1,4 +1,5 @@
-@Jobs = new (Mongo.Collection)('jobs')
+@Jobs = new Mongo.Collection 'jobs'
+@Job_tags = new Mongo.Collection 'job_tags'
 
 Jobs.before.insert (userId, doc)->
     doc.timestamp = Date.now()

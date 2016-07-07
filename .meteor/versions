@@ -45,6 +45,7 @@ email@1.0.14_1
 fastclick@1.0.12
 flemay:less-autoprefixer@1.2.0
 fortawesome:fontawesome@4.5.0
+fourseven:scss@3.3.3_3
 froala:editor@2.3.3
 geojson-utils@1.0.9
 gwendall:body-events@0.1.6
@@ -109,6 +110,7 @@ spacebars-compiler@1.0.12
 srp@1.0.9
 templating@1.1.12_1
 templating-tools@1.0.4
+themeteorchef:bert@2.1.0
 tracker@1.0.14
 u2622:persistent-session@0.4.4
 ui@1.0.11
