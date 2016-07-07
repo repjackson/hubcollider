@@ -47,10 +47,26 @@ signInRequired.route '/jobs',
         BlazeLayout.render 'layout', main: 'jobs'
         setTitle 'Jobs'
 
-signInRequired.route '/jobs/edit/:job_id', action: (params) ->
+signInRequired.route '/jobs/edit/:doc_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'edit_job'
 
-signInRequired.route '/jobs/view/:job_id', action: (params) ->
+signInRequired.route '/jobs/view/:doc_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'view_job'
+
+# Events
+
+signInRequired.route '/events',
+    name: 'events'
+    action: ->
+        BlazeLayout.render 'layout', main: 'events'
+        setTitle 'Events'
+
+signInRequired.route '/events/edit/:doc_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'edit_event'
+
+signInRequired.route '/events/view/:doc_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'view_event'

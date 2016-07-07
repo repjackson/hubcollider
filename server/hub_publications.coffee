@@ -39,26 +39,26 @@ Meteor.publish 'doc', (id)-> Docs.find id
 
 
 
-Meteor.publish 'job_tags', (selected_job_tags)->
+Meteor.publish 'tags', (selected_tags)->
     self = @
 
     match = {}
-    limit = 25
-    if selected_job_tags.length then match.tags = $all: selected_job_tags
+    selected_tags.push 'job'
+    match.tags = $all: selected_tags
 
     cloud = Jobs.aggregate [
         { $match: match }
         { $project: tags: 1 }
         { $unwind: '$tags' }
         { $group: _id: '$tags', count: $sum: 1 }
-        { $match: _id: $nin: selected_job_tags }
+        { $match: _id: $nin: selected_tags }
         { $sort: count: -1, _id: 1 }
-        { $limit: limit }
+        { $limit: 25 }
         { $project: _id: 0, name: '$_id', count: 1 }
         ]
 
     cloud.forEach (tag, i) ->
-        self.added 'job_tags', Random.id(),
+        self.added 'tags', Random.id(),
             name: tag.name
             count: tag.count
             index: i
@@ -67,12 +67,23 @@ Meteor.publish 'job_tags', (selected_job_tags)->
 
 
 
-Meteor.publish 'filtered_jobs', (selected_tags, selected_authors=[])->
+Meteor.publish 'jobs', (selected_tags)->
     match = {}
-    if selected_tags.length then match.tags = $all: selected_tags
-    if selected_authors.length > 0 then match.authorId = $in: selected_authors
+    selected_tags.push 'job'
+    match.tags = $all: selected_tags
 
-    Jobs.find match,
+    Docs.find match,
+        sort:
+            tagCount: 1
+            timestamp: -1
+        limit: 10
+
+Meteor.publish 'events', (selected_tags)->
+    match = {}
+    selected_tags.push 'event'
+    match.tags = $all: selected_tags
+
+    Docs.find match,
         sort:
             tagCount: 1
             timestamp: -1
@@ -101,10 +112,3 @@ Meteor.publish 'authors', (selected_tags, selected_authors)->
             count: author.count
     self.ready()
 
-
-
-
-
-
-Meteor.publish 'job', (id)-> Jobs.find id
-Meteor.publish 'jobs', -> Jobs.find()

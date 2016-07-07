@@ -1,7 +1,7 @@
 Template.edit_job.onCreated ->
     self = @
     self.autorun ->
-        self.subscribe 'job', FlowRouter.getParam('job_id')
+        self.subscribe 'job', FlowRouter.getParam('doc_id')
 
 
 
@@ -9,8 +9,8 @@ Template.edit_job.onCreated ->
 
 Template.edit_job.helpers
     job: ->
-        # docId = FlowRouter.getParam('job_id')
-        Jobs.findOne FlowRouter.getParam('job_id')
+        # docId = FlowRouter.getParam('doc_id')
+        Docs.findOne FlowRouter.getParam('doc_id')
 
     type_button_class: (type)->
         if @type is type.hash.type then 'active' else 'basic'
@@ -29,30 +29,30 @@ Template.edit_job.events
             confirmButtonText: 'Delete'
             confirmButtonColor: '#da5347'
         }, ->
-            Meteor.call 'delete_job', FlowRouter.getParam('job_id'), (error, result) ->
+            Meteor.call 'delete_job', FlowRouter.getParam('doc_id'), (error, result) ->
                 if error
                     console.error error.reason
                 else
-                    FlowRouter.go '/'
+                    FlowRouter.go '/jobs'
 
 
     'keydown #add_job_tag': (e,t)->
         switch e.which
             when 13
-                job_id = FlowRouter.getParam('job_id')
+                doc_id = FlowRouter.getParam('doc_id')
                 tag = $('#add_job_tag').val().toLowerCase().trim()
                 if tag.length > 0
-                    Jobs.update job_id,
+                    Docs.update doc_id,
                         $addToSet: tags: tag
                     $('#add_job_tag').val('')
 
     'click .job_tag': (e,t)->
-        job =Jobs.findOne FlowRouter.getParam('job_id')
+        job = Docs.findOne FlowRouter.getParam('doc_id')
         tag = @valueOf()
         if tag is job.type
-            Jobs.update FlowRouter.getParam('job_id'),
+            Docs.update FlowRouter.getParam('doc_id'),
                 $set: type: ''
-        Jobs.update FlowRouter.getParam('job_id'),
+        Docs.update FlowRouter.getParam('doc_id'),
             $pull: tags: tag
         $('#add_job_tag').val(tag)
 
@@ -60,15 +60,15 @@ Template.edit_job.events
     'click .type_button': (e,t)->
         current_type = @type
         type = e.currentTarget.innerHTML.trim().toLowerCase()
-        Jobs.update FlowRouter.getParam('job_id'),
+        Docs.update FlowRouter.getParam('doc_id'),
             $pull: tags: current_type
-        Jobs.update FlowRouter.getParam('job_id'),
+        Docs.update FlowRouter.getParam('doc_id'),
             $set: type: type
             $addToSet: tags: type
 
     'click #save_job': ->
         description = $('#description').val()
-        Docs.update FlowRouter.getParam('job_id'),
+        Docs.update FlowRouter.getParam('doc_id'),
             $set:
                 description: description
                 # tagCount: @tags.length
@@ -84,5 +84,5 @@ Template.edit_job.events
         if title.length is 0
             Bert.alert 'Must include title', 'danger', 'growl-top-right'
         else
-            Jobs.update FlowRouter.getParam('job_id'),
+            Docs.update FlowRouter.getParam('doc_id'),
                 $set: title: title

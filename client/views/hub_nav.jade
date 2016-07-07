@@ -8,9 +8,12 @@ template(name='nav')
                 .ui.transparent.icon.input
                     input.search(type='text', placeholder='Search...')
                     i.search.link.icon
-            a#jobs_link.item
+            a.item(href='/jobs')
                 i.suitcase.icon
                 |Jobs
+            a.item(href='/events')
+                i.empty.calendar.icon
+                |Events
             .right.menu
                 a.item(href='/profile')
                     i.user.icon

@@ -6,7 +6,7 @@ Template.job_cloud.helpers
     all_job_tags: ->
         # docCount = Docs.find().count()
         # if 0 < docCount < 3 then Tags.find { count: $lt: docCount } else Tags.find()
-        Job_tags.find()
+        Tags.find()
 
     cloud_tag_class: ->
         buttonClass = switch

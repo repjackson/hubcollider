@@ -3,8 +3,6 @@
 Docs.before.insert (userId, doc)->
     doc.timestamp = Date.now()
     doc.authorId = Meteor.userId()
-    doc.down_voters = []
-    doc.up_voters = []
     return
 
 Docs.after.update ((userId, doc, fieldNames, modifier, options) ->

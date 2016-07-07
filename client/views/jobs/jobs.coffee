@@ -3,11 +3,11 @@
 Template.jobs.onCreated ->
     self = @
     self.autorun ->
-        self.subscribe 'filtered_jobs', selected_job_tags.array()
+        self.subscribe 'jobs', selected_job_tags.array()
     
 
 Template.jobs.helpers
-    jobs: -> Jobs.find()
+    jobs: -> Docs.find()
 
 
 
