@@ -63,10 +63,10 @@ signInRequired.route '/events',
         BlazeLayout.render 'layout', main: 'events'
         setTitle 'Events'
 
-signInRequired.route '/events/edit/:doc_id', action: (params) ->
+signInRequired.route '/events/edit/:event_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'edit_event'
 
-signInRequired.route '/events/view/:doc_id', action: (params) ->
+signInRequired.route '/events/view/:event_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'view_event'

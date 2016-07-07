@@ -1,7 +1,7 @@
 Template.edit_job.onCreated ->
     self = @
     self.autorun ->
-        self.subscribe 'job', FlowRouter.getParam('doc_id')
+        self.subscribe 'doc', FlowRouter.getParam('doc_id')
 
 
 
@@ -13,7 +13,7 @@ Template.edit_job.helpers
         Docs.findOne FlowRouter.getParam('doc_id')
 
     type_button_class: (type)->
-        if @type is type.hash.type then 'active' else 'basic'
+        if @type is type.hash.type.toLowerCase() then 'active' else 'basic'
 
 
 

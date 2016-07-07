@@ -1,7 +1,7 @@
 Template.edit_event.onCreated ->
     self = @
     self.autorun ->
-        self.subscribe 'event', FlowRouter.getParam('event_id')
+        self.subscribe 'doc', FlowRouter.getParam('event_id')
 
 
 
@@ -11,11 +11,10 @@ Template.edit_event.helpers
     event: ->
         # docId = FlowRouter.getParam('event_id')
         Docs.findOne FlowRouter.getParam('event_id')
-
+    
     type_button_class: (type)->
-        if @type is type.hash.type then 'active' else 'basic'
-
-
+        # console.log type.hash.type.toString() 
+        if @type is type.hash.type.toString() then 'active' else 'basic'
 
 Template.edit_event.events
     'click #delete': ->
@@ -42,28 +41,29 @@ Template.edit_event.events
                 event_id = FlowRouter.getParam('event_id')
                 tag = $('#add_event_tag').val().toLowerCase().trim()
                 if tag.length > 0
-                    Events.update event_id,
+                    Docs.update event_id,
                         $addToSet: tags: tag
                     $('#add_event_tag').val('')
 
     'click .event_tag': (e,t)->
-        event =Events.findOne FlowRouter.getParam('event_id')
+        event = Docs.findOne FlowRouter.getParam('event_id')
         tag = @valueOf()
         if tag is event.type
-            Events.update FlowRouter.getParam('event_id'),
+            Docs.update FlowRouter.getParam('event_id'),
                 $set: type: ''
-        Events.update FlowRouter.getParam('event_id'),
+        Docs.update FlowRouter.getParam('event_id'),
             $pull: tags: tag
         $('#add_event_tag').val(tag)
 
 
     'click .type_button': (e,t)->
         current_type = @type
+        machine_type = e.currentTarget.id
         type = e.currentTarget.innerHTML.trim().toLowerCase()
-        Events.update FlowRouter.getParam('event_id'),
+        Docs.update FlowRouter.getParam('event_id'),
             $pull: tags: current_type
-        Events.update FlowRouter.getParam('event_id'),
-            $set: type: type
+        Docs.update FlowRouter.getParam('event_id'),
+            $set: type: machine_type
             $addToSet: tags: type
 
     'click #save_event': ->
@@ -72,10 +72,10 @@ Template.edit_event.events
             $set:
                 description: description
                 # tagCount: @tags.length
-        FlowRouter.go '/Events'
-        selected_event_tags.clear()
-        for tag in tags
-            selected_event_tags.push tag
+        # selected_event_tags.clear()
+        # for tag in tags
+        #     selected_event_tags.push tag
+        FlowRouter.go '/events'
 
 
 
@@ -84,9 +84,10 @@ Template.edit_event.events
         if title.length is 0
             Bert.alert 'Must include title', 'danger', 'growl-top-right'
         else
-            Events.update FlowRouter.getParam('event_id'),
+            Docs.update FlowRouter.getParam('event_id'),
                 $set: title: title
 
 Template.edit_event.onRendered ->
-    $('#datetimepicker').datetimepicker()
-    
+    Meteor.setTimeout (->
+        $('#datetimepicker').datetimepicker()
+        ), 500
