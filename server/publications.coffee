@@ -39,14 +39,13 @@ Meteor.publish 'doc', (id)-> Docs.find id
 
 
 
-Meteor.publish 'tags', (selected_tags)->
+Meteor.publish 'tags', (selected_tags, manual_filter)->
     self = @
-
     match = {}
-    selected_tags.push 'job'
+    if manual_filter then selected_tags.push manual_filter
     match.tags = $all: selected_tags
 
-    cloud = Jobs.aggregate [
+    cloud = Docs.aggregate [
         { $match: match }
         { $project: tags: 1 }
         { $unwind: '$tags' }
@@ -56,7 +55,7 @@ Meteor.publish 'tags', (selected_tags)->
         { $limit: 25 }
         { $project: _id: 0, name: '$_id', count: 1 }
         ]
-
+        
     cloud.forEach (tag, i) ->
         self.added 'tags', Random.id(),
             name: tag.name

@@ -1,5 +1,5 @@
 Template.event_cloud.onCreated ->
-    @autorun -> Meteor.subscribe 'event_tags', selected_event_tags.array()
+    @autorun -> Meteor.subscribe 'tags', selected_event_tags.array(), 'event'
 
 
 Template.event_cloud.helpers

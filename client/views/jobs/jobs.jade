@@ -1,12 +1,13 @@
 template(name='jobs')
     h1.ui.header Jobs
-    #add_job.ui.big.basic.button
-        i.green.plus.icon
-        |Add Job
+        #add_job.ui.compact.basic.button
+            i.green.plus.icon
+            |Add Job
     +job_cloud
     .ui.container
-        each jobs
-            +view_job
+        .ui.divided.items
+            each jobs
+                +view_job
 
 template(name='job_cloud')
     #cloud.ui.center.aligned.basic.fluid.segment
@@ -22,16 +23,17 @@ template(name='job_cloud')
         .ui.hidden.fitted.divider
         
 template(name='view_job')
-    .ui.segment
-        .ui.header #{title}
-        .description #{description}
-        .location #{location}
-        .tags 
-            each tags
-                .ui.label #{this}
-        .meta #{field}
-        .meta #{applicant_inclusion}
-        if is_author
-            .edit_job.ui.basic.button
-                i.pencil.icon
-                |Edit
+    .ui.item
+        .content
+            .header #{title}
+            .meta
+                each tags
+                    .ui.small.compact.button(class=job_tag_class) #{this}
+            .description #{description}
+            .location #{location}
+            .meta #{field}
+            .meta #{applicant_inclusion}
+            if is_author
+                .edit_job.ui.basic.button
+                    i.pencil.icon
+                    |Edit

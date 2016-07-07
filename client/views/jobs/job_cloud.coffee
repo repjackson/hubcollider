@@ -1,5 +1,5 @@
 Template.job_cloud.onCreated ->
-    @autorun -> Meteor.subscribe 'job_tags', selected_job_tags.array()
+    @autorun -> Meteor.subscribe 'tags', selected_job_tags.array(), 'job'
 
 
 Template.job_cloud.helpers

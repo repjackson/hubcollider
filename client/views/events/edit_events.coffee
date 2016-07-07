@@ -1,8 +1,10 @@
+selected_type_of_event_tags = new ReactiveArray []
+
 Template.edit_event.onCreated ->
     self = @
     self.autorun ->
         self.subscribe 'doc', FlowRouter.getParam('event_id')
-
+        self.subscribe 'tags', selected_type_of_event_tags.array(),"event"
 
 
 # Template.edit_event.onRendered ->
@@ -16,8 +18,29 @@ Template.edit_event.helpers
         # console.log type.hash.type.toString() 
         if @type is type.hash.type.toString() then 'active' else 'basic'
 
+    settings: ->
+        {
+            position: 'bottom'
+            limit: 10
+            rules: [
+                {
+                    # token: ''
+                    collection: Tags
+                    field: 'name'
+                    matchAll: true
+                    template: Template.tag_result
+                }
+            ]
+        }
+    type_of_event_cloud: -> 
+        Tags.find()
+    
+    selected_type_of_event_tags: ->
+        selected_type_of_event_tags.array()
+        
+        
 Template.edit_event.events
-    'click #delete': ->
+    'click #delete_event': ->
         swal {
             title: 'Delete event?'
             text: 'Confirm delete?'
@@ -32,7 +55,15 @@ Template.edit_event.events
                 if error
                     console.error error.reason
                 else
-                    FlowRouter.go '/'
+                    FlowRouter.go '/events'
+
+    'autocompleteselect #add_type_of_event_tag': (event, template, doc) ->
+        # console.log 'selected ', doc
+       Docs.update FlowRouter.getParam("event_id"), 
+            $addToSet: tags: doc.name
+        $('#add_type_of_event_tag').val('')
+        selected_type_of_event_tags.push doc.name
+
 
 
     'keydown #add_event_tag': (e,t)->
@@ -68,15 +99,28 @@ Template.edit_event.events
 
     'click #save_event': ->
         description = $('#description').val()
+        datetime = $('#datetimepicker').val()
         Docs.update FlowRouter.getParam('event_id'),
             $set:
                 description: description
+                datetime: datetime
                 # tagCount: @tags.length
         # selected_event_tags.clear()
         # for tag in tags
         #     selected_event_tags.push tag
         FlowRouter.go '/events'
 
+
+    'click .select_type_of_event_tag': -> 
+        selected_type_of_event_tags.push @name
+        Docs.update FlowRouter.getParam("event_id"), 
+            $addToSet: tags: @name
+
+    'click .unselect_type_of_event_tag': -> 
+        selected_type_of_event_tags.remove @valueOf()
+
+    'click #clear_type_of_event_tags': -> 
+        selected_type_of_event_tags.clear()
 
 
     'blur #title': ->
