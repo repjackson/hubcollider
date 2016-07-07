@@ -4,14 +4,14 @@ template(name='edit_job')
             .ui.form
                 .required.field
                     label Title
-                    input#title(type='text' name='title' placeholder='Title')
+                    input#title(type='text' name='title' placeholder='Title' value=title)
                 .inline.field
                     label Type of Job
-                    .ui.basic.buttons
-                        #contract.ui.button(class=type_button_class) Contract or Freelance
-                        #part_time.ui.button(class=type_button_class) Part-time
-                        #full_time.ui.button(class=type_button_class) Full-time
-                        #internship.ui.button(class=type_button_class) Internship
+                    .ui.buttons
+                        #contract.ui.button.type_button(class=type_button_class(type='contract')) Contract or Freelance
+                        #part_time.ui.button.type_button(class=type_button_class(type='part_time')) Part-time
+                        #full_time.ui.button.type_button(class=type_button_class(type='full_time')) Full-time
+                        #internship.ui.button.type_button(class=type_button_class(type='internship')) Internship
                 .field
                     label Description
                     textarea#description(rows='5')
@@ -48,10 +48,10 @@ template(name='edit_job')
                     .ui.left.icon.input
                         i.add.icon
                         input#add_job_tag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
-                #delete_job.ui.red.compact.button
-                    i.remove.icon
-                    |Delete
                 if tags
                     #save_job.ui.large.green.button
                         i.check.icon
                         |Save
+                #delete_job.ui.red.compact.button
+                    i.remove.icon
+                    |Delete

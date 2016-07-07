@@ -11,13 +11,13 @@ template(name='jobs')
 template(name='job_cloud')
     #cloud.ui.center.aligned.basic.fluid.segment
         if selected_job_tags
-            #clearTags.ui.large.compact.primary.icon.button
+            #clear_job_tags.ui.large.compact.primary.icon.button
                 i.remove.icon
             each selected_job_tags
-                .ui.compact.large.primary.button.unselectTag
+                .ui.compact.large.primary.button.unselect_job_tag
                     strong #{this}
         each all_job_tags
-            .ui.compact.basic.button.selectTag(class=cloud_tag_class) #{this.name}
+            .ui.compact.basic.button.select_job_tag(class=cloud_tag_class) #{this.name}
                 small #{this.count}
         .ui.hidden.fitted.divider
         
@@ -26,6 +26,9 @@ template(name='view_job')
         .ui.header #{title}
         .description #{description}
         .location #{location}
+        .tags 
+            each tags
+                .ui.label #{this}
         .meta #{field}
         .meta #{applicant_inclusion}
         if is_author

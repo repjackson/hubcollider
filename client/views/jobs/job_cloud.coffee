@@ -21,11 +21,8 @@ Template.job_cloud.helpers
 
 
 Template.job_cloud.events
-    'click .select_tag': ->
-        selected_job_tags.push @name
+    'click .select_job_tag': -> selected_job_tags.push @name
 
-    'click .unselect_tag': ->
-        selected_job_tags.remove @valueOf()
+    'click .unselect_job_tag': -> selected_job_tags.remove @valueOf()
 
-    'click #clear_tags': ->
-        selected_job_tags.clear()
+    'click #clear_job_tags': -> selected_job_tags.clear()

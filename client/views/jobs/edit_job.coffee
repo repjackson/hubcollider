@@ -12,6 +12,10 @@ Template.edit_job.helpers
         # docId = FlowRouter.getParam('job_id')
         Jobs.findOne FlowRouter.getParam('job_id')
 
+    type_button_class: (type)->
+        if @type is type.hash.type then 'active' else 'basic'
+
+
 
 Template.edit_job.events
     'click #delete': ->
@@ -42,13 +46,25 @@ Template.edit_job.events
                         $addToSet: tags: tag
                     $('#add_job_tag').val('')
 
-    'click .job_tag': ->
+    'click .job_tag': (e,t)->
+        job =Jobs.findOne FlowRouter.getParam('job_id')
         tag = @valueOf()
-        Docs.update FlowRouter.getParam('job_id'),
+        if tag is job.type
+            Jobs.update FlowRouter.getParam('job_id'),
+                $set: type: ''
+        Jobs.update FlowRouter.getParam('job_id'),
             $pull: tags: tag
         $('#add_job_tag').val(tag)
 
 
+    'click .type_button': (e,t)->
+        current_type = @type
+        type = e.currentTarget.innerHTML.trim().toLowerCase()
+        Jobs.update FlowRouter.getParam('job_id'),
+            $pull: tags: current_type
+        Jobs.update FlowRouter.getParam('job_id'),
+            $set: type: type
+            $addToSet: tags: type
 
     'click #save_job': ->
         description = $('#description').val()

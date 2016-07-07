@@ -23,7 +23,6 @@ momentjs:moment
 kevohagan:sweetalert
 mizzao:autocomplete
 constellation:console
-mquandalle:jade
 coffeescript
 manuel:reactivearray
 random
@@ -37,3 +36,4 @@ matb33:collection-hooks
 dburles:collection-helpers
 froala:editor
 themeteorchef:bert
+dalgard:jade

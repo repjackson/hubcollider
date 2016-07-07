@@ -67,12 +67,12 @@ Meteor.publish 'job_tags', (selected_job_tags)->
 
 
 
-Meteor.publish 'docs', (selected_tags, selected_authors)->
+Meteor.publish 'filtered_jobs', (selected_tags, selected_authors=[])->
     match = {}
     if selected_tags.length then match.tags = $all: selected_tags
     if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
-    Docs.find match,
+    Jobs.find match,
         sort:
             tagCount: 1
             timestamp: -1
