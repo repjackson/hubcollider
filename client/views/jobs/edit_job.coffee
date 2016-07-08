@@ -4,7 +4,7 @@ Template.edit_job.onCreated ->
     self = @
     self.autorun ->
         self.subscribe 'doc', FlowRouter.getParam('job_id')
-        self.subscribe 'tags', selected_field_of_work_tags.array(),"job"
+        self.subscribe 'tags', selected_field_of_work_tags.array(),"job", 10
 
 
 
@@ -36,6 +36,7 @@ Template.edit_job.helpers
         }
         
     selected_field_of_work_tags: -> selected_field_of_work_tags.array()
+    field_of_work_cloud : -> Tags.find()
 
 
 
@@ -110,7 +111,6 @@ Template.edit_job.events
         #     selected_job_tags.push tag
 
 
-
     'blur #title': ->
         title = $('#title').val()
         if title.length is 0
@@ -124,3 +124,16 @@ Template.edit_job.events
             $addToSet: tags: doc.name
         $('#add_field_of_work_tag').val('')
         selected_field_of_work_tags.push doc.name
+        
+    'click .select_field_of_work_tag': -> 
+        selected_field_of_work_tags.push @name
+        Docs.update FlowRouter.getParam("job_id"), 
+            $addToSet: tags: @name
+            
+            
+
+    'click .unselect_field_of_work_tag': -> 
+        selected_field_of_work_tags.remove @valueOf()
+
+    'click #clear_field_of_work_tags': -> 
+        selected_field_of_work_tags.clear()

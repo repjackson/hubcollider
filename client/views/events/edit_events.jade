@@ -16,19 +16,7 @@ template(name='edit_event')
                                     .ui.compact.large.primary.button.unselect_type_of_event_tag
                                         strong #{this}
                             each type_of_event_cloud 
-                                .ui.compact.button.select_type_of_event_tag #{name}
-                            // #accounting_finance.ui.button.type_button(class=type_button_class(type='accounting_finance')) Accounting/Finance
-                            // #fundraising_crowdfunding.ui.button.type_button(class=type_button_class(type='fundraising_crowdfunding')) Fundraising/Crowdfunding
-                            // #advertising_pr.ui.button.type_button(class=type_button_class(type='advertising pr')) Advertising PR
-                            // #meetups_panels.ui.button.type_button(class=type_button_class(type='meetups panels')) Meetups/Panels
-                            // #leadership_professional_development.ui.button.type_button(class=type_button_class(type='leadership professional_development')) Leadership/Professional Development
-                            // #startups_demos.ui.button.type_button(class=type_button_class(type='startups_demos')) Startups/Demos
-                            // #product_promotions.ui.button.type_button(class=type_button_class(type='product_promotions')) Product Promotions
-                            // #health_wellness.ui.button.type_button(class=type_button_class(type='health_wellness')) Health/Wellness
-                            // #online_marketing_seo.ui.button.type_button(class=type_button_class(type='online_marketing_seo')) Online Marketing/SEO
-                            // #happy_hours.ui.button.type_button(class=type_button_class(type='happy_hours')) Happy Hours
-                            // #community_event.ui.button.type_button(class=type_button_class(type='community_event')) Community Event
-                            // #other.ui.button.type_button(class=type_button_class(type='other')) Other
+                                .ui.compact.basic.button.select_type_of_event_tag #{name}
                     .inline.field
                         label Type w/Autocomplete
                         +inputAutocomplete settings=settings id="add_type_of_event_tag" class="" autocomplete="off" placeholder='Select/Type Type'

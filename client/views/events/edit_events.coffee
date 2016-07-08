@@ -33,11 +33,9 @@ Template.edit_event.helpers
                 }
             ]
         }
-    type_of_event_cloud: -> 
-        Tags.find()
+    type_of_event_cloud: -> Tags.find()
     
-    selected_type_of_event_tags: ->
-        selected_type_of_event_tags.array()
+    selected_type_of_event_tags: -> selected_type_of_event_tags.array()
         
         
 Template.edit_event.events
@@ -76,6 +74,16 @@ Template.edit_event.events
                     Docs.update event_id,
                         $addToSet: tags: tag
                     $('#add_event_tag').val('')
+                    
+    'keydown #add_type_of_event_tag': (e,t)->
+        switch e.which
+            when 13
+                event_id = FlowRouter.getParam('event_id')
+                tag = $('#add_type_of_event_tag').val().toLowerCase().trim()
+                if tag.length > 0
+                    Docs.update event_id,
+                        $addToSet: tags: tag
+                    $('#add_type_of_event_tag').val('')
 
     'click .event_tag': (e,t)->
         event = Docs.findOne FlowRouter.getParam('event_id')

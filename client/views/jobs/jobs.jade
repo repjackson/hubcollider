@@ -10,18 +10,6 @@ template(name='jobs')
                 .ui.segment
                     +view_job
 
-template(name='job_cloud')
-    #cloud.ui.center.aligned.basic.fluid.segment
-        if selected_job_tags
-            #clear_job_tags.ui.large.compact.primary.icon.button
-                i.remove.icon
-            each selected_job_tags
-                .ui.compact.large.primary.button.unselect_job_tag
-                    strong #{this}
-        each all_job_tags
-            .ui.compact.basic.button.select_job_tag(class=cloud_tag_class) #{this.name}
-                small #{this.count}
-        .ui.hidden.fitted.divider
         
 template(name='view_job')
     .ui.item

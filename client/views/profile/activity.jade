@@ -1,13 +1,22 @@
 template(name='activity')
     #cloud.ui.center.aligned.segment
         .ui.header Activity
-        if selected_profile_tags
+        if selected_activity_tags
             #clear_profile_tags.ui.large.compact.primary.icon.button
                 i.remove.icon
-            each selected_profile_tags
+            each selected_activity_tags
                 .ui.compact.large.primary.button.unselect_profile_tag
                     strong #{this}
         each all_profile_tags
-            .ui.compact.basic.button.select_profile_tag(class=cloud_tag_class) #{this.name}
+            .ui.compact.basic.button.select_activity_tag(class=cloud_tag_class) #{this.name}
                 small #{this.count}
         .ui.hidden.fitted.divider
+    each my_docs 
+        +doc
+
+template(name='doc')
+    .ui.segment
+        h1.ui.header #{title}
+        each tags 
+            .ui.label #{this}
+        span #{author.username}

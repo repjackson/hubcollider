@@ -21,9 +21,22 @@ template(name='edit_job')
                     .ui.button.tag_suggestion(class=tag_suggestion_class(val='flexible')) Flexible
                     .ui.button.tag_suggestion(class=tag_suggestion_class(val='on site')) On Site
 
-                .inline.field
-                    label Field of Work
-                    +inputAutocomplete settings=settings id="add_field_of_work_tag" class="" autocomplete="off" placeholder='Select/Type Type'
+                .ui.segment    
+                    .inline.field
+                        label Field of Work
+                        .ui
+                            if selected_field_of_work_tags
+                                #clear_field_of_work_tags.ui.large.compact.primary.icon.button
+                                    i.remove.icon
+                                each selected_field_of_work_tags
+                                    .ui.compact.large.primary.button.unselect_field_of_work_tag
+                                        strong #{this}
+                            each field_of_work_cloud 
+                                .ui.compact.basic.button.select_field_of_work_tag #{name}
+                    .inline.field
+                        label Add/Search
+                        .ui.input
+                            +inputAutocomplete settings=settings id="add_field_of_work_tag" class="" autocomplete="off" placeholder='Select/Type Type'
                 
                 .inline.field
                     label Extras required?

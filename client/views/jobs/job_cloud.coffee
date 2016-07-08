@@ -1,8 +1,8 @@
 @selected_post_tags = new ReactiveArray []
 
 
-Template.job_cloud.onCreated ->
-    @autorun -> Meteor.subscribe 'tags', selected_job_tags.array(), 'job'
+# Template.job_cloud.onCreated ->
+#     @autorun -> Meteor.subscribe 'tags', selected_job_tags.array(), 'job'
 
 
 Template.job_cloud.helpers
