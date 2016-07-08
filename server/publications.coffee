@@ -8,16 +8,12 @@ Meteor.publish null, ->
             authored_list: 1)
     return
 
-Meteor.publish 'users.all', () ->
+Meteor.publish 'people', () ->
     if @userId
-        Counts.publish this, 'users.all', Meteor.users.find(), noReady: true
         Meteor.users.find {},
             fields:
                 username: 1
-                bookmarks: 1
                 tags: 1
-                authored_cloud: 1
-                authored_list: 1
     else
         []
 
@@ -27,8 +23,6 @@ Meteor.publish 'person', (id)->
         fields:
             tags: 1
             username: 1
-            authored_cloud: 1
-            authored_list: 1
 
 
 Meteor.publish 'doc', (id)-> Docs.find id
@@ -48,7 +42,7 @@ Meteor.publish 'tags', (selected_tags, manual_filter)->
         { $group: _id: '$tags', count: $sum: 1 }
         { $match: _id: $nin: selected_tags }
         { $sort: count: -1, _id: 1 }
-        { $limit: 25 }
+        { $limit: 10 }
         { $project: _id: 0, name: '$_id', count: 1 }
         ]
         
@@ -74,26 +68,26 @@ Meteor.publish 'docs', (selected_tags, filter='')->
         limit: 10
 
 
-Meteor.publish 'authors', (selected_tags, selected_authors)->
-    self = @
+# Meteor.publish 'authors', (selected_tags, selected_authors)->
+#     self = @
 
-    match = {}
-    if selected_tags.length then match.tags = $all: selected_tags
-    if selected_authors.length > 0 then match.authorId = $in: selected_authors
+#     match = {}
+#     if selected_tags.length then match.tags = $all: selected_tags
+#     if selected_authors.length > 0 then match.authorId = $in: selected_authors
 
-    cloud = Docs.aggregate [
-        { $match: match }
-        { $project: authorId: 1 }
-        { $group: _id: '$authorId', count: $sum: 1 }
-        { $match: _id: $nin: selected_authors }
-        { $sort: count: -1, _id: 1 }
-        { $limit: 10 }
-        { $project: _id: 0, text: '$_id', count: 1 }
-        ]
+#     cloud = Docs.aggregate [
+#         { $match: match }
+#         { $project: authorId: 1 }
+#         { $group: _id: '$authorId', count: $sum: 1 }
+#         { $match: _id: $nin: selected_authors }
+#         { $sort: count: -1, _id: 1 }
+#         { $limit: 10 }
+#         { $project: _id: 0, text: '$_id', count: 1 }
+#         ]
 
-    cloud.forEach (author) ->
-        self.added 'authors', Random.id(),
-            text: author.text
-            count: author.count
-    self.ready()
+#     cloud.forEach (author) ->
+#         self.added 'authors', Random.id(),
+#             text: author.text
+#             count: author.count
+#     self.ready()
 

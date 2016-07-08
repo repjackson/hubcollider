@@ -89,3 +89,12 @@ signInRequired.route '/posts/edit/:post_id', action: (params) ->
 signInRequired.route '/posts/view/:post_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'view_post'
+
+
+
+# People
+signInRequired.route '/people',
+    name: 'people'
+    action: ->
+        BlazeLayout.render 'layout', main: 'people'
+        setTitle 'People'

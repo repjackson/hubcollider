@@ -1,0 +1,12 @@
+template(name='people_cloud')
+    #cloud.ui.center.aligned.basic.fluid.segment
+        if selected_people_tags
+            #clear_people_tags.ui.large.compact.primary.icon.button
+                i.remove.icon
+            each selected_people_tags
+                .ui.compact.large.primary.button.unselect_people_tag
+                    strong #{this}
+        each all_people_tags
+            .ui.compact.basic.button.select_people_tag(class=cloud_tag_class) #{this.name}
+                small #{this.count}
+        .ui.hidden.fitted.divider

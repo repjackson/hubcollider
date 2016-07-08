@@ -1,5 +1,5 @@
 template(name='jobs')
-    h1.ui.header Jobs
+    h1.ui.center.aligned.header Jobs
         #add_job.ui.compact.basic.button
             i.green.plus.icon
             |Add Job
@@ -7,7 +7,8 @@ template(name='jobs')
     .ui.container
         .ui.divided.items
             each jobs
-                +view_job
+                .ui.segment
+                    +view_job
 
 template(name='job_cloud')
     #cloud.ui.center.aligned.basic.fluid.segment
@@ -37,3 +38,5 @@ template(name='view_job')
                 .edit_job.ui.basic.button
                     i.pencil.icon
                     |Edit
+        .ui.divider
+        +comments

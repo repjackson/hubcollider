@@ -2,38 +2,36 @@
 @selected_authors = new ReactiveArray []
 Session.setDefault('view_more', false)
 
-Template.cloud.onCreated ->
-    @autorun -> Meteor.subscribe('tags', selected_tags.array(), selected_authors.array(), Session.get('view_more'))
-    @autorun -> Meteor.subscribe('authors', selected_tags.array(), selected_authors.array())
+Template.home_cloud.onCreated ->
+    @autorun -> Meteor.subscribe 'tags', selected_tags.array(), 'event'
+    # @autorun -> Meteor.subscribe('authors', selected_tags.array())
 
 
-Template.cloud.helpers
+Template.home_cloud.helpers
     all_tags: ->
         # docCount = Docs.find().count()
         # if 0 < docCount < 3 then Tags.find { count: $lt: docCount } else Tags.find()
         Tags.find()
 
-    all_authors: -> Authors.find()
+    # all_authors: -> Authors.find()
 
-    selected_authors: -> selected_authors.list()
+    # selected_authors: -> selected_authors.list()
 
-    username_view: -> Meteor.users.findOne(@text)?.username
+    # username_view: -> Meteor.users.findOne(@text)?.username
 
-    selected_username_view: -> Meteor.users.findOne(@valueOf())?.username
+    # selected_username_view: -> Meteor.users.findOne(@valueOf())?.username
 
-    cloud_tag_class: ->
-        buttonClass = switch
-            when @index <= 5 then 'large'
-            when @index <= 10 then ''
-            when @index <= 15 then 'small'
-            when @index <= 20 then 'tiny'
-        return buttonClass
+    # cloud_tag_class: ->
+    #     buttonClass = switch
+    #         when @index <= 5 then 'large'
+    #         when @index <= 10 then ''
+    #         when @index <= 15 then 'small'
+    #         when @index <= 20 then 'tiny'
+    #     return buttonClass
 
     selected_tags: -> selected_tags.list()
 
-    user: -> Meteor.user()
-
-    selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
+    # selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
 
     # selected_tag_class: ->
     #     tag_class = switch
@@ -42,13 +40,12 @@ Template.cloud.helpers
     #         else 'primary'
     #     return tag_class
 
-    can_view_less: -> Session.equals('view_more', true)
+    # can_view_less: -> Session.equals('view_more', true)
 
-    can_view_more: ->
-        Session.equals('view_more', false)
+    # can_view_more: -> Session.equals('view_more', false)
 
 
-Template.cloud.events
+Template.home_cloud.events
     'click #view_more': -> Session.set 'view_more', true
     'click #view_less': -> Session.set 'view_more', false
 

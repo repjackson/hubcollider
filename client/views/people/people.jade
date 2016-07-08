@@ -1,0 +1,16 @@
+template(name='people')
+    .ui.container
+        h1.ui.header People
+        each people
+            +person
+
+
+template(name='person')
+    .ui.segment
+        .header
+            i.user.icon
+            |#{username}
+        .description
+            // h5.ui.header #{username}'s tags
+            each profile.tags
+                .ui.label.user_tag(class=tag_class) #{this}
