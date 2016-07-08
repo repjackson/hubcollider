@@ -3,7 +3,7 @@
 Template.events.onCreated ->
     self = @
     self.autorun ->
-        self.subscribe 'events', selected_event_tags.array()
+        self.subscribe 'docs', selected_event_tags.array(), 'event'
     
 
 Template.events.helpers

@@ -8,10 +8,6 @@ Meteor.publish null, ->
             authored_list: 1)
     return
 
-Meteor.publish 'userStatus', ->
-    Meteor.users.find 'status.online': true
-
-
 Meteor.publish 'users.all', () ->
     if @userId
         Counts.publish this, 'users.all', Meteor.users.find(), noReady: true
@@ -66,9 +62,9 @@ Meteor.publish 'tags', (selected_tags, manual_filter)->
 
 
 
-Meteor.publish 'jobs', (selected_tags)->
+Meteor.publish 'docs', (selected_tags, filter='')->
     match = {}
-    selected_tags.push 'job'
+    selected_tags.push filter
     match.tags = $all: selected_tags
 
     Docs.find match,
@@ -77,16 +73,6 @@ Meteor.publish 'jobs', (selected_tags)->
             timestamp: -1
         limit: 10
 
-Meteor.publish 'events', (selected_tags)->
-    match = {}
-    selected_tags.push 'event'
-    match.tags = $all: selected_tags
-
-    Docs.find match,
-        sort:
-            tagCount: 1
-            timestamp: -1
-        limit: 10
 
 Meteor.publish 'authors', (selected_tags, selected_authors)->
     self = @

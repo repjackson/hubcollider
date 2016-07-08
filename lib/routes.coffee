@@ -72,3 +72,20 @@ signInRequired.route '/events/edit/:event_id', action: (params) ->
 signInRequired.route '/events/view/:event_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'view_event'
+
+
+# Feed
+
+signInRequired.route '/feed',
+    name: 'feed'
+    action: ->
+        BlazeLayout.render 'layout', main: 'feed'
+        setTitle 'Feed'
+
+signInRequired.route '/posts/edit/:post_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'edit_post'
+
+signInRequired.route '/posts/view/:post_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'view_post'

@@ -1,10 +1,11 @@
 Session.setDefault 'editing_profile', false
 
 Template.view_profile.events
-    'click #edit_profile': Session.set 'editing_profile', true
+    'click #edit_profile': -> Session.set 'editing_profile', true
 
 Template.view_profile.helpers
     is_author: -> Meteor.userId() is FlowRouter.getParam 'user_id'
+
 Template.profile.helpers
     is_editing_profile: -> Session.get 'editing_profile'
 
@@ -84,4 +85,9 @@ Template.edit_profile.events
         Meteor.call 'add_tag', doc.name, ->
             $('#add_tag').val ''
 
-    'click #save_profile': -> Session.set 'editing_profile', false
+    'click #save_profile': -> 
+        description = $('#description').val()
+        Meteor.users.update Meteor.userId(),
+            $set:
+                "profile.description": description
+        Session.set 'editing_profile', false

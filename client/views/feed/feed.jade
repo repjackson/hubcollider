@@ -1,0 +1,39 @@
+template(name='feed')
+    .ui.form
+        .field
+            textarea#post_area(rows='2' placeholder='Add a Post...')
+            #add_post.ui.basic.button
+                i.plus.icon
+                |Add Post
+    h1.ui.header Posts
+    +post_cloud
+    .ui.container
+        .ui.divided.items
+            each posts
+                +view_post
+
+template(name='post_cloud')
+    #cloud.ui.center.aligned.basic.fluid.segment
+        if selected_post_tags
+            #clear_post_tags.ui.large.compact.primary.icon.button
+                i.remove.icon
+            each selected_post_tags
+                .ui.compact.large.primary.button.unselect_post_tag
+                    strong #{this}
+        each all_post_tags
+            .ui.compact.basic.button.select_post_tag(class=cloud_tag_class) #{this.name}
+                small #{this.count}
+        .ui.hidden.fitted.divider
+        
+template(name='view_post')
+    .ui.item
+        .content
+            .header #{title}
+            .meta
+                each tags
+                    .ui.small.compact.button(class=job_tag_class) #{this}
+            .description #{description}
+            if is_author
+                .edit_job.ui.basic.button
+                    i.pencil.icon
+                    |Edit

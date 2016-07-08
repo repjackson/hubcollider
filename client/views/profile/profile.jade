@@ -3,7 +3,7 @@ template(name='profile')
         +edit_profile
     else
         +view_profile
-    +profile_cloud
+    +activity
 
 
 template(name='edit_profile')
@@ -22,7 +22,7 @@ template(name='edit_profile')
                     input#contact(type='text' value=contact)
                 .field 
                     label Description
-                    textarea#user_description(rows='5') #{description}
+                    textarea#description(rows='5') #{profile.description}
                 // .ui.input
                 .inline.field
                     label Your Tags
@@ -35,20 +35,23 @@ template(name='edit_profile')
                         +inputAutocomplete settings=settings id="add_profile_tag" class="" autocomplete="off" placeholder='Add Tag'
                         // input#add_tag(type='text' autofocus='' placeholder='Enter Tag')
             .ui.divider
-            .ui.header Top Matches
-            each user_matches
-                strong #{matched_user} #{length}
-                each tag_intersection
-                    .ui.basic.label #{this}      
+            // .ui.header Top Matches
+            // each user_matches
+            //     strong #{matched_user} #{length}
+            //     each tag_intersection
+            //         .ui.basic.label #{this}      
                 .ui.fitted.hidden.divider
         #save_profile.ui.green.button Save Profile    
 
 template(name='view_profile')
     with currentUser
+        +avatar user=this shape="circle" size="extra-large" 
         h1.ui.header #{username}
-        if is_author
-            #edit_profile.ui.button
-                i.pencil.icon
-                |Edit Profile
+            if is_author
+                #edit_profile.ui.button
+                    i.pencil.icon
+                    |Edit Profile
         each profile.tags
             .ui.label #{this}
+        h5.ui.header Description
+        |#{profile.description}

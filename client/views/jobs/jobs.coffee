@@ -3,7 +3,7 @@
 Template.jobs.onCreated ->
     self = @
     self.autorun ->
-        self.subscribe 'jobs', selected_job_tags.array()
+        self.subscribe 'docs', selected_job_tags.array(), 'job'
     
 
 Template.jobs.helpers

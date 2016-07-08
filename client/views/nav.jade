@@ -4,10 +4,13 @@ template(name='nav')
             a#home_link.item
                 img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
                 | Collider
-            .ui.category.search.two.wide.item
-                .ui.transparent.icon.input
-                    input.search(type='text', placeholder='Search...')
-                    i.search.link.icon
+            // .ui.category.search.two.wide.item
+            //     .ui.transparent.icon.input
+            //         input.search(type='text', placeholder='Search...')
+            //         i.search.link.icon
+            a.item(href='/feed')
+                i.feed.icon
+                |Feed
             a.item(href='/jobs')
                 i.suitcase.icon
                 |Jobs
