@@ -1,4 +1,14 @@
+Session.setDefault 'editing_profile', false
+
+Template.view_profile.events
+    'click #edit_profile': Session.set 'editing_profile', true
+
+Template.view_profile.helpers
+    is_author: -> Meteor.userId() is FlowRouter.getParam 'user_id'
 Template.profile.helpers
+    is_editing_profile: -> Session.get 'editing_profile'
+
+Template.edit_profile.helpers
     user_matches: ->
         users = Meteor.users.find({_id: $ne: Meteor.userId()}).fetch()
         user_matches = []
@@ -27,16 +37,7 @@ Template.profile.helpers
         }
 
 
-Template.profile.events
-    'keydown #add_tag': (e,t)->
-        e.preventDefault
-        tag = $('#add_tag').val().toLowerCase().trim()
-        switch e.which
-            when 13
-                if tag.length > 0
-                    Meteor.call 'add_tag', tag, ->
-                        $('#add_tag').val('')
-
+Template.edit_profile.events
     'keydown #username': (e,t)->
         e.preventDefault
         username = $('#username').val().trim()
@@ -60,12 +61,27 @@ Template.profile.events
                         unless err 
                             alert "Updated contact to #{contact}."
 
-    'click .tag': ->
+    'click .profile_tag': ->
         tag = @valueOf()
-        Meteor.call 'remove_tag', tag, ->
-            $('#add_tag').val(tag)
+        Meteor.users.update Meteor.userId(),
+            $pull: "profile.tags": tag
+        # Meteor.call 'remove_tag', tag, ->
+        #     $('#add_tag').val(tag)
+
+    'keydown #add_profile_tag': (e,t)->
+        e.preventDefault
+        switch e.which
+            when 13
+                tag = $('#add_profile_tag').val().toLowerCase().trim()
+                if tag.length > 0
+                    Meteor.users.update Meteor.userId(),
+                        $addToSet: "profile.tags": tag
+                    $('#add_profile_tag').val('')
+                    
 
     'autocompleteselect #add_tag': (event, template, doc) ->
         # console.log 'selected ', doc
         Meteor.call 'add_tag', doc.name, ->
             $('#add_tag').val ''
+
+    'click #save_profile': -> Session.set 'editing_profile', false

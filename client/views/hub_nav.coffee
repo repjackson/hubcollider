@@ -38,7 +38,7 @@ Template.nav.events
             if err then console.log err
             else FlowRouter.go "/edit/#{id}"
     
-    'click #jobs_link': -> FlowRouter.go "/jobs"
+    'click #profile_link': -> FlowRouter.go "/users/#{Meteor.userId()}"
 
     'keyup .search': (e,t)->
         e.preventDefault()

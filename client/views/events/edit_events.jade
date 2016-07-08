@@ -34,7 +34,7 @@ template(name='edit_event')
                         +inputAutocomplete settings=settings id="add_type_of_event_tag" class="" autocomplete="off" placeholder='Select/Type Type'
                 .field
                     label Date and Time
-                    input#datetimepicker(type='text')
+                    input#datetimepicker(type='text' value=datetime)
                 .field
                     label Description
                     textarea#description(rows='5') #{description}
@@ -56,7 +56,7 @@ template(name='edit_event')
                     .ui.left.icon.input
                         i.add.icon
                         input#add_event_tag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
-                if tags
+                if title
                     #save_event.ui.animated.large.green.button
                         .visible.content Save
                         .hidden.content

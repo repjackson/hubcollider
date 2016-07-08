@@ -4,7 +4,7 @@ template(name='nav')
             a#home_link.item
                 img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
                 | Collider
-            .item
+            .ui.category.search.two.wide.item
                 .ui.transparent.icon.input
                     input.search(type='text', placeholder='Search...')
                     i.search.link.icon
@@ -14,10 +14,13 @@ template(name='nav')
             a.item(href='/events')
                 i.empty.calendar.icon
                 |Events
+            a.item(href='/people')
+                i.users.icon
+                |People
             .right.menu
-                a.item(href='/profile')
-                    i.user.icon
-                    |Profile
+                a#profile_link.item
+                    +avatar user=currentUser shape="circle" size="extra-small" 
+                    | &nbsp; Profile
                 a#sign-out.item
                     i.sign.out.icon
                     |Logout #{currentUser.username}
