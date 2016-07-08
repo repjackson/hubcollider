@@ -7,7 +7,6 @@
 # Template.nav.helpers
     # is_editing: -> Session.equals('is_editing', @_id)
 
-
 Template.nav.events
     'click [data-id=sign-out]': ->
         Meteor.logout (error) ->

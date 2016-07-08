@@ -1,11 +1,11 @@
 template(name='feed')
+    h1.ui.center.aligned.header Posts
     .ui.form
         .field
             textarea#post_area(rows='2' placeholder='Add a Post...')
             #add_post.ui.basic.button
                 i.plus.icon
                 |Add Post
-    h1.ui.header Posts
     +post_cloud
     .ui.container
         .ui.divided.items

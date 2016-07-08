@@ -5,6 +5,11 @@ template(name='edit_event')
                 .required.field
                     label Title
                     input#title(type='text' name='title' placeholder='Title' value=title)
+                    .field
+                        input(type='file' name='upload_image' accept='image/*')
+                        .ui.button Upload CSV File
+                        input(type='text' value=fileName)
+                        p #{downloadUrl}
                 .ui.segment    
                     .inline.field
                         label Type of event

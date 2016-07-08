@@ -140,6 +140,24 @@ Template.edit_event.events
             Docs.update FlowRouter.getParam('event_id'),
                 $set: title: title
 
+    'change [name="upload_image"]': (event, template) ->
+        id = FlowRouter.getParam('event_id')
+        # template.uploading.set true
+        console.log event.target.files
+        uploader = new (Slingshot.Upload)('myFileUploads')
+        uploader.send event.target.files[0], (error, downloadUrl) ->
+            if error
+                # Log service detailed response.
+                # console.error 'Error uploading', uploader.xhr.response
+                console.error 'Error uploading', error
+                alert error
+            else
+                Meteor.users.update Meteor.userId(), $push: 'profile.files': downloadUrl
+                Docs.update id, $set: downloadUrl: downloadUrl
+            return
+
+
+
 Template.edit_event.onRendered ->
     Meteor.setTimeout (->
         $('#datetimepicker').datetimepicker()
