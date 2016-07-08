@@ -7,7 +7,8 @@ Template.edit_event.onCreated ->
         self.subscribe 'tags', selected_type_of_event_tags.array(),"event"
 
 
-# Template.edit_event.onRendered ->
+Template.post_cloud.onCreated ->
+    @autorun -> Meteor.subscribe 'tags', selected_post_tags.array(), 'post'
 
 Template.edit_event.helpers
     event: ->

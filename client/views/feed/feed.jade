@@ -10,7 +10,10 @@ template(name='feed')
     .ui.container
         .ui.divided.items
             each posts
-                +view_post
+                if is_editing
+                    +edit_post
+                else
+                    +view_post
 
 template(name='post_cloud')
     #cloud.ui.center.aligned.basic.fluid.segment
@@ -28,12 +31,27 @@ template(name='post_cloud')
 template(name='view_post')
     .ui.item
         .content
-            .header #{title}
-            .meta
-                each tags
+            .header
+                each post_tags
                     .ui.small.compact.button(class=job_tag_class) #{this}
-            .description #{description}
+            .text #{text}
             if is_author
-                .edit_job.ui.basic.button
+                .edit_post.ui.basic.button
                     i.pencil.icon
                     |Edit
+
+template(name='edit_post')
+    .ui.item
+        .content
+            .meta
+                each post_tags
+                    .ui.small.compact.button(class=job_tag_class) #{this}
+                .ui.left.icon.input
+                    i.add.icon
+                    input#add_post_tag(type='text' autofocus='' placeholder='Add Post Tag' maxlength='50')
+            .ui.form
+                .field
+                    textarea.post_text(rows='2') #{text}
+            .save_post.ui.green.button
+                i.check.icon
+                |Save
