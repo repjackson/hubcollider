@@ -15,3 +15,10 @@ Meteor.methods
 
         Docs.update doc_id,
             $inc: comment_count: 1
+    
+    'delete_comment': (comment_id) ->
+        doc_id = Comments.findOne(comment_id).doc_id
+        Comments.remove comment_id
+
+        Docs.update doc_id,
+            $inc: comment_count: -1

@@ -1,14 +1,10 @@
 template(name='comments')
     .ui.comments
-        h3.ui.dividing.header Comments
+        h3.ui.dividing.header #{comment_count} Comments
         each comments
             +comment
-        form.ui.reply.form
-            .inline.field
-                .ui.input
-                    input.new_comment(type='text')
-                .submit_comment.ui.blue.button
-                    |  Comment
+        .ui.input
+            input.new_comment(type='text' placeholder='Comment')
 
 
 template(name='comment')            
@@ -21,5 +17,9 @@ template(name='comment')
             .metadata
                 span.date #{when}
             .text #{text}
-            // .actions
-            //     a.reply Reply
+            .actions
+                // a.reply Reply
+                if is_author
+                    i.large.link.remove.icon.delete_comment
+                else
+                    i.blue.large.link.thumbs.up.icon.like_comment

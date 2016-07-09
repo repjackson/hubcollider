@@ -15,18 +15,16 @@ Template.comments.helpers
 
 
 Template.comments.events
-    'click .submit_comment': (e,t)->
-        text = t.$('.new_comment').val()
-        doc_id = Template.parentData(0)._id
-        Meteor.call 'insert_comment', doc_id, text
-
+    'keydown .new_comment': (e,t)->
+        if e.which is 13
+            text = t.$('.new_comment').val()
+            if text.length > 0
+                doc_id = Template.parentData(0)._id
+                Meteor.call 'insert_comment', doc_id, text,->
+                    t.$('.new_comment').val('')
 
 Template.comment.helpers
-    is_author: -> Meteor.userId() and Meteor.userId() is @authorId 
-    comment: -> console.log doc
+    is_author: -> Meteor.userId() and Meteor.userId() is @author_id 
 
 Template.comment.events
-    'click .edit_event': -> FlowRouter.go "/comments/edit/#{@_id}"
-    
-    
-    
+    'click .delete_comment': -> Meteor.call 'delete_comment', @_id
