@@ -103,6 +103,8 @@ Meteor.publish 'my_docs', ()->
             timestamp: -1
         limit: 100
 
+Meteor.publish 'doc_comments', (doc_id)->
+    Comments.find doc_id: doc_id
 
 
 # Meteor.publish 'authors', (selected_tags, selected_authors)->

@@ -134,11 +134,11 @@ Template.edit_event.events
 
     'blur #title': ->
         title = $('#title').val()
-        if title.length is 0
-            Bert.alert 'Must include title', 'danger', 'growl-top-right'
-        else
-            Docs.update FlowRouter.getParam('event_id'),
-                $set: title: title
+        # if title.length is 0
+        #     Bert.alert 'Must include title', 'danger', 'growl-top-right'
+        # else
+        Docs.update FlowRouter.getParam('event_id'),
+            $set: title: title
 
     'change [name="upload_image"]': (event, template) ->
         id = FlowRouter.getParam('event_id')

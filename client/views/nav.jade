@@ -1,6 +1,6 @@
 template(name='nav')
     // .ui.menu.grid
-    .ui.menu
+    .ui.attached.menu
         // .computer.only.row
         a#home_link.item
             // img.logo(src='/img/ship_wheel-48.png', alt='HubCollider Logo')
@@ -10,18 +10,18 @@ template(name='nav')
             .ui.transparent.icon.input
                 input.search(type='text', placeholder='Search...')
                 i.search.link.icon
-        // a.item(href='/feed')
-        //     i.feed.icon
-        //     |Feed
-        // a.item(href='/jobs')
-        //     i.suitcase.icon
-        //     |Jobs
-        // a.item(href='/events')
-        //     i.empty.calendar.icon
-        //     |Events
-        // a.item(href='/people')
-        //     i.users.icon
-        //     |People
+        a.item(href='/feed')
+            i.feed.icon
+            |Feed
+        a.item(href='/jobs')
+            i.suitcase.icon
+            |Jobs
+        a.item(href='/events')
+            i.empty.calendar.icon
+            |Events
+        a.item(href='/people')
+            i.users.icon
+            |People
         .right.menu
             a#profile_link.item
                 +avatar user=currentUser shape="circle" size="extra-small" 

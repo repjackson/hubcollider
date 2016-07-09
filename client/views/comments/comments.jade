@@ -1,0 +1,25 @@
+template(name='comments')
+    .ui.comments
+        h3.ui.dividing.header Comments
+        each comments
+            +comment
+        form.ui.reply.form
+            .inline.field
+                .ui.input
+                    input.new_comment(type='text')
+                .submit_comment.ui.blue.button
+                    |  Comment
+
+
+template(name='comment')            
+    .comment
+        // a.avatar
+        //     img(src='/images/avatar/small/matt.jpg')
+        //     +avatar user=author shape="circle" size="extra-small" 
+        .content
+            a.author #{author.username}
+            .metadata
+                span.date #{when}
+            .text #{text}
+            // .actions
+            //     a.reply Reply
