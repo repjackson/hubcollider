@@ -29,10 +29,11 @@ Meteor.publish 'doc', (id)-> Docs.find id
 
 
 
-Meteor.publish 'tags', (selected_tags, manual_filter, limit=10)->
+Meteor.publish 'filtered_tags', (selected_tags, filter, limit=10)->
     self = @
     match = {}
-    if manual_filter then selected_tags.push manual_filter
+    console.log filter
+    selected_tags.push filter
     match.tags = $all: selected_tags
 
     cloud = Docs.aggregate [
@@ -43,6 +44,30 @@ Meteor.publish 'tags', (selected_tags, manual_filter, limit=10)->
         { $match: _id: $nin: selected_tags }
         { $sort: count: -1, _id: 1 }
         { $limit: limit }
+        { $project: _id: 0, name: '$_id', count: 1 }
+        ]
+        
+    cloud.forEach (tag, i) ->
+        self.added 'tags', Random.id(),
+            name: tag.name
+            count: tag.count
+            index: i
+
+    self.ready()
+    
+Meteor.publish 'tags', (selected_tags)->
+    self = @
+    match = {}
+    match.tags = $all: selected_tags
+
+    cloud = Docs.aggregate [
+        { $match: match }
+        { $project: tags: 1 }
+        { $unwind: '$tags' }
+        { $group: _id: '$tags', count: $sum: 1 }
+        { $match: _id: $nin: selected_tags }
+        { $sort: count: -1, _id: 1 }
+        { $limit: 20 }
         { $project: _id: 0, name: '$_id', count: 1 }
         ]
         

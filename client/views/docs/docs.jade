@@ -1,0 +1,25 @@
+template(name='docs')
+    h1.ui.center.aligned.header docs
+        #add_doc.ui.compact.basic.button
+            i.green.plus.icon
+            |Add doc
+    .ui.container
+        each docs
+            +view_doc
+
+
+template(name='view_doc')
+    .ui.segment
+        .ui.header #{title}
+        .description #{description}
+        .location #{location}
+        .tags 
+            each tags
+                .ui.label #{this}
+        .meta #{field}
+        .meta #{applicant_inclusion}
+        if is_author
+            .edit_doc.ui.basic.button
+                i.pencil.icon
+                |Edit
+        +comments

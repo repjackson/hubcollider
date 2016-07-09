@@ -1,6 +1,8 @@
 template(name='comments')
     .ui.comments
-        h3.ui.dividing.header #{comment_count} Comments
+        h3.ui.dividing.header
+            i.comments.icon 
+            |#{comment_count} Comments
         each comments
             +comment
         .ui.input
@@ -16,10 +18,10 @@ template(name='comment')
             a.author #{author.username}
             .metadata
                 span.date #{when}
-            .text #{text}
-            .actions
-                // a.reply Reply
                 if is_author
                     i.large.link.remove.icon.delete_comment
                 else
                     i.blue.large.link.thumbs.up.icon.like_comment
+            .text #{text}
+            // .actions
+                // a.reply Reply

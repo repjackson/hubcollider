@@ -2,12 +2,16 @@
 @selected_authors = new ReactiveArray []
 Session.setDefault('view_more', false)
 
-Template.home_cloud.onCreated ->
-    @autorun -> Meteor.subscribe 'tags', selected_tags.array(), 'event'
+# filter = Template.currentData().filter
+
+Template.cloud.onCreated ->
+    console.log Template.currentData().filter
+    @autorun -> Meteor.subscribe 'filtered_tags', selected_tags.array(), Template.currentData().filter
+    # @autorun -> Meteor.subscribe 'tags', selected_tags.array()
     # @autorun -> Meteor.subscribe('authors', selected_tags.array())
 
 
-Template.home_cloud.helpers
+Template.cloud.helpers
     all_tags: ->
         # docCount = Docs.find().count()
         # if 0 < docCount < 3 then Tags.find { count: $lt: docCount } else Tags.find()
@@ -45,21 +49,21 @@ Template.home_cloud.helpers
     # can_view_more: -> Session.equals('view_more', false)
 
 
-Template.home_cloud.events
+Template.cloud.events
     'click #view_more': -> Session.set 'view_more', true
     'click #view_less': -> Session.set 'view_more', false
 
-    'click .selectTag': ->
+    'click .select_tag': ->
         selected_tags.push @name
         FlowRouter.setQueryParams( filter: selected_tags.array() )
         # console.log FlowRouter.getQueryParam('filter');
 
-    'click .unselectTag': ->
+    'click .unselect_tag': ->
         selected_tags.remove @valueOf()
         FlowRouter.setQueryParams( filter: selected_tags.array() )
         # console.log FlowRouter.getQueryParam('filter');
 
-    'click #clearTags': ->
+    'click #clear_tags': ->
         selected_tags.clear()
         FlowRouter.setQueryParams( filter: null )
         # console.log FlowRouter.getQueryParam('filter');

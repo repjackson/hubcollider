@@ -3,10 +3,11 @@ template(name='events')
         #add_event.ui.compact.basic.button
             i.green.plus.icon
             |Add Event
-    +event_cloud
-    .ui.container
-        each events
-            +view_event
+    +cloud filter='event'
+    +docs filter='event'
+    // .ui.container
+    //     each events
+    //         +view_event
 
 template(name='event_cloud')
     #cloud.ui.center.aligned.basic.fluid.segment
@@ -35,4 +36,4 @@ template(name='view_event')
             .edit_event.ui.basic.button
                 i.pencil.icon
                 |Edit
-        +comments doc=this
+        +comments

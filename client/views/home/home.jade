@@ -1,14 +1,4 @@
 template(name='home')
     h1.ui.header Welcome to the Collider
-    +home_cloud
-    +docs
-    
-
-template(name='docs')
-    .ui.container
-        .ui.divided.items
-            each docs
-                +doc
-
-// template(name='doc')
-//     .ui.segment hi
+    +cloud
+    +docs filter='job'

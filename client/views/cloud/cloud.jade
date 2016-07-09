@@ -1,0 +1,25 @@
+template(name='cloud')
+    #cloud.ui.center.aligned.basic.fluid.segment
+        .ui.header #{filter} Cloud
+        if selected_tags
+            #clear_tags.ui.large.compact.primary.icon.button
+                i.remove.icon
+            each selected_tags
+                .unselect_tag.ui.compact.large.primary.button
+                    strong #{this}
+        each all_tags
+            .ui.compact.basic.button.select_tag(class=cloud_tag_class) #{this.name}
+                small #{this.count}
+        // .ui.hidden.fitted.divider
+        // if selected_authors
+        //     #clear_authors.ui.circular.primary.icon.button
+        //         i.remove.icon
+        //     each selected_authors
+        //         a.ui.primary.circular.compact.button.unselect_author
+        //             i.user.icon
+        //             strong #{selected_username_view}
+        // each all_authors
+        //     .ui.basic.circular.compact.button.select_author
+        //         i.user.icon
+        //         |#{username_view}
+        //         small #{this.count}
