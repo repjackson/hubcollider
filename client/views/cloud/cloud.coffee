@@ -6,7 +6,7 @@ Session.setDefault('view_more', false)
 
 Template.cloud.onCreated ->
     console.log Template.currentData().filter
-    @autorun -> Meteor.subscribe 'filtered_tags', selected_tags.array(), Template.currentData().filter
+    @autorun -> Meteor.subscribe 'tags', selected_tags.array(), Template.currentData().filter
     # @autorun -> Meteor.subscribe 'tags', selected_tags.array()
     # @autorun -> Meteor.subscribe('authors', selected_tags.array())
 

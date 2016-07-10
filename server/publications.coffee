@@ -29,7 +29,7 @@ Meteor.publish 'doc', (id)-> Docs.find id
 
 
 
-Meteor.publish 'filtered_tags', (selected_tags, filter, limit=10)->
+Meteor.publish 'tags', (selected_tags, filter='', limit=10)->
     self = @
     match = {}
     console.log filter
@@ -54,8 +54,9 @@ Meteor.publish 'filtered_tags', (selected_tags, filter, limit=10)->
             index: i
 
     self.ready()
-    
-Meteor.publish 'tags', (selected_tags)->
+
+
+Meteor.publish 'unfiltered_tags', (selected_tags=[])->
     self = @
     match = {}
     match.tags = $all: selected_tags
@@ -67,7 +68,7 @@ Meteor.publish 'tags', (selected_tags)->
         { $group: _id: '$tags', count: $sum: 1 }
         { $match: _id: $nin: selected_tags }
         { $sort: count: -1, _id: 1 }
-        { $limit: 20 }
+        { $limit: limit }
         { $project: _id: 0, name: '$_id', count: 1 }
         ]
         
@@ -78,6 +79,7 @@ Meteor.publish 'tags', (selected_tags)->
             index: i
 
     self.ready()
+    
 
 Meteor.publish 'my_tags', (selected_tags)->
     self = @
