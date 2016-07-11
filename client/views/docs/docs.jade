@@ -4,7 +4,7 @@ template(name='docs')
             i.green.plus.icon
             |Add doc
     .ui.container
-        .ui.stackable.centered.two.cards
+        .ui.stackable.centered.cards
             each docs
                 // +view_doc
                 +insta_doc
@@ -26,7 +26,7 @@ template(name='view_doc')
         +comments
         
 template(name='insta_doc')
-    .ui.card
+    .ui.fluid.card
         .content
             .header #{title}
             .right.floated.meta #{when}
@@ -35,12 +35,14 @@ template(name='insta_doc')
                     .ui.basic.label #{this}
             // img.ui.avatar.image(src='/images/avatar/large/#{author.avatar}')
             +avatar user=author shape="circle" size="extra-small" 
-                |  #{author.username}
+            |  #{author.username}
         .image
-            img(src= image_url)
+            img(src='#{image}')
         .content
             span.right.floated
                 +like
+            .extra.content
+                +voting
             i.comment.icon
             |     #{comment_count} comments
         .extra.content

@@ -6,6 +6,7 @@ AccountsTemplates.configure
     overrideLoginErrors: true
     enablePasswordChange: true
     sendVerificationEmail: true
+    showAddRemoveServices: true
     lowercaseUsername: false
     confirmPassword: true
     continuousValidation: true

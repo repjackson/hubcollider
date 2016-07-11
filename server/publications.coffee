@@ -32,7 +32,7 @@ Meteor.publish 'doc', (id)-> Docs.find id
 Meteor.publish 'tags', (selected_tags, filter='', limit=10)->
     self = @
     match = {}
-    console.log filter
+    # console.log filter
     selected_tags.push filter
     match.tags = $all: selected_tags
 
