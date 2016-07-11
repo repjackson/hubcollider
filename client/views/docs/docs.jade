@@ -35,16 +35,17 @@ template(name='insta_doc')
                     .ui.basic.label #{this}
             // img.ui.avatar.image(src='/images/avatar/large/#{author.avatar}')
             +avatar user=author shape="circle" size="extra-small" 
-            |  #{author.username}
+            | #{author.username}
         .image
             img(src='#{image}')
+        .content
+            +view_price
+            +edit_price
         .content
             span.right.floated
                 +like
             .extra.content
                 +voting
-            i.comment.icon
-            |     #{comment_count} comments
         .extra.content
             // .ui.large.transparent.left.icon.input
                 // hook up to profile page favorites

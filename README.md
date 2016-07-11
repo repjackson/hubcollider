@@ -12,3 +12,14 @@ DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy www.collider.cloud --settings se
 
 ## Commit command for Brian 
 GIT_COMMITTER_NAME="Brian Jackson" GIT_COMMITTER_EMAIL="brianpjackson88@gmail.com" git commit --author="Brian Jackson <brianpjackson88@gmail.com>"
+
+## Component List
+-Voting
+-Like
+-Map
+-Date/Time
+-Description
+-Price
+--$ in edit, buy in view
+-Attendee
+--Join, view attendees, atendee cloud
