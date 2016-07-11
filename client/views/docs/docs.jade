@@ -4,9 +4,10 @@ template(name='docs')
             i.green.plus.icon
             |Add doc
     .ui.container
-        each docs
-            +view_doc
-
+        .ui.stackable.centered.two.cards
+            each docs
+                // +view_doc
+                +insta_doc
 
 template(name='view_doc')
     .ui.segment
@@ -27,21 +28,24 @@ template(name='view_doc')
 template(name='insta_doc')
     .ui.card
         .content
+            .header #{title}
             .right.floated.meta #{when}
-            img.ui.avatar.image(src='/images/avatar/large/#{author.avatar}')
+            .meta
+                each tags
+                    .ui.basic.label #{this}
+            // img.ui.avatar.image(src='/images/avatar/large/#{author.avatar}')
             +avatar user=author shape="circle" size="extra-small" 
-            |  #{author.username}
+                |  #{author.username}
         .image
             img(src= image_url)
         .content
             span.right.floated
-                i.heart.outline.like.icon
-                |       #{like_count} likes
+                +like
             i.comment.icon
             |     #{comment_count} comments
         .extra.content
-            .ui.large.transparent.left.icon.input
+            // .ui.large.transparent.left.icon.input
                 // hook up to profile page favorites
-                i.heart.outline.icon
+                // i.heart.outline.icon
                 // input(type='text', placeholder='Add Comment...')
             +comments
