@@ -26,9 +26,10 @@ template(name='nav')
             a#profile_link.item
                 +avatar user=currentUser shape="circle" size="extra-small" 
                 | &nbsp; Profile
-            a#sign-out.item
-                i.sign.out.icon
-                |Logout #{currentUser.username}
+            // a#sign-out.item
+            +atNavButton
+                // i.sign.out.icon
+                // |Logout #{currentUser.username}
         // .mobile.only.row
         //     .ui.simple.dropdown.item
         //         i.content.icon
