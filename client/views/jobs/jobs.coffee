@@ -18,10 +18,11 @@ Template.jobs.events
             else FlowRouter.go "/jobs/edit/#{id}"
 
 
-Template.view_job.helpers
+Template.job_card.helpers
     is_author: -> Meteor.userId() and Meteor.userId() is @authorId 
     job_tag_class: -> if @valueOf() in selected_job_tags.array() then 'primary' else 'basic'
 
 
-Template.view_job.events
+Template.job_card.events
     'click .edit_job': -> FlowRouter.go "/jobs/edit/#{@_id}"
+    'click .job_page_link': -> FlowRouter.go "/jobs/view/#{@_id}"

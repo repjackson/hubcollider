@@ -8,13 +8,13 @@ template(name='jobs')
         .ui.divided.items
             each jobs
                 .ui.segment
-                    +view_job
+                    +job_card
 
         
-template(name='view_job')
+template(name='job_card')
     .ui.item
         .content
-            .header #{title}
+            a.job_page_link.header #{title}
             .meta
                 each tags
                     .ui.small.compact.button(class=job_tag_class) #{this}
@@ -28,3 +28,22 @@ template(name='view_job')
                     |Edit
         .ui.divider
         +comments
+        
+template(name='job_page')
+    with job
+        .ui.item
+            .content
+                a.job_page_link.header #{title}
+                .meta
+                    each tags
+                        .ui.small.compact.button(class=job_tag_class) #{this}
+                .description #{description}
+                .location #{location}
+                .meta #{field}
+                .meta #{applicant_inclusion}
+                if is_author
+                    .edit_job.ui.basic.button
+                        i.pencil.icon
+                        |Edit
+            .ui.divider
+            +comments

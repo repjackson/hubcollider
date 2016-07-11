@@ -53,7 +53,7 @@ signInRequired.route '/jobs/edit/:job_id', action: (params) ->
 
 signInRequired.route '/jobs/view/:job_id', action: (params) ->
     BlazeLayout.render 'layout',
-        main: 'view_job'
+        main: 'job_page'
 
 
 
