@@ -1,3 +1,4 @@
 template(name='like')
     i.heart.link.icon.like_item(class=like_item_class)
-    | #{like_count} likes
+    if like_count
+        | #{like_count} likes

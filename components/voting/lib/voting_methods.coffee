@@ -1,7 +1,7 @@
 Meteor.methods
     vote_up: (id)->
         doc = Docs.findOne id
-        if not doc.up_voters?
+        if not doc.up_voters or doc.down_voters
             Docs.update id,
                 $addToSet: up_voters: []
                 $inc: points: 0
@@ -30,7 +30,7 @@ Meteor.methods
 
     vote_down: (id)->
         doc = Docs.findOne id
-        if not doc.down_voters?
+        if not doc.down_voters or doc.up_voters
             Docs.update id,
                 $addToSet: down_voters: []
                 $inc: points: 0

@@ -23,3 +23,4 @@ GIT_COMMITTER_NAME="Brian Jackson" GIT_COMMITTER_EMAIL="brianpjackson88@gmail.co
 --$ in edit, buy in view
 -Attendee
 --Join, view attendees, atendee cloud
+-Tag preselection

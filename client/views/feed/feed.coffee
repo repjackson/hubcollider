@@ -31,7 +31,7 @@ Template.view_post.events
 Template.view_post.helpers
     post_tags: -> _.without(@tags, 'post')
     
-    is_author: -> Meteor.userId() is @authorId
+    # is_author: -> Meteor.userId() is @authorId
 
 
 Template.edit_post.events

@@ -5,7 +5,6 @@ template(name='price')
         else
             i.pencil.link.icon.edit_price
     if editing_price
-        label Price
         .ui.left.icon.input
             i.dollar.icon
             input.edit_price(type='number' min='0' value=price)

@@ -29,11 +29,11 @@ Meteor.publish 'doc', (id)-> Docs.find id
 
 
 
-Meteor.publish 'tags', (selected_tags, filter='', limit=10)->
+Meteor.publish 'tags', (selected_tags, filter, limit=10)->
     self = @
     match = {}
     # console.log filter
-    selected_tags.push filter
+    if filter? then selected_tags.push filter
     match.tags = $all: selected_tags
 
     cloud = Docs.aggregate [
@@ -56,11 +56,12 @@ Meteor.publish 'tags', (selected_tags, filter='', limit=10)->
     self.ready()
 
 
-Meteor.publish 'unfiltered_tags', (selected_tags=[])->
+Meteor.publish 'unfiltered_tags', (selected_tags)->
     self = @
     match = {}
-    match.tags = $all: selected_tags
+    if selected_tags.length > 0 then match.tags = $all: selected_tags
 
+    # console.log match
     cloud = Docs.aggregate [
         { $match: match }
         { $project: tags: 1 }
@@ -68,10 +69,10 @@ Meteor.publish 'unfiltered_tags', (selected_tags=[])->
         { $group: _id: '$tags', count: $sum: 1 }
         { $match: _id: $nin: selected_tags }
         { $sort: count: -1, _id: 1 }
-        { $limit: limit }
+        { $limit: 20 }
         { $project: _id: 0, name: '$_id', count: 1 }
         ]
-        
+    # console.log 'cloud, ', cloud
     cloud.forEach (tag, i) ->
         self.added 'tags', Random.id(),
             name: tag.name
@@ -108,10 +109,20 @@ Meteor.publish 'my_tags', (selected_tags)->
 
 
 
-Meteor.publish 'docs', (selected_tags, filter='')->
+Meteor.publish 'docs', (selected_tags, filter)->
     match = {}
-    selected_tags.push filter
+    if filter then selected_tags.push filter
     match.tags = $all: selected_tags
+
+    Docs.find match,
+        sort:
+            tag_count: 1
+            timestamp: -1
+        limit: 10
+
+Meteor.publish 'unfiltered_docs', (selected_tags)->
+    match = {}
+    if selected_tags.length > 0 then match.tags = $all: selected_tags
 
     Docs.find match,
         sort:

@@ -5,8 +5,8 @@ Session.setDefault('view_more', false)
 # filter = Template.currentData().filter
 
 Template.unfiltered_cloud.onCreated ->
-    console.log Template.currentData().filter
-    @autorun -> Meteor.subscribe 'unfiltered_tags', selected_tags.array()
+    self = @
+    self.autorun -> self.subscribe 'unfiltered_tags', selected_tags.array()
     # @autorun -> Meteor.subscribe 'tags', selected_tags.array()
     # @autorun -> Meteor.subscribe('authors', selected_tags.array())
 
