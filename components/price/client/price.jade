@@ -1,11 +1,15 @@
-template(name='view_price')
-    | $ #{price}
-    if can_buy
-        .buy.ui.basic.button Buy for $#{price}
-
-template(name='edit_price')
-    label Price
-    .ui.left.icon.input
-        i.dollar.icon
-        input.edit_price(type='number' min='0' value=price)
-
+template(name='price')
+    .ui.header Price
+        if editing_price
+            i.check.green.link.icon.save_price
+        else
+            i.pencil.link.icon.edit_price
+    if editing_price
+        label Price
+        .ui.left.icon.input
+            i.dollar.icon
+            input.edit_price(type='number' min='0' value=price)
+    else
+        | $ #{price}
+        if can_buy
+            .buy.ui.basic.button Buy for $#{price}

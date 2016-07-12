@@ -46,3 +46,4 @@ accounts-github
 accounts-ui
 accounts-meteor-developer
 service-configuration
+reactive-var

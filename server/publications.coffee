@@ -85,7 +85,7 @@ Meteor.publish 'my_tags', (selected_tags)->
     self = @
     match = {}
     if selected_tags then match.tags = $all: selected_tags
-    match.authorId = @userId
+    match.author_id = @userId
 
     cloud = Docs.aggregate [
         { $match: match }
@@ -115,7 +115,7 @@ Meteor.publish 'docs', (selected_tags, filter='')->
 
     Docs.find match,
         sort:
-            tagCount: 1
+            tag_count: 1
             timestamp: -1
         limit: 10
 
@@ -123,10 +123,10 @@ Meteor.publish 'docs', (selected_tags, filter='')->
 
 Meteor.publish 'my_docs', ()->
     match = {}
-    match.authorId= @userId
+    match.author_id= @userId
     Docs.find match,
         sort:
-            tagCount: 1
+            tag_count: 1
             timestamp: -1
         limit: 100
 
@@ -139,12 +139,12 @@ Meteor.publish 'doc_comments', (doc_id)->
 
 #     match = {}
 #     if selected_tags.length then match.tags = $all: selected_tags
-#     if selected_authors.length > 0 then match.authorId = $in: selected_authors
+#     if selected_authors.length > 0 then match.author_id = $in: selected_authors
 
 #     cloud = Docs.aggregate [
 #         { $match: match }
-#         { $project: authorId: 1 }
-#         { $group: _id: '$authorId', count: $sum: 1 }
+#         { $project: author_id: 1 }
+#         { $group: _id: '$author_id', count: $sum: 1 }
 #         { $match: _id: $nin: selected_authors }
 #         { $sort: count: -1, _id: 1 }
 #         { $limit: 10 }

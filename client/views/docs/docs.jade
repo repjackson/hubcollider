@@ -39,8 +39,9 @@ template(name='insta_doc')
         .image
             img(src='#{image}')
         .content
-            +view_price
-            +edit_price
+            +price
+        .content
+            +description
         .content
             span.right.floated
                 +like

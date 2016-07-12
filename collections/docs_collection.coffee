@@ -2,16 +2,16 @@
 
 Docs.before.insert (userId, doc)->
     doc.timestamp = Date.now()
-    doc.authorId = Meteor.userId()
+    doc.author_id = Meteor.userId()
     return
 
 Docs.after.update ((userId, doc, fieldNames, modifier, options) ->
-    doc.tagCount = doc.tags?.length
+    doc.tag_count = doc.tags?.length
     # Meteor.call 'generatePersonalCloud', Meteor.userId()
 ), fetchPrevious: true
 
 Docs.helpers
-    author: -> Meteor.users.findOne @authorId
+    author: -> Meteor.users.findOne @author_id
 
 
 Meteor.methods
