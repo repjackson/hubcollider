@@ -15,7 +15,7 @@ Docs.helpers
 
 
 Meteor.methods
-    create_doc: ()->
+    add_doc: ()->
         Docs.insert({})
 
     delete_doc: (id)->
@@ -28,3 +28,7 @@ Meteor.methods
     add_tag: (tag, docId)->
         Docs.update docId,
             $addToSet: tags: tag
+
+    add_component: (doc_id, component)->
+        Docs.update doc_id,
+            $addToSet: components: component

@@ -90,6 +90,21 @@ signInRequired.route '/posts/view/:post_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'view_post'
 
+# Docs
+signInRequired.route '/docs',
+    name: 'docs'
+    action: ->
+        BlazeLayout.render 'layout', main: 'docs'
+        setTitle 'docs'
+
+signInRequired.route '/docs/edit/:doc_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'edit_doc'
+
+signInRequired.route '/docs/view/:doc_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'view_doc'
+
 
 
 # People
