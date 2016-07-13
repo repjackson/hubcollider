@@ -13,13 +13,10 @@ Template.edit_doc.helpers
         # docId = FlowRouter.getParam('doc_id')
         Docs.findOne FlowRouter.getParam('doc_id')
     
-    availableparts: -> _.difference(Features, @partlist)
-    templateEditName: -> @+'_edit'
-    subtemplatecontext: ->
-        part = Session.get 'selectedpart'
-        console.log @parts?.part
-        #Template.parentData(1).parts?[this]
-    template_name: -> "#{@}"
+    available_components: -> _.difference(Features, @components)
+
+    
+    template_name: -> "#{@toLowerCase()}"
 
     # type_button_class: (type)->
     #     # console.log type.hash.type.toString() 
@@ -41,6 +38,7 @@ Template.edit_doc.helpers
                 }
             ]
         }
+        
     type_of_event_cloud: -> Tags.find()
     
     # selected_type_of_event_tags: -> selected_type_of_event_tags.array()
@@ -72,8 +70,14 @@ Template.edit_doc.events
     #     selected_type_of_doc_tags.push doc.name
 
     'click .add_component': (e,t)->
-        component = e.currentTarget.attributes.id.nodeValue
+        component = @valueOf()
+        # component = e.currentTarget.attributes.id.nodeValue
         Meteor.call 'add_component', FlowRouter.getParam('doc_id'), component
+
+    'click .remove_component': ->
+        component = @valueOf()
+        if confirm "Remove #{@valueOf} Component?"
+            Meteor.call 'remove_component', FlowRouter.getParam('doc_id'), component
 
     'keydown #add_doc_tag': (e,t)->
         switch e.which

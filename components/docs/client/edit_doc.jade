@@ -14,18 +14,20 @@ template(name='edit_doc')
                 .field
                     .ui.segment
                         .ui.header Select Components
-                        each features
-                            .ui.label #{this}
-                        #voting.ui.basic.button.add_component(name='voting') Voting
-                        #like.ui.basic.button.add_component(name='like') Like
-                        #location.ui.basic.button.add_component(name='location') Location
-                        #datetime.ui.basic.button.add_component(name='datetime') Date/Time
-                        #text.ui.basic.button.add_component(name='text') Text Box
-                        #price.ui.basic.button.add_component(name='price') Price
-                        #attendee.ui.basic.button.add_component(name='attendee') Attendee
-                        // .ui.basic.button.add_component(name='') Tag preselection
+                        each available_components
+                            .ui.basic.button.add_component #{this}
+                        // #voting.ui.basic.button.add_component(class=add_component_button_class) Voting
+                        // #like.ui.basic.button.add_component(class=add_component_button_class) Like
+                        // #location.ui.basic.button.add_component(class=add_component_button_class) Location
+                        // #datetime.ui.basic.button.add_component(class=add_component_button_class) Date/Time
+                        // #text.ui.basic.button.add_component(class=add_component_button_class) Text Box
+                        // #price.ui.basic.button.add_component(class=add_component_button_class) Price
+                        // #attendee.ui.basic.button.add_component(class=add_component_button_class) Attendee
+                        // .ui.basic.button.add_component(class=add_component_button_classag preselection
                 each components
                     .ui.segment
+                        .ui.basic.circular.icon.button.remove_component
+                            i.remove.icon
                         +Template.dynamic(template=template_name)
                 // .required.field
                 //     label Title
@@ -66,11 +68,11 @@ template(name='edit_doc')
                 //     label Registration?
 
                 if tags
-                    #save_event.ui.animated.large.green.button
+                    #save_doc.ui.animated.large.green.button
                         .visible.content Save
                         .hidden.content
                             i.right.check.icon
-                #delete_event.ui.animated.red.large.button
+                #delete_doc.ui.animated.red.large.button
                         .hidden.content 
                             i.remove.icon
                         .visible.content Delete

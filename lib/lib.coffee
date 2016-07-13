@@ -7,4 +7,14 @@ Meteor.methods
                 $set: username: username
                 
                 
-@Features = ['recipe', 'review']
+@Features = [
+    'Voting'
+    'Like'
+    'Map'
+    'Date/Time'
+    'Description'
+    'Price'
+    'Attendee'
+    # 'Tag preselection'
+    ]
+    

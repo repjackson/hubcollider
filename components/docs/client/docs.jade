@@ -1,29 +1,36 @@
 template(name='docs')
-    h1.ui.center.aligned.header #{filter} Posts
+    h1.ui.center.aligned.header Docs
         #add_doc.ui.compact.basic.button
             i.green.plus.icon
             |Add doc
     .ui.container
         .ui.stackable.centered.cards
             each docs
-                // +view_doc
-                +insta_doc
+                +view_doc
+                // +insta_doc
 
 template(name='view_doc')
-    .ui.segment
-        .ui.header #{title}
-        .description #{description}
-        .location #{location}
-        .tags 
+    .ui.fluid.card
+        .content
             each tags
-                .ui.label #{this}
-        .meta #{field}
-        .meta #{applicant_inclusion}
-        if is_author
-            .edit_doc.ui.basic.button
-                i.pencil.icon
-                |Edit
-        +comments
+                .ui.basic.label #{this}
+        each components
+            .content
+                +Template.dynamic(template=template_name)
+        // .ui.header #{title}
+        // .description #{description}
+        // .location #{location}
+        // .tags 
+        //     each tags
+        //         .ui.label #{this}
+        // .meta #{field}
+        // .meta #{applicant_inclusion}
+        .content
+            if is_author
+                .edit_doc.ui.basic.button
+                    i.pencil.icon
+                    |Edit
+        // +comments
         
 template(name='insta_doc')
     .ui.fluid.card

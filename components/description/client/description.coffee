@@ -13,6 +13,7 @@ Template.description.events
     'click .save_description': (e,t)->
         doc_id = Template.parentData(0)._id
         text = t.$('.text').val()
+        console.log Template.parentData(1)
         
         Meteor.call 'update_description', doc_id, text
         t.editing_description.set false
