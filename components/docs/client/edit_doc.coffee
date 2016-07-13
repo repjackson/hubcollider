@@ -76,7 +76,7 @@ Template.edit_doc.events
 
     'click .remove_component': ->
         component = @valueOf()
-        if confirm "Remove #{@valueOf} Component?"
+        if confirm "Remove #{component} Component?"
             Meteor.call 'remove_component', FlowRouter.getParam('doc_id'), component
 
     'keydown #add_doc_tag': (e,t)->
@@ -121,17 +121,17 @@ Template.edit_doc.events
     #         $addToSet: tags: type
 
     'click #save_doc': ->
-        description = $('#description').val()
-        datetime = $('#datetimepicker').val()
-        Docs.update FlowRouter.getParam('doc_id'),
-            $set:
-                description: description
-                datetime: datetime
+        # description = $('#description').val()
+        # datetime = $('#datetimepicker').val()
+        # Docs.update FlowRouter.getParam('doc_id'),
+        #     $set:
+        #         description: description
+        #         datetime: datetime
                 # tagCount: @tags.length
         # selected_doc_tags.clear()
-        # for tag in tags
-        #     selected_doc_tags.push tag
-        FlowRouter.go '/docs'
+        for tag in @tags
+            selected_tags.push tag
+        FlowRouter.go '/'
 
 
     # 'click .select_type_of_doc_tag': -> 

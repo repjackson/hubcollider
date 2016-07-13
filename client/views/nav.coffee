@@ -8,12 +8,10 @@
     # is_editing: -> Session.equals('is_editing', @_id)
 
 Template.nav.events
-    'click [data-id=sign-out]': ->
-        Meteor.logout (error) ->
-            if error
-                alert error.reason
-            else
-                FlowRouter.go '/sign-in'
+    'click #add_doc': ->
+        Meteor.call 'add_doc', (err, id)->
+            if err then console.error err
+            else FlowRouter.go "/edit/#{id}"
 
     'click #view_me': -> if Meteor.userId() in selected_authors.array() then selected_authors.remove Meteor.userId() else selected_authors.push Meteor.userId()
 
@@ -32,11 +30,6 @@ Template.nav.events
         if val.length > 0 then selected_tags.push val.toString()
 
 
-    'click #create_doc': ->
-        Meteor.call 'create_doc', null ,(err, id)->
-            if err then console.log err
-            else FlowRouter.go "/edit/#{id}"
-    
     'click #profile_link': -> FlowRouter.go "/users/#{Meteor.userId()}"
 
     'keyup .search': (e,t)->

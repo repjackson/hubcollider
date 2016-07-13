@@ -5,15 +5,15 @@ template(name='edit_doc')
                 .field
                     .ui.header Tags
                     each tags
-                        .ui.basic.button.event_tag
+                        .ui.basic.button.doc_tag
                             i.minus.icon
                             |#{this}
                     .ui.left.icon.input
                         i.add.icon
-                        input#add_event_tag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
+                        input#add_doc_tag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
                 .field
                     .ui.segment
-                        .ui.header Select Components
+                        .ui.header Add Components
                         each available_components
                             .ui.basic.button.add_component #{this}
                         // #voting.ui.basic.button.add_component(class=add_component_button_class) Voting
@@ -26,8 +26,10 @@ template(name='edit_doc')
                         // .ui.basic.button.add_component(class=add_component_button_classag preselection
                 each components
                     .ui.segment
-                        .ui.basic.circular.icon.button.remove_component
+                        .ui.right.corner.red.label.remove_component
                             i.remove.icon
+                        // .ui.basic.circular.icon.button.remove_component
+                            // i.remove.icon
                         +Template.dynamic(template=template_name)
                 // .required.field
                 //     label Title

@@ -29,34 +29,34 @@ Meteor.publish 'doc', (id)-> Docs.find id
 
 
 
-Meteor.publish 'tags', (selected_tags, filter, limit=10)->
-    self = @
-    match = {}
-    # console.log filter
-    if filter? then selected_tags.push filter
-    match.tags = $all: selected_tags
+# Meteor.publish 'tags', (selected_tags, filter, limit=10)->
+#     self = @
+#     match = {}
+#     # console.log filter
+#     if filter? then selected_tags.push filter
+#     match.tags = $all: selected_tags
 
-    cloud = Docs.aggregate [
-        { $match: match }
-        { $project: tags: 1 }
-        { $unwind: '$tags' }
-        { $group: _id: '$tags', count: $sum: 1 }
-        { $match: _id: $nin: selected_tags }
-        { $sort: count: -1, _id: 1 }
-        { $limit: limit }
-        { $project: _id: 0, name: '$_id', count: 1 }
-        ]
+#     cloud = Docs.aggregate [
+#         { $match: match }
+#         { $project: tags: 1 }
+#         { $unwind: '$tags' }
+#         { $group: _id: '$tags', count: $sum: 1 }
+#         { $match: _id: $nin: selected_tags }
+#         { $sort: count: -1, _id: 1 }
+#         { $limit: limit }
+#         { $project: _id: 0, name: '$_id', count: 1 }
+#         ]
         
-    cloud.forEach (tag, i) ->
-        self.added 'tags', Random.id(),
-            name: tag.name
-            count: tag.count
-            index: i
+#     cloud.forEach (tag, i) ->
+#         self.added 'tags', Random.id(),
+#             name: tag.name
+#             count: tag.count
+#             index: i
 
-    self.ready()
+#     self.ready()
 
 
-Meteor.publish 'unfiltered_tags', (selected_tags)->
+Meteor.publish 'tags', (selected_tags)->
     self = @
     match = {}
     if selected_tags.length > 0 then match.tags = $all: selected_tags
@@ -109,18 +109,18 @@ Meteor.publish 'my_tags', (selected_tags)->
 
 
 
-Meteor.publish 'docs', (selected_tags, filter)->
-    match = {}
-    if filter then selected_tags.push filter
-    match.tags = $all: selected_tags
+# Meteor.publish 'docs', (selected_tags, filter)->
+#     match = {}
+#     if filter then selected_tags.push filter
+#     match.tags = $all: selected_tags
 
-    Docs.find match,
-        sort:
-            tag_count: 1
-            timestamp: -1
-        limit: 10
+#     Docs.find match,
+#         sort:
+#             tag_count: 1
+#             timestamp: -1
+#         limit: 10
 
-Meteor.publish 'unfiltered_docs', (selected_tags)->
+Meteor.publish 'docs', (selected_tags)->
     match = {}
     if selected_tags.length > 0 then match.tags = $all: selected_tags
 

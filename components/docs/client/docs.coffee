@@ -1,7 +1,7 @@
 Template.docs.onCreated ->
     self = @
     self.autorun ->
-        self.subscribe 'unfiltered_docs', selected_tags.array()
+        self.subscribe 'docs', selected_tags.array()
     
 
 Template.docs.helpers
@@ -13,7 +13,7 @@ Template.docs.events
     'click #add_doc': ->
         Meteor.call 'add_doc', (err, id)->
             if err then console.error err
-            else FlowRouter.go "/docs/edit/#{id}"
+            else FlowRouter.go "/edit/#{id}"
 
 
 Template.view_doc.helpers
@@ -21,4 +21,5 @@ Template.view_doc.helpers
     template_name: -> "#{@toLowerCase()}"
 
 Template.view_doc.events
-    'click .edit_doc': -> FlowRouter.go "/docs/edit/#{@_id}"
+    'click .edit_doc': -> FlowRouter.go "/edit/#{@_id}"
+    

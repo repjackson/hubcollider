@@ -10,15 +10,9 @@ template(name='nav')
             .ui.transparent.icon.input
                 input.search(type='text', placeholder='Search...')
                 i.search.link.icon
-        a.item(href='/feed')
-            i.feed.icon
-            |Feed
-        a.item(href='/jobs')
-            i.suitcase.icon
-            |Jobs
-        a.item(href='/events')
-            i.empty.calendar.icon
-            |Events
+        a.item#add_doc
+            i.plus.icon
+            | Add
         a.item(href='/people')
             i.users.icon
             |People

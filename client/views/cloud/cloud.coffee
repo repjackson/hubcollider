@@ -1,13 +1,12 @@
 @selected_tags = new ReactiveArray []
 @selected_authors = new ReactiveArray []
-Session.setDefault('view_more', false)
 
 # filter = Template.currentData().filter
 
 Template.cloud.onCreated ->
     # console.log Template.currentData().filter
-    @autorun -> Meteor.subscribe 'tags', selected_tags.array(), Template.currentData().filter
-    # @autorun -> Meteor.subscribe 'tags', selected_tags.array()
+    # @autorun -> Meteor.subscribe 'tags', selected_tags.array(), Template.currentData().filter
+    @autorun -> Meteor.subscribe 'tags', selected_tags.array()
     # @autorun -> Meteor.subscribe('authors', selected_tags.array())
 
 
@@ -25,34 +24,21 @@ Template.cloud.helpers
 
     # selected_username_view: -> Meteor.users.findOne(@valueOf())?.username
 
-    # cloud_tag_class: ->
-    #     buttonClass = switch
-    #         when @index <= 5 then 'large'
-    #         when @index <= 10 then ''
-    #         when @index <= 15 then 'small'
-    #         when @index <= 20 then 'tiny'
-    #     return buttonClass
+    cloud_tag_class: ->
+        buttonClass = switch
+            when @index <= 5 then 'large'
+            when @index <= 10 then ''
+            when @index <= 15 then 'small'
+            when @index <= 20 then 'tiny'
+        return buttonClass
 
     selected_tags: -> selected_tags.list()
 
     # selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
 
-    # selected_tag_class: ->
-    #     tag_class = switch
-    #         # when @valueOf() is 'academy' then 'yellow'
-    #         # when @valueOf() is 'economy' then 'green'
-    #         else 'primary'
-    #     return tag_class
-
-    # can_view_less: -> Session.equals('view_more', true)
-
-    # can_view_more: -> Session.equals('view_more', false)
 
 
 Template.cloud.events
-    'click #view_more': -> Session.set 'view_more', true
-    'click #view_less': -> Session.set 'view_more', false
-
     'click .select_tag': ->
         selected_tags.push @name
         FlowRouter.setQueryParams( filter: selected_tags.array() )

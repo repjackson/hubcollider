@@ -29,81 +29,20 @@ signInRequired.route '/messages',
         BlazeLayout.render 'layout', main: 'messages'
         setTitle 'Messages'
 
-signInRequired.route '/edit/:doc_id', action: (params) ->
-    BlazeLayout.render 'layout',
-        main: 'edit'
 
 signInRequired.route '/view/:doc_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'doc_page'
 
-
-
-# Jobs
-
-# signInRequired.route '/jobs',
-#     name: 'jobs'
-#     action: ->
-#         BlazeLayout.render 'layout', main: 'jobs'
-#         setTitle 'Jobs'
-
-# signInRequired.route '/jobs/edit/:job_id', action: (params) ->
-#     BlazeLayout.render 'layout',
-#         main: 'edit_job'
-
-# signInRequired.route '/jobs/view/:job_id', action: (params) ->
-#     BlazeLayout.render 'layout',
-#         main: 'job_page'
-
-
-
-# Events
-
-# signInRequired.route '/events',
-#     name: 'events'
-#     action: ->
-#         BlazeLayout.render 'layout', main: 'events'
-#         setTitle 'Events'
-
-signInRequired.route '/events/edit/:event_id', action: (params) ->
-    BlazeLayout.render 'layout',
-        main: 'edit_event'
-
-# signInRequired.route '/events/view/:event_id', action: (params) ->
-#     BlazeLayout.render 'layout',
-#         main: 'view_event'
-
-
-# Feed
-
-# signInRequired.route '/feed',
-#     name: 'feed'
-#     action: ->
-#         BlazeLayout.render 'layout', main: 'feed'
-#         setTitle 'Feed'
-
-# signInRequired.route '/posts/edit/:post_id', action: (params) ->
-#     BlazeLayout.render 'layout',
-#         main: 'edit_post'
-
-# signInRequired.route '/posts/view/:post_id', action: (params) ->
-#     BlazeLayout.render 'layout',
-#         main: 'view_post'
-
-# Docs
 signInRequired.route '/docs',
     name: 'docs'
     action: ->
         BlazeLayout.render 'layout', main: 'docs'
         setTitle 'docs'
 
-signInRequired.route '/docs/edit/:doc_id', action: (params) ->
+signInRequired.route '/edit/:doc_id', action: (params) ->
     BlazeLayout.render 'layout',
         main: 'edit_doc'
-
-signInRequired.route '/docs/view/:doc_id', action: (params) ->
-    BlazeLayout.render 'layout',
-        main: 'view_doc'
 
 
 
