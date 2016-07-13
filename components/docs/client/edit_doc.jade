@@ -1,7 +1,10 @@
 template(name='edit_doc')
     with doc
-        .ui.segment
+        .ui.container.segment
             .ui.form
+                .field
+                    label Title
+                    input#title(type='text' name='title' placeholder='Title' value=title)
                 .field
                     .ui.header Tags
                     each tags

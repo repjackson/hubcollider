@@ -12,6 +12,16 @@ Template.nav.events
         Meteor.call 'add_doc', (err, id)->
             if err then console.error err
             else FlowRouter.go "/edit/#{id}"
+    
+    'click #add_job': ->
+        Meteor.call 'add_job', (err, id)->
+            if err then console.error err
+            else FlowRouter.go "/jobs/edit/#{id}"
+    
+    'click #add_event': ->
+        Meteor.call 'add_event', (err, id)->
+            if err then console.error err
+            else FlowRouter.go "/events/edit/#{id}"
 
     'click #view_me': -> if Meteor.userId() in selected_authors.array() then selected_authors.remove Meteor.userId() else selected_authors.push Meteor.userId()
 

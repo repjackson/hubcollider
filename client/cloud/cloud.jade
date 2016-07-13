@@ -1,14 +1,15 @@
 template(name='cloud')
-    #cloud.ui.center.aligned.fluid.segment
+    #cloud.ui.center.aligned.container.segment
         if selected_tags
             #clear_tags.ui.large.compact.primary.icon.button
                 i.remove.icon
             each selected_tags
                 .unselect_tag.ui.compact.large.primary.button
                     strong #{this}
+        h4.ui.floated.left.header Tag Cloud
         each all_tags
             .ui.compact.basic.button.select_tag(class=cloud_tag_class) #{this.name}
-                small #{this.count}
+                small (#{this.count})
         // .ui.hidden.fitted.divider
         // if selected_authors
         //     #clear_authors.ui.circular.primary.icon.button

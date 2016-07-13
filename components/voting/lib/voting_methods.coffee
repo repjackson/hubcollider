@@ -3,8 +3,8 @@ Meteor.methods
         doc = Docs.findOne id
         if not doc.up_voters or doc.down_voters
             Docs.update id,
-                $addToSet: up_voters: []
-                $inc: points: 0
+                $addToSet: up_voters: Meteor.userId()
+                $inc: points: 1
         else
             if Meteor.userId() in doc.up_voters #undo upvote
                 Docs.update id,
@@ -32,8 +32,8 @@ Meteor.methods
         doc = Docs.findOne id
         if not doc.down_voters or doc.up_voters
             Docs.update id,
-                $addToSet: down_voters: []
-                $inc: points: 0
+                $addToSet: down_voters: Meteor.userId()
+                $inc: points: -1
         else
             if Meteor.userId() in doc.down_voters #undo downvote
                 Docs.update id,

@@ -6,15 +6,48 @@ Meteor.methods
             Meteor.users.update Meteor.userId(),
                 $set: username: username
                 
+    add_job: ()->
+        Docs.insert
+            type: 'job'
+            tags: ['job']
+
+    delete_job: (id)->
+        Docs.remove id
+
+    remove_job_tag: (tag, doc_id)->
+        Docs.update doc_id,
+            $pull: tag
+
+    add_job_tag: (tag, doc_id)->
+        Docs.update doc_id,
+            $addToSet: tags: tag
+                
+    add_event: ()->
+        Docs.insert
+            type: 'event'
+            tags: ['event']
+
+    delete_event: (id)->
+        Docs.remove id
+
+    remove_event_tag: (tag, doc_id)->
+        Docs.update doc_id,
+            $pull: tag
+
+    add_event_tag: (tag, doc_id)->
+        Docs.update doc_id,
+            $addToSet: tags: tag
+                
                 
 @Features = [
-    'Voting'
-    'Like'
+    # 'Voting'
+    # 'Like'
     'Map'
-    'Date/Time'
+    'Date'
     'Description'
     'Price'
     'Attendee'
     # 'Tag preselection'
     ]
+    
     

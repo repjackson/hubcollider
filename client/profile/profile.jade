@@ -3,7 +3,8 @@ template(name='profile')
         +edit_profile
     else
         +view_profile
-    +activity
+    .ui.container
+        +activity
 
 
 template(name='edit_profile')
@@ -44,14 +45,16 @@ template(name='edit_profile')
         #save_profile.ui.green.button Save Profile    
 
 template(name='view_profile')
-    with currentUser
-        +avatar user=this shape="circle" size="extra-large" 
-        h1.ui.header #{username}
+    .ui.container.segment
+        with currentUser
             if is_author
-                #edit_profile.ui.button
-                    i.pencil.icon
-                    |Edit Profile
-        each profile.tags
-            .ui.label #{this}
-        h5.ui.header Description
-        |#{profile.description}
+                    #edit_profile.ui.right.floated.button
+                        i.pencil.icon
+                        |Edit Profile
+            +avatar user=this shape="circle" size="extra-large" 
+            h1.ui.header #{username}
+                
+            each profile.tags
+                .ui.label #{this}
+            h5.ui.header Description
+            |#{profile.description}

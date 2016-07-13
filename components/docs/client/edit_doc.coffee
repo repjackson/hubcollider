@@ -48,7 +48,7 @@ Template.edit_doc.events
     'click #delete_doc': ->
         swal {
             title: 'Delete doc?'
-            text: 'Confirm delete?'
+            # text: 'Confirm delete?'
             type: 'error'
             showCancelButton: true
             closeOnConfirm: true
@@ -60,7 +60,7 @@ Template.edit_doc.events
                 if error
                     console.error error.reason
                 else
-                    FlowRouter.go '/docs'
+                    FlowRouter.go '/'
 
     # 'autocompleteselect #add_type_of_doc_tag': (event, template, doc) ->
     #     # console.log 'selected ', doc

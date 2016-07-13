@@ -9,7 +9,7 @@ template(name='view_doc')
     .ui.fluid.card
         .content
             each tags
-                .ui.basic.label #{this}
+                .ui.button.doc_tag(class=doc_tag_class) #{this}
         each components
             .content
                 +Template.dynamic(template=template_name)
@@ -22,11 +22,17 @@ template(name='view_doc')
         // .meta #{field}
         // .meta #{applicant_inclusion}
         .content
+            +like
+            +voting
             if is_author
                 .edit_doc.ui.basic.button
                     i.pencil.icon
                     |Edit
-        // +comments
+            // +comments
+            h3.ui.dividing.header
+            i.comments.icon 
+            |#{comment_count} Comments
+            
         
 template(name='insta_doc')
     .ui.fluid.card

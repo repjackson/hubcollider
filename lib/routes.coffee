@@ -52,3 +52,13 @@ signInRequired.route '/people',
     action: ->
         BlazeLayout.render 'layout', main: 'people'
         setTitle 'People'
+
+
+signInRequired.route '/jobs/edit/:job_id', action: (params) ->
+    BlazeLayout.render 'layout', main: 'edit_job'
+
+
+signInRequired.route '/events/edit/:event_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'edit_event'
+
