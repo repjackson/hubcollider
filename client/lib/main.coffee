@@ -11,3 +11,10 @@
 
 BlazeLayout.setRoot('body')
 
+Meteor.startup ->
+    Stripe.setPublishableKey Meteor.settings.StripeTestPublishableKey
+
+    handler = StripeCheckout.configure(
+        key: Meteor.settings.StripeTestPublishableKey
+        token: (token) ->
+    )

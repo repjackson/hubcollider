@@ -15,6 +15,12 @@ signInRequired.route '/users/:user_id',
         BlazeLayout.render 'layout', main: 'profile'
         setTitle 'Profile'
 
+signInRequired.route '/upgrade',
+    name: 'upgrade'
+    action: ->
+        BlazeLayout.render 'layout', main: 'upgrade'
+        setTitle 'Upgrade'
+
 
 signInRequired.route '/',
     name: 'home'

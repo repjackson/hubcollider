@@ -1,5 +1,5 @@
 Template.voting.helpers
-    points: -> Template.parentData(0).points
+    points: -> Template.parentData(5).points
     
     vote_up_button_class: -> if Meteor.userId() is @author_id or not Meteor.userId() then 'disabled' else ''
 

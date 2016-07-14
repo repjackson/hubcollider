@@ -11,6 +11,7 @@ template(name='edit_profile')
     .ui.container.segment
         with currentUser
             .ui.center.aligned.basic.segment
+                a.ui.top.right.attached.link.blue.label(href='/upgrade') Upgrade
                 +avatar user=this shape="circle" size="extra-large" 
             .ui.form
                 .inline.field

@@ -160,3 +160,13 @@ Meteor.methods
                         $set:
                             alchemy_tags: loweredKeywords
                             # tags: $each: loweredKeywords
+                            
+                            
+    chargeCard: (stripeToken) ->
+        Stripe = StripeAPI(Meteor.settings.StripeTestSecretKey)
+        Stripe.charges.create {
+            amount: 1000
+            currency: 'usd'
+            source: stripeToken
+        }, (err, charge) ->
+        console.log err, charge

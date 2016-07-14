@@ -1,32 +1,36 @@
 Meteor.methods
     vote_up: (id)->
         doc = Docs.findOne id
-        if not doc.up_voters or doc.down_voters
+        # console.log doc
+        if not doc.up_voters? or doc.down_voters?
             Docs.update id,
-                $addToSet: up_voters: Meteor.userId()
-                $inc: points: 1
-        else
-            if Meteor.userId() in doc.up_voters #undo upvote
-                Docs.update id,
-                    $pull: up_voters: Meteor.userId()
-                    $inc: points: -1
-                # Meteor.users.update doc.authorId, $inc: points: -1
-                # Meteor.users.update Meteor.userId(), $inc: points: 1
-    
-            else if Meteor.userId() in doc.down_voters #switch downvote to upvote
-                Docs.update id,
-                    $pull: down_voters: Meteor.userId()
-                    $addToSet: up_voters: Meteor.userId()
-                    $inc: points: 2
-                # Meteor.users.update doc.authorId, $inc: points: 2
-            else #clean upvote
-                Docs.update id,
-                    $addToSet: up_voters: Meteor.userId()
-                    $inc: points: 1
-                # Meteor.users.update doc.authorId, $inc: points: 1
-                # Meteor.users.update Meteor.userId(), $inc: points: -1
-    
-            # Meteor.call 'generatePersonalCloud', Meteor.userId()
+                # $addToSet: up_voters: Meteor.userId()
+                $set: 
+                    up_voters: []
+                    down_voters: []
+                    points: 0
+                , ->
+                if Meteor.userId() in doc.up_voters #undo upvote
+                    Docs.update id,
+                        $pull: up_voters: Meteor.userId()
+                        $inc: points: -1
+                    # Meteor.users.update doc.authorId, $inc: points: -1
+                    # Meteor.users.update Meteor.userId(), $inc: points: 1
+        
+                else if Meteor.userId() in doc.down_voters #switch downvote to upvote
+                    Docs.update id,
+                        $pull: down_voters: Meteor.userId()
+                        $addToSet: up_voters: Meteor.userId()
+                        $inc: points: 2
+                    # Meteor.users.update doc.authorId, $inc: points: 2
+                else #clean upvote
+                    Docs.update id,
+                        $addToSet: up_voters: Meteor.userId()
+                        $inc: points: 1
+                    # Meteor.users.update doc.authorId, $inc: points: 1
+                    # Meteor.users.update Meteor.userId(), $inc: points: -1
+        
+                # Meteor.call 'generatePersonalCloud', Meteor.userId()
 
     vote_down: (id)->
         doc = Docs.findOne id
