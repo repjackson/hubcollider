@@ -4,28 +4,26 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-base             # Packages every Meteor app needs to have
-mobile-experience       # Packages for a great mobile UX
-mongo                   # The database Meteor supports right now
-blaze-html-templates    # Compile .html files into Meteor Blaze views
-session                 # Client-side reactive dictionary for your app
-jquery                  # Helpful client-side library
-tracker                 # Meteor's client-side reactive programming library
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.10                   # The database Meteor supports right now
+blaze-html-templates@1.0.4    # Compile .html files into Meteor Blaze views
+session@1.1.6                 # Client-side reactive dictionary for your app
+jquery@1.11.9                  # Helpful client-side library
+tracker@1.1.0                 # Meteor's client-side reactive programming library
 
 
-accounts-base
-accounts-password
+accounts-base@1.2.9
+accounts-password@1.2.12
 useraccounts:flow-routing
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
 momentjs:moment
-kevohagan:sweetalert
-mizzao:autocomplete
 constellation:console
-coffeescript
+coffeescript@1.2.3
 manuel:reactivearray
-random
+random@1.0.10
 meteorhacks:aggregate
 babrahams:constellation
 useraccounts:semantic-ui
@@ -36,15 +34,7 @@ matb33:collection-hooks
 dburles:collection-helpers
 froala:editor
 dalgard:jade
-drewy:datetimepicker
-utilities:avatar
-edgee:slingshot
-accounts-twitter
-accounts-google
-accounts-facebook
-accounts-github
-accounts-ui
-accounts-meteor-developer
-service-configuration
-reactive-var
-mrgalaxy:stripe
+accounts-google@1.0.10
+accounts-ui@1.1.9
+service-configuration@1.0.10
+reactive-var@1.0.10

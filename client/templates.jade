@@ -1,3 +1,49 @@
+head
+    title Facet
+    meta(name='viewport', content='user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+
+template(name='cloud')
+    #cloud.ui.center.aligned.container.segment
+        if selected_tags
+            #clear_tags.ui.large.compact.primary.icon.button
+                i.remove.icon
+            each selected_tags
+                .unselect_tag.ui.compact.large.primary.button
+                    strong #{this}
+        h4.ui.floated.left.header Tag Cloud
+        each all_tags
+            .ui.compact.basic.button.select_tag(class=cloud_tag_class) #{this.name}
+                small (#{this.count})
+
+
+
+template(name='layout')
+    +nav
+    +Template.dynamic template=main
+
+
+template(name='docs')
+    .ui.container
+        .ui.centered.cards
+            each docs
+                +view
+
+
+template(name='view')
+    .ui.fluid.card
+        .content
+            each tags
+                .ui.button.doc_tag(class=doc_tag_class) #{this}
+        .content
+            if is_author
+                .edit_doc.ui.basic.button
+                    i.pencil.icon
+                    |Edit
+                    
+                    
+                    
 template(name='edit_doc')
     with doc
         .ui.container.segment
@@ -34,44 +80,6 @@ template(name='edit_doc')
                         // .ui.basic.circular.icon.button.remove_component
                             // i.remove.icon
                         +Template.dynamic(template=template_name)
-                // .required.field
-                //     label Title
-                //     input#title(type='text' name='title' placeholder='Title' value=title)
-                //     .field
-                //         input(type='file' name='upload_image' accept='image/*')
-                //         .ui.button Upload CSV File
-                //         input(type='text' value=fileName)
-                //         p #{downloadUrl}
-                // .ui.segment    
-                //     .inline.field
-                //         label Type of event
-                //         .ui
-                //             if selected_type_of_event_tags
-                //                 #clear_type_of_event_tags.ui.large.compact.primary.icon.button
-                //                     i.remove.icon
-                //                 each selected_type_of_event_tags
-                //                     .ui.compact.large.primary.button.unselect_type_of_event_tag
-                //                         strong #{this}
-                //             each type_of_event_cloud 
-                //                 .ui.compact.basic.button.select_type_of_event_tag #{name}
-                //     .inline.field
-                //         label Type w/Autocomplete
-                //         +inputAutocomplete settings=settings id="add_type_of_event_tag" class="" autocomplete="off" placeholder='Select/Type Type'
-                // .field
-                //     label Date and Time
-                //     input#datetimepicker(type='text' value=datetime)
-                // .field
-                //     label Description
-                //     textarea#description(rows='5') #{description}
-                // .inline.field
-                //     label Location
-                        
-                // .inline.field 
-                //     label To Be Determinded  
-
-                // .inline.field
-                //     label Registration?
-
                 if tags
                     #save_doc.ui.animated.large.green.button
                         .visible.content Save

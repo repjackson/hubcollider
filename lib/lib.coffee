@@ -1,53 +1,37 @@
+@Tags = new Meteor.Collection 'tags'
+@Docs = new Meteor.Collection 'docs'
+
+
+@Docs = new (Mongo.Collection)('docs')
+
+Docs.before.insert (userId, doc)->
+    doc.timestamp = Date.now()
+    doc.author_id = Meteor.userId()
+    return
+
+Docs.after.update ((userId, doc, fieldNames, modifier, options) ->
+    doc.tag_count = doc.tags.length
+    # Meteor.call 'generatePersonalCloud', Meteor.userId()
+), fetchPrevious: true
+
+Docs.helpers
+    author: -> Meteor.users.findOne @author_id
+
+
 Meteor.methods
-    update_username: (username)->
-        existing_user = Meteor.users.findOne username:username
-        if existing_user then throw new Meteor.Error 500, 'Username exists'
-        else
-            Meteor.users.update Meteor.userId(),
-                $set: username: username
-                
-    add_job: ()->
+    create_doc: (tag)->
+        tags = []
+        if tag then tags.push tag
         Docs.insert
-            type: 'job'
-            tags: ['job']
+            tags: tags
 
-    delete_job: (id)->
+    delete_doc: (id)->
         Docs.remove id
 
-    remove_job_tag: (tag, doc_id)->
+    remove_tag: (tag, doc_id)->
         Docs.update doc_id,
             $pull: tag
 
-    add_job_tag: (tag, doc_id)->
+    add_tag: (tag, doc_id)->
         Docs.update doc_id,
             $addToSet: tags: tag
-                
-    add_event: ()->
-        Docs.insert
-            type: 'event'
-            tags: ['event']
-
-    delete_event: (id)->
-        Docs.remove id
-
-    remove_event_tag: (tag, doc_id)->
-        Docs.update doc_id,
-            $pull: tag
-
-    add_event_tag: (tag, doc_id)->
-        Docs.update doc_id,
-            $addToSet: tags: tag
-                
-                
-@Features = [
-    # 'Voting'
-    # 'Like'
-    'Map'
-    'Date'
-    'Description'
-    'Price'
-    'Attendee'
-    # 'Tag preselection'
-    ]
-    
-    

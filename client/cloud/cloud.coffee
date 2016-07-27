@@ -1,28 +1,14 @@
 @selected_tags = new ReactiveArray []
-@selected_authors = new ReactiveArray []
-
-# filter = Template.currentData().filter
 
 Template.cloud.onCreated ->
-    # console.log Template.currentData().filter
-    # @autorun -> Meteor.subscribe 'tags', selected_tags.array(), Template.currentData().filter
     @autorun -> Meteor.subscribe 'tags', selected_tags.array()
-    # @autorun -> Meteor.subscribe('authors', selected_tags.array())
 
 
 Template.cloud.helpers
     all_tags: ->
-        # docCount = Docs.find().count()
-        # if 0 < docCount < 3 then Tags.find { count: $lt: docCount } else Tags.find()
-        Tags.find()
-
-    # all_authors: -> Authors.find()
-
-    # selected_authors: -> selected_authors.list()
-
-    # username_view: -> Meteor.users.findOne(@text)?.username
-
-    # selected_username_view: -> Meteor.users.findOne(@valueOf())?.username
+        docCount = Docs.find().count()
+        if 0 < docCount < 3 then Tags.find { count: $lt: docCount } else Tags.find()
+        # Tags.find()
 
     cloud_tag_class: ->
         buttonClass = switch
@@ -34,34 +20,13 @@ Template.cloud.helpers
 
     selected_tags: -> selected_tags.list()
 
-    # selected_user: -> if Session.get 'selected_user' then Meteor.users.findOne(Session.get('selected_user'))?.username
 
 
 
 Template.cloud.events
-    'click .select_tag': ->
-        selected_tags.push @name
-        FlowRouter.setQueryParams( filter: selected_tags.array() )
-        # console.log FlowRouter.getQueryParam('filter');
+    'click .select_tag': -> selected_tags.push @name
 
-    'click .unselect_tag': ->
-        selected_tags.remove @valueOf()
-        FlowRouter.setQueryParams( filter: selected_tags.array() )
-        # console.log FlowRouter.getQueryParam('filter');
+    'click .unselect_tag': -> selected_tags.remove @valueOf()
 
-    'click #clear_tags': ->
-        selected_tags.clear()
-        FlowRouter.setQueryParams( filter: null )
-        # console.log FlowRouter.getQueryParam('filter');
+    'click #clear_tags': -> selected_tags.clear()
 
-    'click #bookmarkSelection': ->
-        # if confirm 'Bookmark Selection?'
-        Meteor.call 'add_bookmark', selected_tags.array(), (err,res)->
-            alert "Selection bookmarked"
-
-    'click .selected_user_button': -> Session.set 'selected_user', null
-
-
-    'click .select_author': -> selected_authors.push @text
-    'click .unselect_author': -> selected_authors.remove @valueOf()
-    'click #clear_authors': -> selected_authors.clear()
