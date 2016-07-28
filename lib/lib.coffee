@@ -16,9 +16,7 @@ Docs.helpers
 
 
 Meteor.methods
-    add_doc: (tag)->
-        tags = []
-        if tag then tags.push tag
+    add_doc: (tags=[])->
         Docs.insert
             tags: tags
 

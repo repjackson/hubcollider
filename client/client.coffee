@@ -17,7 +17,7 @@ Template.cloud.helpers
 
     cloud_tag_class: ->
         buttonClass = switch
-            when @index <= 5 then 'large'
+            when @index <= 5 then ''
             when @index <= 10 then ''
             when @index <= 15 then 'small'
             when @index <= 20 then 'tiny'
@@ -32,8 +32,10 @@ Template.docs.onCreated ->
 
 Template.docs.helpers
     docs: -> 
-        # Docs.find({ _id: $ne: Meteor.userId() })
-        Docs.find({ })
+        Docs.find { }, 
+            sort:
+                tag_count: 1
+            limit: 1
 
     tag_class: -> if @valueOf() in selected_tags.array() then 'primary' else ''
 
@@ -50,11 +52,13 @@ Template.cloud.events
 
 Template.cloud.events
     'click #add_doc': ->
-        Meteor.call 'add_doc', (err, id)->
+        Meteor.call 'add_doc', selected_tags.array(), (err, id)->
             if err then console.error err
             else FlowRouter.go "/edit/#{id}"
 
 
+Template.cloud.helpers
+    add_button_class: -> if selected_tags.array().length then 'primary' else ''
 
 
 
@@ -146,6 +150,17 @@ Template.edit.events
                     Docs.update doc_id,
                         $addToSet: tags: tag
                     $('#add_tag').val('')
+                else
+                    body = $('#body').val()
+                    Docs.update FlowRouter.getParam('doc_id'),
+                        $set:
+                            body: body
+                            tag_count: @tags.length
+                    selected_tags.clear()
+                    for tag in @tags
+                        selected_tags.push tag
+                    FlowRouter.go '/'
+
                     
     'click .doc_tag': (e,t)->
         doc = Docs.findOne FlowRouter.getParam('doc_id')
@@ -167,6 +182,9 @@ Template.edit.events
         FlowRouter.go '/'
 
 
+
+Template.view.helpers
+    is_author: -> Meteor.userId() and @author_id is Meteor.userId()
 
 
 Template.view.events
