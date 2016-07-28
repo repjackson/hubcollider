@@ -1,9 +1,6 @@
 @Tags = new Meteor.Collection 'tags'
 @Docs = new Meteor.Collection 'docs'
 
-
-@Docs = new (Mongo.Collection)('docs')
-
 Docs.before.insert (userId, doc)->
     doc.timestamp = Date.now()
     doc.author_id = Meteor.userId()
@@ -19,7 +16,7 @@ Docs.helpers
 
 
 Meteor.methods
-    create_doc: (tag)->
+    add_doc: (tag)->
         tags = []
         if tag then tags.push tag
         Docs.insert
@@ -35,3 +32,13 @@ Meteor.methods
     add_tag: (tag, doc_id)->
         Docs.update doc_id,
             $addToSet: tags: tag
+
+
+FlowRouter.route '/',
+    action: ->
+        BlazeLayout.render 'layout', main: 'docs'
+
+
+FlowRouter.route '/edit/:doc_id', action: (params) ->
+    BlazeLayout.render 'layout',
+        main: 'edit'

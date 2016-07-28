@@ -1,30 +1,34 @@
 head
-    title Facet
+    title Collider
     meta(name='viewport', content='user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width')
     meta(name='apple-mobile-web-app-capable', content='yes')
     meta(name='apple-mobile-web-app-status-bar-style', content='black')
 
 template(name='cloud')
-    #cloud.ui.center.aligned.container.segment
+    #cloud.ui.segment
+        if currentUser
+            #add_doc.ui.button
+                i.plus.icon
+                | Add
+        +loginButtons
         if selected_tags
             #clear_tags.ui.large.compact.primary.icon.button
                 i.remove.icon
             each selected_tags
                 .unselect_tag.ui.compact.large.primary.button
                     strong #{this}
-        h4.ui.floated.left.header Tag Cloud
         each all_tags
-            .ui.compact.basic.button.select_tag(class=cloud_tag_class) #{this.name}
+            .ui.compact.button.select_tag(class=cloud_tag_class) #{this.name}
                 small (#{this.count})
 
 
 
 template(name='layout')
-    +nav
     +Template.dynamic template=main
 
 
 template(name='docs')
+    +cloud
     .ui.container
         .ui.centered.cards
             each docs
@@ -37,6 +41,8 @@ template(name='view')
             each tags
                 .ui.button.doc_tag(class=doc_tag_class) #{this}
         .content
+            |!{body}
+        .content
             if is_author
                 .edit_doc.ui.basic.button
                     i.pencil.icon
@@ -44,49 +50,19 @@ template(name='view')
                     
                     
                     
-template(name='edit_doc')
+template(name='edit')
     with doc
         .ui.container.segment
-            .ui.form
-                .field
-                    label Title
-                    input#title(type='text' name='title' placeholder='Title' value=title)
-                .field
-                    .ui.header Tags
-                    each tags
-                        .ui.basic.button.doc_tag
-                            i.minus.icon
-                            |#{this}
-                    .ui.left.icon.input
-                        i.add.icon
-                        input#add_doc_tag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
-                .field
-                    .ui.segment
-                        .ui.header Add Components
-                        each available_components
-                            .ui.basic.button.add_component #{this}
-                        // #voting.ui.basic.button.add_component(class=add_component_button_class) Voting
-                        // #like.ui.basic.button.add_component(class=add_component_button_class) Like
-                        // #location.ui.basic.button.add_component(class=add_component_button_class) Location
-                        // #datetime.ui.basic.button.add_component(class=add_component_button_class) Date/Time
-                        // #text.ui.basic.button.add_component(class=add_component_button_class) Text Box
-                        // #price.ui.basic.button.add_component(class=add_component_button_class) Price
-                        // #attendee.ui.basic.button.add_component(class=add_component_button_class) Attendee
-                        // .ui.basic.button.add_component(class=add_component_button_classag preselection
-                each components
-                    .ui.segment
-                        .ui.right.corner.red.label.remove_component
-                            i.remove.icon
-                        // .ui.basic.circular.icon.button.remove_component
-                            // i.remove.icon
-                        +Template.dynamic(template=template_name)
-                if tags
-                    #save_doc.ui.animated.large.green.button
-                        .visible.content Save
-                        .hidden.content
-                            i.right.check.icon
-                #delete_doc.ui.animated.red.large.button
-                        .hidden.content 
-                            i.remove.icon
-                        .visible.content Delete
+            each tags
+                .ui.basic.button.doc_tag
+                    i.minus.icon
+                    |#{this}
+            .ui.left.icon.input
+                i.add.icon
+                input#add_tag(type='text' autofocus='' placeholder='Add Tag' maxlength='50')
+            textarea#body
+                |#{body}
+            if tags
+                #save_doc.ui.large.green.button Save
+            #delete_doc.ui.red.large.button Delete
                     

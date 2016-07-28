@@ -64,4 +64,4 @@ Meteor.publish 'docs', (selected_tags)->
         sort:
             tag_count: 1
             timestamp: -1
-        limit: 10
+        limit: 5
